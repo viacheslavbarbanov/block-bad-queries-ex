@@ -1,0 +1,120 @@
+#scan_section a, #configuration_check_section a {
+    text-decoration: none;
+}
+
+.successMsg {
+    color: green;
+}
+
+.errorMsg {
+    color: red;
+}
+
+.infoMsg, .show_date {
+    color: blue;
+}
+
+/***MAIN MENU***/
+#scan_section {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: left;
+    font-size: 20px;
+}
+
+#scan_section input {
+    margin: 15px;
+}
+
+.last_scanned_files_info {
+    margin-bottom: 4%;
+}
+
+#information_section > div {
+    width: 90%;
+    margin: 2% 0;
+}
+
+.malware_files_list p {
+    margin-top: 0;
+}
+
+#loadGoodFiles {
+    margin-bottom: 15px;
+}
+
+.good_files_list {
+    display: none;
+}
+
+.good_files_list p {
+    color: green;
+    margin-top: 0;
+}
+
+.hiddenGoodFiles {
+    display: none;
+}
+
+/***SETTINGS MENU***/
+#settings_section {
+    margin-top: 5vh;
+}
+
+.interrogative_badge_parent {
+    display: flex;
+    align-items: center;
+}
+
+.interrogative_badge {
+    width: 6%;
+    margin-left: 5%;
+}
+
+#forbidden_link_page_section {
+    display: flex;
+    align-items: center;
+}
+
+.forbidden_link {
+    width: 90%;
+}
+
+.delete_forbidden_link {
+    width: 2.5%;
+}
+
+.delete_forbidden_link a {
+    display: block;
+    overflow: auto;
+}
+
+#forbidden_link_page_section img {
+    width: 100%;
+}
+
+/***PROGRESS BAR FOR SCAN***/
+#progressbar_section {
+    width: 80%;
+    margin: auto;
+}
+
+#progressbar .ui-widget-header {
+    background: #2a9e4a;
+}
+
+/***CONFIGURATION-CHECK MENU***/
+.config_check_button_parent {
+    text-align: center;
+    margin: 5%;
+}
+
+/***CHECK UNKNOWN FILES MENU***/
+#check_unknown_files_section .description {
+    /*text-align: center;*/
+    margin: 5% 0;
+}
+
+.current_file_info {
+    display: none;
+}
