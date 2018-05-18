@@ -450,13 +450,7 @@ if (!class_exists('BlockAdminOptions')) {
                     }
                 }
             }
-
             $this->updateUnknownFilesList($newUknownFilesListArr);
-
-//            echo '<pre>'; var_dump($newUknownFilesListArr);
-//            echo '<pre>'; var_dump($this->unknownFilesDb);
-//            echo '<pre>'; var_dump($this->responseAfterCurlArr);
-//            exit;
         }
 
         public function scannedFilesProgressPercent()
@@ -468,7 +462,6 @@ if (!class_exists('BlockAdminOptions')) {
         {
 //            // initialise the curl request
             $fileToUpload = new CURLFile(realpath($dir));
-//            $request = curl_init('http://scanner.interserver.net/s');
             $request = curl_init('http://scanner.interserver.net/wpscan');
             // send a file
             curl_setopt($request, CURLOPT_POST, true);
@@ -482,7 +475,6 @@ if (!class_exists('BlockAdminOptions')) {
                 ));
             // output the response
             curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-            //echo curl_exec($request);
             array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
             // close the session
             curl_close($request);
