@@ -101,7 +101,7 @@ if (!class_exists('CheckFilesCorrect')) {
 
                 /***Save Percent For Every 5%***/
                 if ($percent % 5 == 0) {
-                    update_option('bl_scanned_files_progress_percent', json_encode(array('scannedFiles' => $increment, 'percent' => $percent, 'total'=> $total,'date' => date('"d-m-Y H:i:s"'))));
+                    update_option('bl_scanned_files_progress_percent', json_encode(array('scannedFiles' => $increment, 'percent' => $percent, 'total' => $total, 'date' => date('"d-m-Y H:i:s"'))));
                 }
 
                 $hash = hash_file('sha256', $file);
@@ -128,21 +128,32 @@ if (!class_exists('CheckFilesCorrect')) {
         public function testHashFiles()
         {
             $url = 'https://sigs.interserver.net/wpscan';
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            $data = curl_exec($ch);
-            curl_close($ch);
+            $fileGetContentRes = @file_get_contents($url);
+            $data = 'connectionError';
 
-            if ($data == 'input..input..') {
-                $this->configCheckResualt = 'Remote scanner connection is working';
-            } else {
-                $this->configCheckResualt = 'Remote scanner connection failing.';
+            if (function_exists('curl_version')) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+                $data = curl_exec($ch);
+                curl_close($ch);
+            } else if ($fileGetContentRes) {
+                $data = $fileGetContentRes;
+            }
+
+            switch ($data) {
+                case 'input..input..':
+                    $this->configCheckResualt = 'Remote scanner connection is working';
+                    break;
+                case 'connectionError':
+                    $this->configCheckResualt = 'Please enable your cURL or file_get_content configuration on your server.';
+                    break;
+                default:
+                    $this->configCheckResualt = 'Remote scanner connection failing.';
             }
         }
     }
-
 }
