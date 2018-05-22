@@ -7,7 +7,7 @@ if (!class_exists('CheckFilesCorrect')) {
         public $home_dir;
         public $filesList;
         public $malware_files_list = array();
-        public $configCheckResualt;
+        public $configCheckResult;
         public $unknownFilesList = array();
         public $goodFilesList = array();
 
@@ -31,11 +31,11 @@ if (!class_exists('CheckFilesCorrect')) {
                         $this->filesList = $this->glob_recursive($folder_path_for_scan_arr[0], '*.{php,js}', GLOB_BRACE);
                     } else {
                         /***When *Current Folder Not Found**/
-                        header("Location: " . home_url() . "/wp-admin/admin.php?page=scan-files&errorMsg=" . urlencode("Folder not found"));
+                        header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder not found"));
                     }
                 } else {
                     /***When folder_name_for_scan Is Empty**/
-                    header("Location: " . home_url() . "/wp-admin/admin.php?page=scan-files&errorMsg=" . urlencode("Folder name can not be empty"));
+                    header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder name can not be empty"));
                 }
                 /***To Cache All Files In filesList***/
                 $this->hashFiles($this->filesList);
@@ -101,7 +101,7 @@ if (!class_exists('CheckFilesCorrect')) {
 
                 /***Save Percent For Every 5%***/
                 if ($percent % 5 == 0) {
-                    update_option('bl_scanned_files_progress_percent', json_encode(array('scannedFiles' => $increment, 'percent' => $percent, 'total' => $total, 'date' => date('"d-m-Y H:i:s"'))));
+                    update_option('intershield_scanned_files_progress_percent', json_encode(array('scannedFiles' => $increment, 'percent' => $percent, 'total' => $total, 'date' => date('"d-m-Y H:i:s"'))));
                 }
 
                 $hash = hash_file('sha256', $file);
@@ -146,13 +146,13 @@ if (!class_exists('CheckFilesCorrect')) {
 
             switch ($data) {
                 case 'input..input..':
-                    $this->configCheckResualt = 'Remote scanner connection is working';
+                    $this->configCheckResult = 'Remote scanner connection is working';
                     break;
                 case 'connectionError':
-                    $this->configCheckResualt = 'Please enable your cURL or file_get_content configuration on your server.';
+                    $this->configCheckResult = 'Please enable your cURL or file_get_content configuration on your server.';
                     break;
                 default:
-                    $this->configCheckResualt = 'Remote scanner connection failing.';
+                    $this->configCheckResult = 'Remote scanner connection failing.';
             }
         }
     }

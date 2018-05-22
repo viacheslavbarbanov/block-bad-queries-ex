@@ -13,7 +13,6 @@ if (!class_exists('BlockBadIp')) {
             $forbidden_link = $this->getSettingsDb()['forbidden_link'];
 
             if (!$forbidden_link) {
-//                 header("Location: " . home_url(), true, 403);
 //                header("Location: " . 'https://sigs.interserver.net/blocked?ref=' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '&port=' . $_SERVER['SERVER_PORT'], true, 301);
                 header("Location: " . 'https://sigs.interserver.net/blocked', true, 301);
                 exit;
@@ -28,7 +27,7 @@ if (!class_exists('BlockBadIp')) {
 
         public function getSettingsDb()
         {
-            return json_decode(get_option('bl_settings'), true);
+            return json_decode(get_option('intershield_settings'), true);
         }
     }
 }

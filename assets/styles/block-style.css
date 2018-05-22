@@ -1,4 +1,4 @@
-#scan_section a, #configuration_check_section a {
+#scan_section a, #configuration_check_section a, #update_bad_ip_list_section a {
     text-decoration: none;
 }
 
@@ -105,16 +105,19 @@
 
 /***CONFIGURATION-CHECK MENU***/
 .config_check_button_parent {
-    text-align: center;
     margin: 5%;
 }
 
 /***CHECK UNKNOWN FILES MENU***/
-#check_unknown_files_section .description {
-    /*text-align: center;*/
-    margin: 5% 0;
+#check_unknown_files_section {
+    margin: 5% auto;
 }
 
 .current_file_info {
     display: none;
+}
+
+/***UPDATE BAD IP LIST MENU***/
+#update_bad_ip_list_section{
+    margin: 5% auto;
 }

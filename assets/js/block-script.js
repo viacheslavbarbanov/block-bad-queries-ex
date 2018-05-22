@@ -78,7 +78,7 @@ jQuery(document).ready(function ($) {
     })();
 
     (function showInfoWithLoadMore() {
-        var countFilesShownDuringStart = data_block.bl_settings['count_files_shown_during_start'];
+        var countFilesShownDuringStart = data_block.intershield_settings['count_files_shown_during_start'];
 
         /***Part Of <<Good files list>>***/
         $(".good_files_list .current_file_info").slice(0, countFilesShownDuringStart).show();
@@ -107,7 +107,7 @@ jQuery(document).ready(function ($) {
 
     $(".loadMore").on('click', function (e) {
         e.preventDefault();
-        var loadMoreFilesRange = data_block.bl_settings['load_more_files_range'];
+        var loadMoreFilesRange = data_block.intershield_settings['load_more_files_range'];
         var clickedLoadMoreParent = $(this).parent();
 
         $(clickedLoadMoreParent).find(".current_file_info:hidden").slice(0, loadMoreFilesRange).slideDown();

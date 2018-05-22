@@ -1,4 +1,4 @@
-The intersheild plugin is a security plugin for wordpress that ultilizes the large amount of data that comes from InterServers secure intershield hosting which includes up to date
+The intershield plugin is a security plugin for wordpress that ultilizes the large amount of data that comes from InterServers secure intershield hosting which includes up to date
 listing and reputations of ip addresses, millions of malware scans on wordpress sites and data of the current threats facing wordpress installs.
 
 The main goals are to:

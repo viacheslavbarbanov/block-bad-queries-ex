@@ -3,13 +3,15 @@ defined('ABSPATH') or exit;
 if (!class_exists('BlockAdminOptions')) {
     class BlockAdminOptions
     {
-        public $bl_settings;
+        public $intershield_settings;
         public $scanState;
         public $malwareFilesDb;
         public $goodFilesDb;
         public $unknownFilesDb;
         public $lastScannedInfo;
         public $msgAfterConfigCheck;
+        public $startUpdateBadIpList;
+        public $msgAfterUpdateBadIpList;
         public $filesInfoAfterCurl;
         public $curlProgressPercentDb;
         public $goodResponseCodeAfterCurl = '1 clamscan: OK';
@@ -19,7 +21,7 @@ if (!class_exists('BlockAdminOptions')) {
         public function __construct()
         {
             $this->malwareFilesDb = $this->getMalwareFilesDb();
-            $this->bl_settings = $this->getSettingsDb();
+            $this->intershield_settings = $this->getSettingsDb();
             $this->goodFilesDb = $this->getGoodFilesDb();
             $this->unknownFilesDb = json_decode($this->getUnknownFilesDb(), true);
             $this->filesInfoAfterCurlDb = $this->getFilesInfoAfterCurlDb();
@@ -36,12 +38,17 @@ if (!class_exists('BlockAdminOptions')) {
         {
             /***Add Scan Files Menu In Dashboard***/
             add_action('admin_menu', function () {
-                add_menu_page('Scan Files', 'Scan Files', 'manage_options', 'scan-files', array($this, 'main_menu'), 'dashicons-portfolio');
-                add_submenu_page('scan-files', 'Settings', 'Settings', 'manage_options', 'scan-files-settings', array($this, 'scanFilesSettingsMenu'));
-                add_submenu_page('scan-files', 'Configuration Check', 'Configuration Check', 'manage_options', 'scan-files-configuration-check', array($this, 'configurationCheckMenu'));
+                add_menu_page('intershield', 'intershield', 'manage_options', 'intershield', array($this, 'main_menu'), 'dashicons-portfolio');
+                add_submenu_page('intershield', 'Settings', 'Settings', 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
+                add_submenu_page('intershield', 'Configuration Check', 'Configuration Check', 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
 
-                if ($this->bl_settings['show_check_unknown_files_menu_switch'] === 'on') {
-                    add_submenu_page('scan-files', 'Check Unknown Files', 'Check Unknown Files', 'manage_options', 'scan-files-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
+                if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') {
+                    add_submenu_page('intershield', 'Check Unknown Files', 'Check Unknown Files', 'manage_options', 'intershield-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
+                }
+
+                /***When Blocking Bad Ip's Enabled In Settings***/
+                if ($this->intershield_settings['block_bad_ip_switch'] === 'on') {
+                    add_submenu_page('intershield', "Update Bad IP List", 'Update Bad IP List', 'manage_options', 'intershield-update-bad-ip-list', array($this, 'updateBadIpListMenu'));
                 }
             });
         }
@@ -65,7 +72,7 @@ if (!class_exists('BlockAdminOptions')) {
                                    value="<?php echo wp_create_nonce('start-scan'); ?>">
 
                             <input type="submit" name="start_scan" id="start_scan" value="Start Scan">
-                            <a href="?page=scan-files&end-scan=true" id="stop_scan">Stop Scan</a>
+                            <a href="?page=intershield&end-scan=true" id="stop_scan">Stop Scan</a>
                         </form>
                     </div>
                     <div id="progressbar_section">
@@ -89,7 +96,7 @@ if (!class_exists('BlockAdminOptions')) {
                         <?php } ?>
                         <div class="malware_files_list">
                             <!--/***show <<Load More>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/-->
-                            <?php if ($this->malwareFilesDb && count(json_decode($this->malwareFilesDb, true)) > $this->bl_settings['count_files_shown_during_start']) { ?>
+                            <?php if ($this->malwareFilesDb && count(json_decode($this->malwareFilesDb, true)) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreMalwareFiles" class="loadMore">
                                     Load More
                                 </button>
@@ -116,7 +123,7 @@ if (!class_exists('BlockAdminOptions')) {
                                 } ?>
 
                                 <!--/***show <<Load More>> Button When <<Good Files List>> Is More Then <<Count Files Shown During Start>>***/-->
-                                <?php if (count($goodFilesListArr) > $this->bl_settings['count_files_shown_during_start']) { ?>
+                                <?php if (count($goodFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                     <button type="button" id="loadMoreGoodFiles" class="loadMore">Load More</button>
                                 <?php } ?>
                             </div>
@@ -127,13 +134,13 @@ if (!class_exists('BlockAdminOptions')) {
             <?php
         }
 
-        public function scanFilesSettingsMenu()
+        public function intershieldSettingsMenu()
         { ?>
             <!--/***Update Settings Form***/-->
             <div class="wrap">
             <h1><?php echo get_admin_page_title(); ?></h1>
             <div id="settings_section">
-                <form action="?page=scan-files-settings&update-settings" method="post">
+                <form action="?page=intershield-settings&update-settings" method="post">
                     <table>
                         <tr>
                             <td class="interrogative_badge_parent">
@@ -147,7 +154,7 @@ if (!class_exists('BlockAdminOptions')) {
                             <td>
                                 <input type="text" name="forbidden_link" id="forbidden_link"
                                        placeholder="Enter forbidden page url..."
-                                       value="<?php echo $this->bl_settings['forbidden_link'] ?>">
+                                       value="<?php echo $this->intershield_settings['forbidden_link'] ?>">
                             </td>
                         </tr>
                         <tr>
@@ -159,7 +166,7 @@ if (!class_exists('BlockAdminOptions')) {
                             <td>
                                 <input type="number" min="1" name="count_files_shown_during_start"
                                        id="count_files_shown_during_start"
-                                       value="<?php echo $this->bl_settings['count_files_shown_during_start'] ?>">
+                                       value="<?php echo $this->intershield_settings['count_files_shown_during_start'] ?>">
                             </td>
                         </tr>
                         <tr>
@@ -171,7 +178,7 @@ if (!class_exists('BlockAdminOptions')) {
                             </td>
                             <td>
                                 <input type="number" min="1" name="load_more_files_range" id="load_more_files_range"
-                                       value="<?php echo $this->bl_settings['load_more_files_range'] ?>">
+                                       value="<?php echo $this->intershield_settings['load_more_files_range'] ?>">
                             </td>
                         </tr>
                         <tr>
@@ -182,9 +189,9 @@ if (!class_exists('BlockAdminOptions')) {
                             </td>
                             <td>
                                 On <input type="radio" name="block_bad_ip_switch" value="on"
-                                    <?php echo $this->bl_settings['block_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
+                                    <?php echo $this->intershield_settings['block_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
                                 Off <input type="radio" name="block_bad_ip_switch" value="off"
-                                    <?php echo $this->bl_settings['block_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
+                                    <?php echo $this->intershield_settings['block_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
 
@@ -196,9 +203,9 @@ if (!class_exists('BlockAdminOptions')) {
                             </td>
                             <td>
                                 On <input type="radio" name="show_check_unknown_files_menu_switch" value="on"
-                                    <?php echo $this->bl_settings['show_check_unknown_files_menu_switch'] == 'on' ? 'checked' : '' ?> >
+                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'on' ? 'checked' : '' ?> >
                                 Off <input type="radio" name="show_check_unknown_files_menu_switch" value="off"
-                                    <?php echo $this->bl_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
+                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
                         <tr>
@@ -213,14 +220,14 @@ if (!class_exists('BlockAdminOptions')) {
             </div>
 
             <!--/***Show Settings***/-->
-            <?php if (!empty($this->bl_settings['forbidden_link'])) { ?>
+            <?php if (!empty($this->intershield_settings['forbidden_link'])) { ?>
             <h2>Forbidden Page Link</h2>
             <div id="forbidden_link_page_section">
                 <div class="forbidden_link">
-                    <?php echo $this->bl_settings['forbidden_link'] ?>
+                    <?php echo $this->intershield_settings['forbidden_link'] ?>
                 </div>
                 <div class="delete_forbidden_link">
-                    <a href="?page=scan-files-settings&del_forbidden_link&_wpnonce=<?php echo wp_create_nonce('del-link'); ?>"
+                    <a href="?page=intershield-settings&del_forbidden_link&_wpnonce=<?php echo wp_create_nonce('del-link'); ?>"
                        data-method="delete"><img src="<?php echo BLOCK_URL . 'assets/images/delete.png' ?>"> </a>
                 </div>
             </div>
@@ -235,13 +242,13 @@ if (!class_exists('BlockAdminOptions')) {
                 <div id="configuration_check_section">
                     <div class="config_check_button_parent">
                         <h3>
-                            <a href="?page=scan-files-configuration-check&scan_type=configCheck">Check</a>
+                            <a href="?page=intershield-configuration-check&scan_type=configCheck">Check</a>
                         </h3>
                     </div>
-                    <!--                    /***When Clicked <<Configuration Check>> Button***/-->
+<!--                    /***When Clicked <<Configuration Check>> Button***/-->
                     <?php if (!empty($this->msgAfterConfigCheck)) { ?>
                         <div class="config_check_result">
-                            <h3><?php echo $this->msgAfterConfigCheck ?></h3>
+                            <h3 class="infoMsg"><?php echo $this->msgAfterConfigCheck ?></h3>
                         </div>
                     <?php } ?>
                 </div>
@@ -279,7 +286,7 @@ if (!class_exists('BlockAdminOptions')) {
                             }
                             ?>
                             <!--/***show <<Load More>> Button When <<Unknown Files List>> Is More Then <<Count Files Shown During Start>>***/-->
-                            <?php if (count($unknownFilesListArr) > $this->bl_settings['count_files_shown_during_start']) { ?>
+                            <?php if (count($unknownFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreUnknownFiles" class="loadMore">Load More</button>
                             <?php } ?>
                         </div>
@@ -289,7 +296,7 @@ if (!class_exists('BlockAdminOptions')) {
                                    value="Send Unknown Files">
                             <input type="hidden" name="wp_nonce_unknown_files_nonce"
                                    value="<?php echo wp_create_nonce('unknown-files-nonce'); ?>">
-                            <a href="?page=scan-files&stop-sending-unknown-files=true" id="stop_sending_unknown_files">
+                            <a href="?page=intershield&stop-sending-unknown-files=true" id="stop_sending_unknown_files">
                                 Stop Sending
                             </a>
                         </form>
@@ -328,7 +335,7 @@ if (!class_exists('BlockAdminOptions')) {
                             <?php } ?>
 
                             <!--/***show <<Load More>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
-                            <?php if (count($filesInfoAfterCurlDb) > $this->bl_settings['count_files_shown_during_start']) { ?>
+                            <?php if (count($filesInfoAfterCurlDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreFilesListAfterCurl" class="loadMore">
                                     Load More
                                 </button>
@@ -338,6 +345,27 @@ if (!class_exists('BlockAdminOptions')) {
                 </div>
             </div>
         <?php }
+
+        public function updateBadIpListMenu()
+        { ?>
+            <div class="wrap">
+                <h1><?php echo get_admin_page_title(); ?></h1>
+                <div id="update_bad_ip_list_section">
+                    <div class="update_bad_ip_list_button_parent">
+                        <h3>
+                            <a href="?page=intershield-update-bad-ip-list&update_bad_ip_list=true&_wpnonce=<?php echo wp_create_nonce('update-ip-list'); ?>">Update</a>
+                        </h3>
+                    </div>
+<!--                    /***When Clicked <<Update>> Button***/-->
+                    <?php if (!empty($this->msgAfterUpdateBadIpList)) { ?>
+                        <div class="update_bad_ip_list_result">
+                            <h3 class="successMsg"><?php echo $this->msgAfterUpdateBadIpList ?></h3>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php
+        }
 
 
         public function registerScripts()
@@ -360,7 +388,7 @@ if (!class_exists('BlockAdminOptions')) {
                 'scanState' => $this->scanState,
                 'malwareFilesDb' => $this->malwareFilesDb,
                 'goodFilesDb' => $this->goodFilesDb,
-                'bl_settings' => $this->bl_settings,
+                'intershield_settings' => $this->intershield_settings,
                 'ajaxUrl' => admin_url('admin-ajax.php'),
             ));
         }
@@ -375,9 +403,9 @@ if (!class_exists('BlockAdminOptions')) {
                 $this->scanState = 'configCheck';
             }
 
-            /***Save <<bl_settings>> In DB***/
+            /***Save <<intershield_settings>> In DB***/
             if (!empty($_POST['wp_nonce_update_settings']) && wp_verify_nonce($_POST['wp_nonce_update_settings'], 'update-settings')) {
-                $bl_settings_arr = array(
+                $intershield_settings_arr = array(
                     'forbidden_link' => $_POST['forbidden_link'],
                     'count_files_shown_during_start' => $_POST['count_files_shown_during_start'],
                     'load_more_files_range' => $_POST['load_more_files_range'],
@@ -385,22 +413,32 @@ if (!class_exists('BlockAdminOptions')) {
                     'show_check_unknown_files_menu_switch' => $_POST['show_check_unknown_files_menu_switch'],
                 );
 
-                $this->updateSettingsDb($bl_settings_arr);
-                header("Location: " . home_url() . '/wp-admin/admin.php?page=scan-files-settings', true, 301);
+                $this->updateSettingsDb($intershield_settings_arr);
+                header("Location: " . home_url() . '/wp-admin/admin.php?page=intershield-settings', true, 301);
             }
 
             /***Delete forbidden_link In DB***/
             if (isset($_GET['del_forbidden_link']) && wp_verify_nonce($_GET['_wpnonce'], 'del-link')) {
-                $bl_settings = $this->bl_settings;
-                $bl_settings['forbidden_link'] = '';
-                update_option('bl_settings', json_encode($bl_settings));
-                header("Location: " . home_url() . '/wp-admin/admin.php?page=scan-files-settings', true, 301);
+                $intershield_settings = $this->intershield_settings;
+                $intershield_settings['forbidden_link'] = '';
+                update_option('intershield_settings', json_encode($intershield_settings));
+                header("Location: " . home_url() . '/wp-admin/admin.php?page=intershield-settings', true, 301);
             }
 
             /***Unknown Files***/
             if (!empty($_POST['send_unknown_files']) && wp_verify_nonce($_POST['wp_nonce_unknown_files_nonce'], 'unknown-files-nonce')) {
                 $this->unknownFilesController();
             }
+
+            /***UPDATE BAD IP LIST***/
+            if (isset($_GET['update_bad_ip_list']) && wp_verify_nonce($_GET['_wpnonce'], 'update-ip-list')) {
+                $this->startUpdateBadIpList = true;
+
+//echo '<pre>'; var_dump($_GET); exit;
+
+
+            }
+
         }
 
         public function unknownFilesController()
@@ -431,10 +469,10 @@ if (!class_exists('BlockAdminOptions')) {
                     }
                 }
 
-                /***After Curl Remove All Good Files Off bl_unknown_files_list In wp-option***/
+                /***After Curl Remove All Good Files Off intershield_unknown_files_list In wp-option***/
                 $this->removeGoodFilesOffUnknownFilesList();
 
-                /***Update bl_files_info_after_curl In wp-option***/
+                /***Update intershield_files_info_after_curl In wp-option***/
                 $this->updateFilesInfoAfterCurl($this->responseAfterCurlArr);
                 header("Refresh:0");
             }
@@ -455,7 +493,7 @@ if (!class_exists('BlockAdminOptions')) {
 
         public function scannedFilesProgressPercent()
         {
-            return get_option('bl_scanned_files_progress_percent');
+            return get_option('intershield_scanned_files_progress_percent');
         }
 
         public function sendUnknownFilesByCurl($dir)
@@ -481,71 +519,71 @@ if (!class_exists('BlockAdminOptions')) {
             return true;
         }
 
-        public function updateSettingsDb($bl_settings_arr)
+        public function updateSettingsDb($intershield_settings_arr)
         {
-            update_option('bl_settings', json_encode($bl_settings_arr));
+            update_option('intershield_settings', json_encode($intershield_settings_arr));
         }
 
         public function updateMalwareFilesDb($malware_files_list)
         {
-            update_option('bl_malware_files_list', json_encode($malware_files_list));
+            update_option('intershield_malware_files_list', json_encode($malware_files_list));
         }
 
         public function updateGoodFilesList($goodFilesList)
         {
-            update_option('bl_good_files_list', json_encode($goodFilesList));
+            update_option('intershield_good_files_list', json_encode($goodFilesList));
         }
 
         public function updateUnknownFilesList($unknownFilesListArr)
         {
-            update_option('bl_unknown_files_list', json_encode($unknownFilesListArr));
+            update_option('intershield_unknown_files_list', json_encode($unknownFilesListArr));
         }
 
         public function updateFilesInfoAfterCurl($responseAfterCurl)
         {
-            update_option('bl_files_info_after_curl', json_encode($responseAfterCurl));
+            update_option('intershield_files_info_after_curl', json_encode($responseAfterCurl));
         }
 
         public function updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl)
         {
-            update_option('bl_curl_progress_percent', json_encode(array('sentFiles' => $increment, 'percent' => $percent, 'total' => $totalFilesCountForCurl, 'date' => date('"d-m-Y H:i:s"'))));
+            update_option('intershield_curl_progress_percent', json_encode(array('sentFiles' => $increment, 'percent' => $percent, 'total' => $totalFilesCountForCurl, 'date' => date('"d-m-Y H:i:s"'))));
         }
 
         public function getSettingsDb()
         {
-            $default_bl_settings = array(
+            $default_intershield_settings = array(
                 'forbidden_link' => '',
                 'count_files_shown_during_start' => 5,
                 'load_more_files_range' => 5,
                 'block_bad_ip_switch' => 'on',
                 'show_check_unknown_files_menu_switch' => 'off'
             );
-            return get_option('bl_settings') ? json_decode(get_option('bl_settings'), true) : $default_bl_settings;
+            return get_option('intershield_settings') ? json_decode(get_option('intershield_settings'), true) : $default_intershield_settings;
         }
 
         public function getMalwareFilesDb()
         {
-            return get_option('bl_malware_files_list');
+            return get_option('intershield_malware_files_list');
         }
 
         public function getGoodFilesDb()
         {
-            return get_option('bl_good_files_list');
+            return get_option('intershield_good_files_list');
         }
 
         public function getUnknownFilesDb()
         {
-            return get_option('bl_unknown_files_list');
+            return get_option('intershield_unknown_files_list');
         }
 
         public function getFilesInfoAfterCurlDb()
         {
-            return get_option('bl_files_info_after_curl');
+            return get_option('intershield_files_info_after_curl');
         }
 
         public function getCurlProgressPercentDb()
         {
-            return get_option('bl_curl_progress_percent');
+            return get_option('intershield_curl_progress_percent');
         }
     }
 }
