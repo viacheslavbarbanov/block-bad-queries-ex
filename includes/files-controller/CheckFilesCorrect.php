@@ -146,13 +146,13 @@ if (!class_exists('CheckFilesCorrect')) {
 
             switch ($data) {
                 case 'input..input..':
-                    $this->configCheckResult = 'Remote scanner connection is working';
+                    $this->configCheckResult = __('Remote scanner connection is working', 'intershield');
                     break;
                 case 'connectionError':
-                    $this->configCheckResult = 'Please enable your cURL or file_get_content configuration on your server.';
+                    $this->configCheckResult = __('Please enable your cURL or file_get_contents configuration on your server.', 'intershield');
                     break;
                 default:
-                    $this->configCheckResult = 'Remote scanner connection failing.';
+                    $this->configCheckResult = __('Remote scanner connection failing.', 'intershield');
             }
         }
     }

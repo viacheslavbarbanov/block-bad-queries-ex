@@ -4,7 +4,7 @@ Plugin Name: Wp Intershield
 Plugin URI: #
 Description:
 Version: 0.1
-Text Domain: admin
+Text Domain: intershield
 */
 
 defined('ABSPATH') or exit;
@@ -16,19 +16,11 @@ ini_set('max_execution_time', 30000);
 ini_set('mysql.connect_timeout', 30000);
 ini_set('default_socket_timeout', 30000);
 
-/***Clear Scheduler hook***/
-register_deactivation_hook(__FILE__, function () {
-    wp_clear_scheduled_hook('add_every_fifteen_min');
-});
-
-
 /***Admin Options***/
 add_action('init', function () {
-
     /***Scheduler update bad ips list***/
     include BLOCK_DIR . 'includes/UpdateBadIpList.php';
     $updateBadIpList = new UpdateBadIpList();
-
 
     include BLOCK_DIR . 'includes/BlockAdminOptions.php';
     $blockAdminOptions = new BlockAdminOptions();
@@ -37,10 +29,9 @@ add_action('init', function () {
     if($blockAdminOptions->startUpdateBadIpList){
         $updateIpListTxt = $updateBadIpList->updateIpListTxt();
         if($updateIpListTxt){
-            $blockAdminOptions->msgAfterUpdateBadIpList = 'Bad IP List Successfully Updated';
+            $blockAdminOptions->msgAfterUpdateBadIpList = __('Bad IP List Successfully Updated', 'intershield');
         }
     }
-
 
     include BLOCK_DIR . 'includes/CheckIpStatus.php';
     $CheckIpStatus = new CheckIpStatus();
@@ -85,6 +76,15 @@ add_action('init', function () {
     });
 });
 
+/***For Multi Language***/
+add_action( 'plugins_loaded', function (){
+    load_plugin_textdomain( 'intershield', false, BLOCK_REL_PATH . '/languages' );
+} );
+
+/***Clear Scheduler hook***/
+register_deactivation_hook(__FILE__, function () {
+    wp_clear_scheduled_hook('add_every_fifteen_min');
+});
 
 /***After Uninstall Plugin***/
 register_uninstall_hook(__FILE__, 'block_uninstall');

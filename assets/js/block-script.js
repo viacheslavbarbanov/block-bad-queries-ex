@@ -18,64 +18,18 @@ jQuery(document).ready(function ($) {
         if ($(folder_name_for_scan).attr('required') && !$(folder_name_for_scan).val()) {
             return false;
         }
+        $('.stop_button').show('slow');
         $('#information_section').hide('slow');
         sendAjaxRequest('get_scan_percent');
     });
 
     /***When Clicked Send Unknown Files***/
     $('#send_unknown_files').on('click', function () {
+        $('.stop_button').show('slow');
         $('.unknown_files_list').hide('slow');
         $('.files_list_after_curl').hide('slow');
         sendAjaxRequest('get_curl_percent')
     });
-
-    (function showMalwareFilesList() {
-        console.log(data_block.malwareFilesDb);
-
-        if(data_block.malwareFilesDb === '[]'){
-            $('.malware_files_list').append('<h2 class="successMsg">Scan detected no malware</h2>');
-            return false;
-        }
-
-        if (data_block.malwareFilesDb.length > 0 ) {
-            var malwareFilesList = JSON.parse(data_block.malwareFilesDb);
-            var malwareMsg = '';
-
-            /***Append Files Directories In Dashboard***/
-            malwareFilesList.forEach(function (obj) {
-                $.each(obj, function (key, value) {
-                    /***Check Error Code***/
-                    switch (key) {
-                        case '127.0.0.100':
-                            malwareMsg = "Malware sha256match from previous scan";
-                            break;
-                        case '127.0.0.10':
-                            malwareMsg = "Malware sha256match from known malware";
-                            break;
-                        case '127.0.0.20':
-                            malwareMsg = "Malware hexmatch from known malware";
-                            break;
-                        case '127.0.0.40':
-                            malwareMsg = "Malware logical virus match";
-                            break;
-                        case '127.0.0.50':
-                            malwareMsg = "Malware SEO match";
-                            break;
-                        case '127.0.0.2':
-                            malwareMsg = "Malware test strings";
-                            break;
-                    }
-
-                    /***Add Msg In Dashboard***/
-                    $('.malware_files_list').prepend('<div class="current_file_info">' +
-                        '<strong>' + malwareMsg + '</strong> ' +
-                        '<p class="errorMsg">' + value + '</p>' +
-                        '</div>'
-                    );
-                });
-            });
-        }
-    })();
 
     (function showInfoWithLoadMore() {
         var countFilesShownDuringStart = data_block.intershield_settings['count_files_shown_during_start'];
@@ -116,35 +70,41 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    console.log(data_block.messages.text_total);
+
     function sendAjaxRequest(requestAction) {
         setInterval(function () {
-        $.ajax({
-            url: data_block.ajaxUrl,
-            method: 'post',
-            data: {action: requestAction}
-        }).done(function (response) {
-            var info = jQuery.parseJSON(response);
+            $.ajax({
+                url: data_block.ajaxUrl,
+                method: 'post',
+                data: {action: requestAction}
+            }).done(function (response) {
+                var info = jQuery.parseJSON(response);
 
-            if (requestAction === 'get_scan_percent') {
-                $('.scanned_files_info').html('<h3> Total(' + info.total + ') Scanned Files: ' + info.scannedFiles + '</h3>');
-            } else if (requestAction === 'get_curl_percent') {
-                $('.curl_sent_files_info').html('<h3>Total(' + info.total + ') Sent Files: ' + info.sentFiles + '</h3>');
-            }
-
-            $("#progressbar").progressbar({
-                value: info.percent,
-                create: function (event, ui) {
-                    var spanl = $("<span id='left'>0%</span>")
-                        .css('float', 'left');
-                    var spanr = $("<span id='right'>100%</span>")
-                        .css('float', 'right');
-                    var div = $("<div id='percent'></div>")
-                        .css('width', $(this).width())
-                        .append(spanl).append(spanr);
-                    div.insertAfter($(this));
+                if (requestAction === 'get_scan_percent') {
+                    $('.scanned_files_info').html('' +
+                        '<h3>'
+                        + data_block.messages.text_total + '(' + info.total + ') '
+                        + data_block.messages.text_ScannedFiles + ' ' + info.scannedFiles +
+                        '</h3>');
+                } else if (requestAction === 'get_curl_percent') {
+                    $('.curl_sent_files_info').html('<h3>' + data_block.messages.text_total + '(' + info.total + ') ' + data_block.messages.text_sentFiles + ' ' + info.sentFiles + '</h3>');
                 }
+
+                $("#progressbar").progressbar({
+                    value: info.percent,
+                    create: function (event, ui) {
+                        var spanl = $("<span id='left'>0%</span>")
+                            .css('float', 'left');
+                        var spanr = $("<span id='right'>100%</span>")
+                            .css('float', 'right');
+                        var div = $("<div id='percent'></div>")
+                            .css('width', $(this).width())
+                            .append(spanl).append(spanr);
+                        div.insertAfter($(this));
+                    }
+                });
             });
-        });
         }, 2000)
     }
 

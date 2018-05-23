@@ -1,4 +1,4 @@
-#scan_section a, #configuration_check_section a, #update_bad_ip_list_section a {
+#scan_section a, #configuration_check_section a,#check_unknown_files_section a, #update_bad_ip_list_section a {
     text-decoration: none;
 }
 
@@ -12,6 +12,10 @@
 
 .infoMsg, .show_date {
     color: blue;
+}
+
+.stop_button{
+    display: none;
 }
 
 /***MAIN MENU***/
@@ -111,6 +115,14 @@
 /***CHECK UNKNOWN FILES MENU***/
 #check_unknown_files_section {
     margin: 5% auto;
+}
+.unknown_files_list {
+    margin-bottom: 7vh;
+}
+
+#check_unknown_files_section a{
+    margin-left: 1%;
+    font-size: 20px;
 }
 
 .current_file_info {

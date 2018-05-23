@@ -1,0 +1,221 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Wp Intershield\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-23 09:36+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: wp-intershield.php:34
+msgid "Bad IP List Successfully Updated"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:41
+msgid "Intershield"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:42
+msgid "Settings"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:43
+msgid "Configuration Check"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:46
+msgid "Check Unknown Files"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:51
+msgid "Update Bad IP List"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:66
+msgid "Full Scan:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:68
+msgid "Part Scan:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:75
+msgid "Start Scan"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:77
+msgid "Stop Scan"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:88
+msgid "Malware Files Information After Last Scan in"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:94
+msgid "Scanned"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:94
+msgid "files"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:106
+msgid "Malware sha256 match from previous scan"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:109
+msgid "Malware sha256 match from known malware"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:112
+msgid "Malware hexmatch from known malware"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:115
+msgid "Malware logical virus match"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:118
+msgid "Malware SEO match"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:121
+msgid "Malware test strings"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:134 includes/BlockAdminOptions.php:167
+#: includes/BlockAdminOptions.php:336 includes/BlockAdminOptions.php:390
+msgid "Load More"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:138
+msgid "Scan detected no malware"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:147
+msgid "Show clean files"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:157
+msgid "Good sha256 match from previous scan"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:157
+msgid "Good sha256 match known wordpress files"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:188
+msgid "Forbidden Link:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:192
+msgid "Need fill url, for example ... https://website.com/forbidden/"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:196
+msgid "Enter forbidden page url..."
+msgstr ""
+
+#: includes/BlockAdminOptions.php:203
+msgid "Files quantity on start:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:216
+msgid "Loading files quantity on \"Load more\" button click:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:228
+msgid "Blocking Bad IP:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:232 includes/BlockAdminOptions.php:248
+msgid "On"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:235 includes/BlockAdminOptions.php:251
+msgid "Off"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:244
+msgid "Show \"Check Unknown Files\" menu:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:261
+msgid "Save"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:291
+msgid "Check"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:314
+msgid "You have not done any scan yet!"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:320
+msgid "The list of the unknown files after last scan in"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:343
+msgid "Send Unknown Files"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:348
+msgid "Stop Sending"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:358
+msgid "You have no unknown files!"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:365
+msgid "The list of the files after last check in"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:376
+msgid "Bad Code:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:380
+msgid "Good Code:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:407
+msgid "Update"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:441
+msgid "Total"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:442
+msgid "Scanned Files:"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:443
+msgid "Sent Files:"
+msgstr ""
+
+#: includes/files-controller/CheckFilesCorrect.php:149
+msgid "Remote scanner connection is working"
+msgstr ""
+
+#: includes/files-controller/CheckFilesCorrect.php:152
+msgid ""
+"Please enable your cURL or file_get_contents configuration on your server."
+msgstr ""
+
+#: includes/files-controller/CheckFilesCorrect.php:155
+msgid "Remote scanner connection failing."
+msgstr ""
+
+#. URI of the plugin
+msgid "#"
+msgstr ""
