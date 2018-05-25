@@ -97,11 +97,7 @@ if (!class_exists('BlockAdminOptions')) {
                             </div>
                         <?php } ?>
                         <div class="malware_files_list">
-                            <!--                            --><?php //echo '<pre>'; var_dump($this->malwareFilesDb); exit;
-                            ?>
-
                             <?php if (!is_null($this->malwareFilesDb)) { ?>
-
                                 <?php if (!empty($this->malwareFilesDb)) {
                                     /***Show Malware Files And Error Msg***/
                                     $malwareMsg = '';
@@ -134,7 +130,7 @@ if (!class_exists('BlockAdminOptions')) {
                                         <?php }
                                     }
 
-//                                /***show <<Load More>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
+                                    /***show  <<Load More>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
                                     if (count($this->malwareFilesDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                         <button type="button" id="loadMoreMalwareFiles" class="loadMore">
                                             <?php _e('Load More', 'intershield') ?>
