@@ -63,9 +63,9 @@ if (!class_exists('BlockAdminOptions')) {
                         <form name="scan_info" action="#" method="post">
                             <input type="radio" name="scan_type" class="full_scan" id="full_scan" value="full_scan"
                                    checked>
-                            <label for="full_scan"> <?php _e('Full Scan:', 'intershield') ?> </label><br>
+                            <label for="full_scan"> <?php _e('Full Site Scan:', 'intershield') ?> </label><br>
                             <input type="radio" name="scan_type" class="part_scan" id="part_scan" value="part_scan">
-                            <label for="part_scan"> <?php _e('Part Scan:', 'intershield') ?> </label><br>
+                            <label for="part_scan"> <?php _e('Partial Folder Scan:', 'intershield') ?> </label><br>
                             <input type="text" name="folder_name_for_scan" id="folder_name_for_scan" class="hidden"
                                    placeholder="Enter folder name..."><br>
                             <input type="hidden" name="wp_nonce_start_scan"

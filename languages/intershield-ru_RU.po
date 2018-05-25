@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-25 08:17+0000\n"
-"PO-Revision-Date: 2018-05-25 08:18+0000\n"
+"POT-Creation-Date: 2018-05-25 09:25+0000\n"
+"PO-Revision-Date: 2018-05-25 09:26+0000\n"
 "Last-Translator: admin <admin@example.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -39,12 +39,12 @@ msgid "Update Bad IP List"
 msgstr "Обновить неверный список IP-адресов"
 
 #: includes/BlockAdminOptions.php:66
-msgid "Full Scan:"
-msgstr "Полное сканирование:"
+msgid "Full Site Scan:"
+msgstr "Сканирование полного сайта:"
 
 #: includes/BlockAdminOptions.php:68
-msgid "Part Scan:"
-msgstr "Сканирование части:"
+msgid "Partial Folder Scan:"
+msgstr "Сканирование частичной папки:"
 
 #: includes/BlockAdminOptions.php:75
 msgid "Start Scan"
@@ -66,128 +66,128 @@ msgstr "Отсканированные"
 msgid "files"
 msgstr "файлы"
 
-#: includes/BlockAdminOptions.php:112
+#: includes/BlockAdminOptions.php:108
 msgid "Malware sha256 match from previous scan"
 msgstr "Вредоносная программа sha256 соответствует предыдущей проверке"
 
-#: includes/BlockAdminOptions.php:115
+#: includes/BlockAdminOptions.php:111
 msgid "Malware sha256 match from known malware"
 msgstr "Malware sha256 соответствует известным вредоносным программам"
 
-#: includes/BlockAdminOptions.php:118
+#: includes/BlockAdminOptions.php:114
 msgid "Malware hexmatch from known malware"
 msgstr "Вредоносная программа hexmatch из известных вредоносных программ"
 
-#: includes/BlockAdminOptions.php:121
+#: includes/BlockAdminOptions.php:117
 msgid "Malware logical virus match"
 msgstr "Вредоносный логический вирус"
 
-#: includes/BlockAdminOptions.php:124
+#: includes/BlockAdminOptions.php:120
 msgid "Malware SEO match"
 msgstr "SEO-сопоставление вредоносных программ"
 
-#: includes/BlockAdminOptions.php:127
+#: includes/BlockAdminOptions.php:123
 msgid "Malware test strings"
 msgstr "Тестовые строки вредоносных программ"
 
-#: includes/BlockAdminOptions.php:140 includes/BlockAdminOptions.php:178
-#: includes/BlockAdminOptions.php:338 includes/BlockAdminOptions.php:393
+#: includes/BlockAdminOptions.php:136 includes/BlockAdminOptions.php:174
+#: includes/BlockAdminOptions.php:334 includes/BlockAdminOptions.php:389
 msgid "Load More"
 msgstr "Загрузить больше"
 
-#: includes/BlockAdminOptions.php:144
+#: includes/BlockAdminOptions.php:140
 msgid "No malware files were detected after the previous scan"
 msgstr "После предыдущего сканирования не было обнаружено вредоносных файлов"
 
-#: includes/BlockAdminOptions.php:147
+#: includes/BlockAdminOptions.php:143
 msgid "No previous scan was detected"
 msgstr "Не было обнаружено предыдущего сканирования"
 
-#: includes/BlockAdminOptions.php:158
+#: includes/BlockAdminOptions.php:154
 msgid "Show clean files"
 msgstr "Показать чистые файлы"
 
-#: includes/BlockAdminOptions.php:168
+#: includes/BlockAdminOptions.php:164
 msgid "Good sha256 match from previous scan"
 msgstr "Хорошее соответствие sha256 от предыдущего сканирования"
 
-#: includes/BlockAdminOptions.php:168
+#: includes/BlockAdminOptions.php:164
 msgid "Good sha256 match known wordpress files"
 msgstr "Хорошие ответы sha256 на известные файлы WordPress"
 
-#: includes/BlockAdminOptions.php:199
+#: includes/BlockAdminOptions.php:195
 msgid "Forbidden Link:"
 msgstr "Запретная ссылка:"
 
-#: includes/BlockAdminOptions.php:203
+#: includes/BlockAdminOptions.php:199
 msgid "Need fill url, for example ... https://website.com/forbidden/"
 msgstr "Нужно заполнить URL-адрес, например ... https://website.com/forbidden/"
 
-#: includes/BlockAdminOptions.php:207
+#: includes/BlockAdminOptions.php:203
 msgid "Enter forbidden page url..."
 msgstr "Введите URL  запрещенный страницы..."
 
-#: includes/BlockAdminOptions.php:214
+#: includes/BlockAdminOptions.php:210
 msgid "Files quantity on start:"
 msgstr "Количество файлов при запуске:"
 
-#: includes/BlockAdminOptions.php:227
+#: includes/BlockAdminOptions.php:223
 msgid "Loading files quantity on \"Load more\" button click:"
 msgstr "Количества загружаемых файлов по щелчку кнопки \"Загрузить больше\":"
 
-#: includes/BlockAdminOptions.php:239
+#: includes/BlockAdminOptions.php:235
 msgid "Blocking Bad IP:"
 msgstr "Блокирование плохого IP:"
 
-#: includes/BlockAdminOptions.php:243 includes/BlockAdminOptions.php:259
+#: includes/BlockAdminOptions.php:239 includes/BlockAdminOptions.php:255
 msgid "On"
 msgstr "Включить"
 
-#: includes/BlockAdminOptions.php:246 includes/BlockAdminOptions.php:262
+#: includes/BlockAdminOptions.php:242 includes/BlockAdminOptions.php:258
 msgid "Off"
 msgstr "Выключить"
 
-#: includes/BlockAdminOptions.php:255
+#: includes/BlockAdminOptions.php:251
 msgid "Show \"Check Unknown Files\" menu:"
 msgstr "Показать меню «Проверка неизвестных файлов»:"
 
-#: includes/BlockAdminOptions.php:272
+#: includes/BlockAdminOptions.php:268
 msgid "Save"
 msgstr "Сохранить"
 
-#: includes/BlockAdminOptions.php:316
+#: includes/BlockAdminOptions.php:312
 msgid "You have not done any scan yet!"
 msgstr "Вы еще не сделали никакого сканирования!"
 
-#: includes/BlockAdminOptions.php:322
+#: includes/BlockAdminOptions.php:318
 msgid "The list of the unknown files after last scan in"
 msgstr "Список неизвестных файлов после последнего сканирования в"
 
-#: includes/BlockAdminOptions.php:345
+#: includes/BlockAdminOptions.php:341
 msgid "Send Unknown Files"
 msgstr "Отправить Неизвестные файлы"
 
-#: includes/BlockAdminOptions.php:351
+#: includes/BlockAdminOptions.php:347
 msgid "Stop Sending"
 msgstr "Остановить отправку"
 
-#: includes/BlockAdminOptions.php:361
+#: includes/BlockAdminOptions.php:357
 msgid "You have no unknown files!"
 msgstr "У вас нет неизвестных файлов!"
 
-#: includes/BlockAdminOptions.php:368
+#: includes/BlockAdminOptions.php:364
 msgid "The list of the files after last check in"
 msgstr "Список файлов после последней проверки"
 
-#: includes/BlockAdminOptions.php:379
+#: includes/BlockAdminOptions.php:375
 msgid "Bad Code:"
 msgstr "Плохой код:"
 
-#: includes/BlockAdminOptions.php:383
+#: includes/BlockAdminOptions.php:379
 msgid "Good Code:"
 msgstr "Хороший код:"
 
-#: includes/BlockAdminOptions.php:410
+#: includes/BlockAdminOptions.php:406
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
@@ -195,19 +195,19 @@ msgstr ""
 "Плохой список ip автоматически обновляется ежедневно через wp-cron. "
 "Используйте приведенную ниже команду для принудительного обновления вручную."
 
-#: includes/BlockAdminOptions.php:418
+#: includes/BlockAdminOptions.php:414
 msgid "Update"
 msgstr "Обновить"
 
-#: includes/BlockAdminOptions.php:451
+#: includes/BlockAdminOptions.php:447
 msgid "Total"
 msgstr "Всего"
 
-#: includes/BlockAdminOptions.php:452
+#: includes/BlockAdminOptions.php:448
 msgid "Scanned Files:"
 msgstr "Отсканированные файлы:"
 
-#: includes/BlockAdminOptions.php:453
+#: includes/BlockAdminOptions.php:449
 msgid "Sent Files:"
 msgstr "Отправленные файлы:"
 
