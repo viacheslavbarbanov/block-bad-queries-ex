@@ -1,4 +1,4 @@
-#scan_section a, #configuration_check_section a,#check_unknown_files_section a, #update_bad_ip_list_section a {
+#scan_section a, #configuration_check_section a, #check_unknown_files_section a, #update_bad_ip_list_section a {
     text-decoration: none;
 }
 
@@ -14,7 +14,7 @@
     color: blue;
 }
 
-.stop_button{
+.stop_button {
     display: none;
 }
 
@@ -108,19 +108,20 @@
 }
 
 /***CONFIGURATION-CHECK MENU***/
-.config_check_button_parent {
-    margin: 5%;
+#configuration_check_section {
+    margin: 5% auto;
 }
 
 /***CHECK UNKNOWN FILES MENU***/
 #check_unknown_files_section {
     margin: 5% auto;
 }
+
 .unknown_files_list {
     margin-bottom: 7vh;
 }
 
-#check_unknown_files_section a{
+#check_unknown_files_section a {
     margin-left: 1%;
     font-size: 20px;
 }
@@ -130,6 +131,10 @@
 }
 
 /***UPDATE BAD IP LIST MENU***/
-#update_bad_ip_list_section{
+#update_bad_ip_list_section {
     margin: 5% auto;
+}
+
+#update_bad_ip_list_section > div{
+    margin-bottom: 10vh;
 }

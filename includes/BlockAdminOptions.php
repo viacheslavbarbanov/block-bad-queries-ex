@@ -97,47 +97,57 @@ if (!class_exists('BlockAdminOptions')) {
                             </div>
                         <?php } ?>
                         <div class="malware_files_list">
-                            <?php if (!empty($this->malwareFilesDb)) {
-                                /***Show Malware Files And Error Msg***/
-                                $malwareMsg = '';
-                                foreach ($this->malwareFilesDb as $currentFileInfo) {
-                                    foreach ($currentFileInfo as $responseCode => $fileDir) {
-                                        switch ($responseCode) {
-                                            case '127.0.0.100':
-                                                $malwareMsg = __('Malware sha256 match from previous scan', 'intershield');
-                                                break;
-                                            case '127.0.0.10':
-                                                $malwareMsg = __('Malware sha256 match from known malware', 'intershield');
-                                                break;
-                                            case '127.0.0.20':
-                                                $malwareMsg = __('Malware hexmatch from known malware', 'intershield');
-                                                break;
-                                            case '127.0.0.40':
-                                                $malwareMsg = __('Malware logical virus match', 'intershield');
-                                                break;
-                                            case '127.0.0.50':
-                                                $malwareMsg = __('Malware SEO match', 'intershield');
-                                                break;
-                                            case '127.0.0.2':
-                                                $malwareMsg = __('Malware test strings', 'intershield');
-                                                break;
-                                        } ?>
-                                        <div class="current_file_info">
-                                            <strong><?php echo $malwareMsg; ?></strong>
-                                            <p class="errorMsg"> <?php echo $fileDir; ?></p>
-                                        </div>
-                                    <?php }
-                                }
+                            <!--                            --><?php //echo '<pre>'; var_dump($this->malwareFilesDb); exit;
+                            ?>
+
+                            <?php if (!is_null($this->malwareFilesDb)) { ?>
+
+                                <?php if (!empty($this->malwareFilesDb)) {
+                                    /***Show Malware Files And Error Msg***/
+                                    $malwareMsg = '';
+                                    foreach ($this->malwareFilesDb as $currentFileInfo) {
+                                        foreach ($currentFileInfo as $responseCode => $fileDir) {
+                                            switch ($responseCode) {
+                                                case '127.0.0.100':
+                                                    $malwareMsg = __('Malware sha256 match from previous scan', 'intershield');
+                                                    break;
+                                                case '127.0.0.10':
+                                                    $malwareMsg = __('Malware sha256 match from known malware', 'intershield');
+                                                    break;
+                                                case '127.0.0.20':
+                                                    $malwareMsg = __('Malware hexmatch from known malware', 'intershield');
+                                                    break;
+                                                case '127.0.0.40':
+                                                    $malwareMsg = __('Malware logical virus match', 'intershield');
+                                                    break;
+                                                case '127.0.0.50':
+                                                    $malwareMsg = __('Malware SEO match', 'intershield');
+                                                    break;
+                                                case '127.0.0.2':
+                                                    $malwareMsg = __('Malware test strings', 'intershield');
+                                                    break;
+                                            } ?>
+                                            <div class="current_file_info">
+                                                <strong><?php echo $malwareMsg; ?></strong>
+                                                <p class="errorMsg"> <?php echo $fileDir; ?></p>
+                                            </div>
+                                        <?php }
+                                    }
 
 //                                /***show <<Load More>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
-                                if (count($this->malwareFilesDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
-                                    <button type="button" id="loadMoreMalwareFiles" class="loadMore">
-                                        <?php _e('Load More', 'intershield') ?>
-                                    </button>
-                                <?php }
-                            } else {
-                                echo "<h2 class='successMsg'>" . __('Scan detected no malware', 'intershield') . "</h2>";
+                                    if (count($this->malwareFilesDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
+                                        <button type="button" id="loadMoreMalwareFiles" class="loadMore">
+                                            <?php _e('Load More', 'intershield') ?>
+                                        </button>
+                                    <?php }
+                                } else {
+                                    echo "<h2 class='successMsg'>" . __('No malware files were detected after the previous scan', 'intershield') . "</h2>";
+                                } ?>
+                            <?php } else {
+                                echo "<h2 class='successMsg'>" . __('No previous scan was detected', 'intershield') . "</h2>";
                             } ?>
+
+
                         </div>
 
                         <?php if (!empty($this->goodFilesDb) && $this->goodFilesDb !== '[]') {
@@ -286,18 +296,9 @@ if (!class_exists('BlockAdminOptions')) {
             <div class="wrap">
                 <h1><?php echo get_admin_page_title(); ?></h1>
                 <div id="configuration_check_section">
-                    <div class="config_check_button_parent">
-                        <h3>
-                            <a href="?page=intershield-configuration-check&scan_type=configCheck">
-                                <?php _e('Check', 'intershield') ?>
-                            </a>
-                        </h3>
-                    </div>
-                    <!--                   /***When Clicked <<Configuration Check>> Button***/-->
+                    <!--/***When Clicked <<Configuration Check>> Button***/-->
                     <?php if (!empty($this->msgAfterConfigCheck)) { ?>
-                        <div class="config_check_result">
-                            <h3 class="infoMsg"><?php echo $this->msgAfterConfigCheck ?></h3>
-                        </div>
+                        <h3 class="infoMsg"><?php echo $this->msgAfterConfigCheck ?></h3>
                     <?php } ?>
                 </div>
             </div>
@@ -345,7 +346,8 @@ if (!class_exists('BlockAdminOptions')) {
                             <input type="hidden" name="wp_nonce_unknown_files_nonce"
                                    value="<?php echo wp_create_nonce('unknown-files-nonce'); ?>">
 
-                            <a href="?page=intershield&stop-sending-unknown-files=true" id="stop_sending_unknown_files" class="stop_button">
+                            <a href="?page=intershield&stop-sending-unknown-files=true" id="stop_sending_unknown_files"
+                               class="stop_button">
                                 <?php _e('Stop Sending', 'intershield') ?>
                             </a>
                         </form>
@@ -402,6 +404,14 @@ if (!class_exists('BlockAdminOptions')) {
             <div class="wrap">
                 <h1><?php echo get_admin_page_title(); ?></h1>
                 <div id="update_bad_ip_list_section">
+
+                    <div class="update_bad_ip_list_info">
+                        <h3>
+                            <?php _e('The bad ip list will automatically update daily through wp-cron. Use the below to manually force an update.', 'intershield') ?>
+
+                        </h3>
+                    </div>
+
                     <div class="update_bad_ip_list_button_parent">
                         <h3>
                             <a href="?page=intershield-update-bad-ip-list&update_bad_ip_list=true&_wpnonce=<?php echo wp_create_nonce('update-ip-list'); ?>">
@@ -453,9 +463,10 @@ if (!class_exists('BlockAdminOptions')) {
                 $this->scanState = 'start';
             } elseif (isset($_GET['end-scan'])) {
                 $this->scanState = 'stop';
-            } elseif (!empty($_GET['scan_type']) && $_GET['scan_type'] == 'configCheck') {
+            } elseif (!empty($_GET['page']) && $_GET['page'] == 'intershield-configuration-check') {
                 $this->scanState = 'configCheck';
             }
+
 
             /***Save <<intershield_settings>> In DB***/
             if (!empty($_POST['wp_nonce_update_settings']) && wp_verify_nonce($_POST['wp_nonce_update_settings'], 'update-settings')) {
@@ -487,10 +498,6 @@ if (!class_exists('BlockAdminOptions')) {
             /***UPDATE BAD IP LIST***/
             if (isset($_GET['update_bad_ip_list']) && wp_verify_nonce($_GET['_wpnonce'], 'update-ip-list')) {
                 $this->startUpdateBadIpList = true;
-
-//echo '<pre>'; var_dump($_GET); exit;
-
-
             }
 
         }

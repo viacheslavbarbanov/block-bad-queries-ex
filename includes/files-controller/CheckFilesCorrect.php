@@ -39,7 +39,7 @@ if (!class_exists('CheckFilesCorrect')) {
                 }
                 /***To Cache All Files In filesList***/
                 $this->hashFiles($this->filesList);
-            } elseif (!empty($_GET['scan_type']) && $_GET['scan_type'] == 'configCheck') {
+            } elseif (!empty($_GET['page']) && $_GET['page'] == 'intershield-configuration-check') {
                 $this->testHashFiles();
             }
         }

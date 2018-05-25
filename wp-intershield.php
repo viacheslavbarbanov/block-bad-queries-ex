@@ -26,9 +26,9 @@ add_action('init', function () {
     $blockAdminOptions = new BlockAdminOptions();
 
     /*****WHEN CLICKED UPDATE BAD IP LIST*****/
-    if($blockAdminOptions->startUpdateBadIpList){
+    if ($blockAdminOptions->startUpdateBadIpList) {
         $updateIpListTxt = $updateBadIpList->updateIpListTxt();
-        if($updateIpListTxt){
+        if ($updateIpListTxt) {
             $blockAdminOptions->msgAfterUpdateBadIpList = __('Bad IP List Successfully Updated', 'intershield');
         }
     }
@@ -77,9 +77,9 @@ add_action('init', function () {
 });
 
 /***For Multi Language***/
-add_action( 'plugins_loaded', function (){
-    load_plugin_textdomain( 'intershield', false, BLOCK_REL_PATH . '/languages' );
-} );
+add_action('plugins_loaded', function () {
+    load_plugin_textdomain('intershield', false, BLOCK_REL_PATH . '/languages');
+});
 
 /***Clear Scheduler hook***/
 register_deactivation_hook(__FILE__, function () {
