@@ -130,10 +130,10 @@ if (!class_exists('BlockAdminOptions')) {
                                         <?php }
                                     }
 
-                                    /***show  <<Load More>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
+                                    /***show  <<View Debugging Information>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
                                     if (count($this->malwareFilesDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                         <button type="button" id="loadMoreMalwareFiles" class="loadMore">
-                                            <?php _e('Load More', 'intershield') ?>
+                                            <?php _e('View Debugging Information', 'intershield') ?>
                                         </button>
                                     <?php }
                                 } else {
@@ -168,10 +168,10 @@ if (!class_exists('BlockAdminOptions')) {
                                     <?php }
                                 } ?>
 
-                                <!--/***show <<Load More>> Button When <<Good Files List>> Is More Then <<Count Files Shown During Start>>***/-->
+                                <!--/***show <<View Debugging Information>> Button When <<Good Files List>> Is More Then <<Count Files Shown During Start>>***/-->
                                 <?php if (count($goodFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                     <button type="button" id="loadMoreGoodFiles"
-                                            class="loadMore"><?php _e('Load More', 'intershield') ?> </button>
+                                            class="loadMore"><?php _e('View Debugging Information', 'intershield') ?> </button>
                                 <?php } ?>
                             </div>
                         <?php } ?>
@@ -220,7 +220,7 @@ if (!class_exists('BlockAdminOptions')) {
                             <td>
                                 <h3>
                                     <label for="load_more_files_range">
-                                        <?php _e('Loading files quantity on "Load more" button click:', 'intershield') ?>
+                                        <?php _e('Loading files quantity on "View Debugging Information" button click:', 'intershield') ?>
                                     </label>
                                 </h3>
                             </td>
@@ -328,10 +328,10 @@ if (!class_exists('BlockAdminOptions')) {
                                 }
                             }
                             ?>
-                            <!--/***show <<Load More>> Button When <<Unknown Files List>> Is More Then <<Count Files Shown During Start>>***/-->
+                            <!--/***show <<View Debugging Information>> Button When <<Unknown Files List>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($unknownFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreUnknownFiles" class="loadMore">
-                                    <?php _e('Load More', 'intershield') ?>
+                                    <?php _e('View Debugging Information', 'intershield') ?>
                                 </button>
                             <?php } ?>
                         </div>
@@ -376,17 +376,17 @@ if (!class_exists('BlockAdminOptions')) {
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } elseif (in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
                                         <!--                                        /***Show Current Good File Dir***/-->
-                                        <h3 class="successMsg file_desc"> <?php _e('Good Code:', 'intershield') ?> </h3>
+                                        <h3 class="successMsg file_desc"> <?php _e('good code:', 'intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } ?>
 
                                 </div>
                             <?php } ?>
 
-                            <!--/***show <<Load More>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
+                            <!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($filesInfoAfterCurlDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreFilesListAfterCurl" class="loadMore">
-                                    <?php _e('Load More', 'intershield') ?>
+                                    <?php _e('View Debugging Information', 'intershield') ?>
                                 </button>
                             <?php } ?>
                         </div>

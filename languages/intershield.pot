@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-25 09:25+0000\n"
+"POT-Creation-Date: 2018-05-30 07:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -92,7 +92,7 @@ msgstr ""
 
 #: includes/BlockAdminOptions.php:136 includes/BlockAdminOptions.php:174
 #: includes/BlockAdminOptions.php:334 includes/BlockAdminOptions.php:389
-msgid "Load More"
+msgid "View Debugging Information"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:140
@@ -132,7 +132,7 @@ msgid "Files quantity on start:"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:223
-msgid "Loading files quantity on \"Load more\" button click:"
+msgid "Loading files quantity on \"View Debugging Information\" button click:"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:235
@@ -184,7 +184,7 @@ msgid "Bad Code:"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:379
-msgid "Good Code:"
+msgid "good code:"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:406

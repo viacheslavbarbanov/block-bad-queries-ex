@@ -70,8 +70,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    console.log(data_block.messages.text_total);
-
     function sendAjaxRequest(requestAction) {
         setInterval(function () {
             $.ajax({
