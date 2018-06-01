@@ -142,13 +142,10 @@ if (!class_exists('BlockAdminOptions')) {
                             <?php } else {
                                 echo "<h2 class='successMsg'>" . __('No previous scan was detected', 'intershield') . "</h2>";
                             } ?>
-
-
                         </div>
 
                         <?php if (!empty($this->goodFilesDb) && $this->goodFilesDb !== '[]') {
                             $goodFilesListArr = json_decode($this->goodFilesDb, true); ?>
-
                             <div>
                                 <button type="button" id="show_good_files">
                                     <?php _e('Show clean files', 'intershield') ?>
@@ -178,8 +175,7 @@ if (!class_exists('BlockAdminOptions')) {
                     </div>
                 </div>
             </div>
-            <?php
-        }
+        <?php }
 
         public function intershieldSettingsMenu()
         { ?>
@@ -309,7 +305,10 @@ if (!class_exists('BlockAdminOptions')) {
                     $unknownFilesListArr = $this->unknownFilesDb;
                     $filesInfoAfterCurlDb = json_decode($this->filesInfoAfterCurlDb, true);
                     if (is_null($unknownFilesListArr)) { ?>
-                        <?php wp_die("<h2 class='successMsg'>" . __('You have not done any scan yet!', 'intershield') . "</h2>") ?>
+                        <?php wp_die("
+                            <h2 class='successMsg'>" . __('You have not done any scan yet!', 'intershield') . "</h2>
+                            <a href='?page=intershield' class='button'>Go to scan</a>
+                            ") ?>
                     <?php }
 
                     if (is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
@@ -400,17 +399,16 @@ if (!class_exists('BlockAdminOptions')) {
             <div class="wrap">
                 <h1><?php echo get_admin_page_title(); ?></h1>
                 <div id="update_bad_ip_list_section">
-
                     <div class="update_bad_ip_list_info">
                         <h3>
                             <?php _e('The bad ip list will automatically update daily through wp-cron. Use the below to manually force an update.', 'intershield') ?>
-
                         </h3>
                     </div>
 
                     <div class="update_bad_ip_list_button_parent">
                         <h3>
-                            <a href="?page=intershield-update-bad-ip-list&update_bad_ip_list=true&_wpnonce=<?php echo wp_create_nonce('update-ip-list'); ?>">
+                            <a class="button"
+                               href="?page=intershield-update-bad-ip-list&update_bad_ip_list=true&_wpnonce=<?php echo wp_create_nonce('update-ip-list'); ?>">
                                 <?php _e('Update', 'intershield') ?>
                             </a>
                         </h3>
@@ -419,12 +417,30 @@ if (!class_exists('BlockAdminOptions')) {
                     <?php if (!empty($this->msgAfterUpdateBadIpList)) { ?>
                         <div class="update_bad_ip_list_result">
                             <h3 class="successMsg"><?php echo $this->msgAfterUpdateBadIpList ?></h3>
+
+                            <?php
+                            $path = dirname(__FILE__) . '/bad-ip-list.txt';
+                            if (file_exists($path) && $badIpListTxt = fopen($path, "r")) { ?>
+                                <button type="button" id="show_bad_ip_list">
+                                    <?php _e('Show bad IP list', 'intershield') ?>
+                                </button>
+                                <div class="bad_ip_list">
+                                    <?php while (!feof($badIpListTxt)) {
+                                        $line = fgets($badIpListTxt);
+                                        echo $line . '<br>';
+                                    }
+                                    fclose($badIpListTxt);
+                                    ?>
+                                </div>
+                            <?php } else {
+                                wp_die('<h3>' . __('File is not opened!', 'intershield') . '</h3>');
+                            }
+                            ?>
                         </div>
                     <?php } ?>
                 </div>
             </div>
-            <?php
-        }
+        <?php }
 
         public function registerScripts()
         {

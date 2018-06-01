@@ -67,6 +67,7 @@ add_action('init', function () {
 
     /***Get Percent And Count Scanned Files From db***/
     add_action('wp_ajax_get_scan_percent', function () {
+
         wp_die(get_option('intershield_scanned_files_progress_percent'));
     });
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-30 07:07+0000\n"
+"POT-Creation-Date: 2018-06-01 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgid "Malware test strings"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:136 includes/BlockAdminOptions.php:174
-#: includes/BlockAdminOptions.php:334 includes/BlockAdminOptions.php:389
+#: includes/BlockAdminOptions.php:337 includes/BlockAdminOptions.php:392
 msgid "View Debugging Information"
 msgstr ""
 
@@ -155,57 +155,65 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:312
+#: includes/BlockAdminOptions.php:313
 msgid "You have not done any scan yet!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:318
+#: includes/BlockAdminOptions.php:321
 msgid "The list of the unknown files after last scan in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:341
+#: includes/BlockAdminOptions.php:344
 msgid "Send Unknown Files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:347
+#: includes/BlockAdminOptions.php:350
 msgid "Stop Sending"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:357
+#: includes/BlockAdminOptions.php:360
 msgid "You have no unknown files!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:364
+#: includes/BlockAdminOptions.php:367
 msgid "The list of the files after last check in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:375
+#: includes/BlockAdminOptions.php:378
 msgid "Bad Code:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:379
+#: includes/BlockAdminOptions.php:382
 msgid "good code:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:406
+#: includes/BlockAdminOptions.php:409
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
 
-#: includes/BlockAdminOptions.php:414
+#: includes/BlockAdminOptions.php:418
 msgid "Update"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:447
+#: includes/BlockAdminOptions.php:431
+msgid "Show bad IP list"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:442
+msgid "File is not opened!"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:470
 msgid "Total"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:448
+#: includes/BlockAdminOptions.php:471
 msgid "Scanned Files:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:449
+#: includes/BlockAdminOptions.php:472
 msgid "Sent Files:"
 msgstr ""
 

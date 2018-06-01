@@ -56,10 +56,6 @@
     margin-top: 0;
 }
 
-.hiddenGoodFiles {
-    display: none;
-}
-
 /***SETTINGS MENU***/
 #settings_section {
     margin-top: 5vh;
@@ -137,4 +133,8 @@
 
 #update_bad_ip_list_section > div{
     margin-bottom: 10vh;
+}
+
+.bad_ip_list{
+    display: none;
 }

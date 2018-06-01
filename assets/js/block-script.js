@@ -79,15 +79,24 @@ jQuery(document).ready(function ($) {
             }).done(function (response) {
                 var info = jQuery.parseJSON(response);
 
+                var currentFileNumber = '';
+
                 if (requestAction === 'get_scan_percent') {
+                    currentFileNumber = info.scannedFiles;
+
                     $('.scanned_files_info').html('' +
                         '<h3>'
                         + data_block.messages.text_total + '(' + info.total + ') '
                         + data_block.messages.text_ScannedFiles + ' ' + info.scannedFiles +
                         '</h3>');
                 } else if (requestAction === 'get_curl_percent') {
+                    currentFileNumber = info.sentFiles;
+
                     $('.curl_sent_files_info').html('<h3>' + data_block.messages.text_total + '(' + info.total + ') ' + data_block.messages.text_sentFiles + ' ' + info.sentFiles + '</h3>');
                 }
+
+                /***If during plugin work user goes to another page***/
+                showMsgBeforeUnload(info.total, currentFileNumber);
 
                 $("#progressbar").progressbar({
                     value: info.percent,
@@ -104,6 +113,17 @@ jQuery(document).ready(function ($) {
                 });
             });
         }, 2000)
+    }
+
+    function showMsgBeforeUnload(total, currentFileNumber) {
+        if(total > currentFileNumber){
+            $(window).bind('beforeunload', function(){
+                return 'Please wait for scan to finish.';
+            });
+        }else{
+            $(window).unbind("beforeunload");
+            location.reload(true);
+        }
     }
 
     /***Settings Page***/
@@ -130,5 +150,11 @@ jQuery(document).ready(function ($) {
     $('#show_good_files').on('click', function () {
         $('#show_good_files').hide('slow');
         $('.good_files_list').show('slow');
-    })
+    });
+
+    /***Update Bad IP List Page***/
+    $('#show_bad_ip_list').on('click', function () {
+        $('#show_bad_ip_list').hide('slow');
+        $('.bad_ip_list').show('slow');
+    });
 });
