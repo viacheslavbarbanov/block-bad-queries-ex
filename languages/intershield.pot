@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 10:49+0000\n"
+"POT-Creation-Date: 2018-06-04 06:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,7 +15,9 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/"
 
 #: wp-intershield.php:32
-msgid "Bad IP List Successfully Updated"
+msgid ""
+"Bad IP List Successfully Updated. Downloading bad IP list update from sigs."
+"interserver.net "
 msgstr ""
 
 #: includes/BlockAdminOptions.php:41
@@ -23,197 +25,201 @@ msgid "Intershield"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:42
-msgid "Settings"
+msgid "Scan Files"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:43
+msgid "Settings"
+msgstr ""
+
+#: includes/BlockAdminOptions.php:44
 msgid "Configuration Check"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:46
+#: includes/BlockAdminOptions.php:47
 msgid "Check Unknown Files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:51
+#: includes/BlockAdminOptions.php:52
 msgid "Update Bad IP List"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:66
+#: includes/BlockAdminOptions.php:67
 msgid "Full Site Scan:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:68
+#: includes/BlockAdminOptions.php:69
 msgid "Partial Folder Scan:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:75
+#: includes/BlockAdminOptions.php:76
 msgid "Start Scan"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:77
+#: includes/BlockAdminOptions.php:78
 msgid "Stop Scan"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:89
+#: includes/BlockAdminOptions.php:90
 msgid "Malware Files Information After Last Scan in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:95
+#: includes/BlockAdminOptions.php:96
 msgid "Scanned"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:95
+#: includes/BlockAdminOptions.php:96
 msgid "files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:108
+#: includes/BlockAdminOptions.php:109
 msgid "Malware sha256 match from previous scan"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:111
+#: includes/BlockAdminOptions.php:112
 msgid "Malware sha256 match from known malware"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:114
+#: includes/BlockAdminOptions.php:115
 msgid "Malware hexmatch from known malware"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:117
+#: includes/BlockAdminOptions.php:118
 msgid "Malware logical virus match"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:120
+#: includes/BlockAdminOptions.php:121
 msgid "Malware SEO match"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:123
+#: includes/BlockAdminOptions.php:124
 msgid "Malware test strings"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:136 includes/BlockAdminOptions.php:174
-#: includes/BlockAdminOptions.php:337 includes/BlockAdminOptions.php:392
+#: includes/BlockAdminOptions.php:137 includes/BlockAdminOptions.php:172
+#: includes/BlockAdminOptions.php:334 includes/BlockAdminOptions.php:389
 msgid "View Debugging Information"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:140
+#: includes/BlockAdminOptions.php:141
 msgid "No malware files were detected after the previous scan"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:143
+#: includes/BlockAdminOptions.php:144
 msgid "No previous scan was detected"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:154
+#: includes/BlockAdminOptions.php:152
 msgid "Show clean files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:164
+#: includes/BlockAdminOptions.php:162
 msgid "Good sha256 match from previous scan"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:164
+#: includes/BlockAdminOptions.php:162
 msgid "Good sha256 match known wordpress files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:195
+#: includes/BlockAdminOptions.php:192
 msgid "Forbidden Link:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:199
+#: includes/BlockAdminOptions.php:196
 msgid "Need fill url, for example ... https://website.com/forbidden/"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:203
+#: includes/BlockAdminOptions.php:200
 msgid "Enter forbidden page url..."
 msgstr ""
 
-#: includes/BlockAdminOptions.php:210
+#: includes/BlockAdminOptions.php:207
 msgid "Files quantity on start:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:223
+#: includes/BlockAdminOptions.php:220
 msgid "Loading files quantity on \"View Debugging Information\" button click:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:235
+#: includes/BlockAdminOptions.php:232
 msgid "Blocking Bad IP:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:239 includes/BlockAdminOptions.php:255
+#: includes/BlockAdminOptions.php:236 includes/BlockAdminOptions.php:252
 msgid "On"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:242 includes/BlockAdminOptions.php:258
+#: includes/BlockAdminOptions.php:239 includes/BlockAdminOptions.php:255
 msgid "Off"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:251
+#: includes/BlockAdminOptions.php:248
 msgid "Show \"Check Unknown Files\" menu:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:268
+#: includes/BlockAdminOptions.php:265
 msgid "Save"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:313
+#: includes/BlockAdminOptions.php:310
 msgid "You have not done any scan yet!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:321
+#: includes/BlockAdminOptions.php:318
 msgid "The list of the unknown files after last scan in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:344
+#: includes/BlockAdminOptions.php:341
 msgid "Send Unknown Files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:350
+#: includes/BlockAdminOptions.php:347
 msgid "Stop Sending"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:360
+#: includes/BlockAdminOptions.php:357
 msgid "You have no unknown files!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:367
+#: includes/BlockAdminOptions.php:364
 msgid "The list of the files after last check in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:378
+#: includes/BlockAdminOptions.php:375
 msgid "Bad Code:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:382
+#: includes/BlockAdminOptions.php:379
 msgid "good code:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:409
+#: includes/BlockAdminOptions.php:405
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
 
-#: includes/BlockAdminOptions.php:418
+#: includes/BlockAdminOptions.php:413
 msgid "Update"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:431
+#: includes/BlockAdminOptions.php:426
 msgid "Show bad IP list"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:442
+#: includes/BlockAdminOptions.php:437
 msgid "File is not opened!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:470
+#: includes/BlockAdminOptions.php:464
 msgid "Total"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:471
+#: includes/BlockAdminOptions.php:465
 msgid "Scanned Files:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:472
+#: includes/BlockAdminOptions.php:466
 msgid "Sent Files:"
 msgstr ""
 

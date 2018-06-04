@@ -29,7 +29,7 @@ add_action('init', function () {
     if ($blockAdminOptions->startUpdateBadIpList) {
         $updateIpListTxt = $updateBadIpList->updateIpListTxt();
         if ($updateIpListTxt) {
-            $blockAdminOptions->msgAfterUpdateBadIpList = __('Bad IP List Successfully Updated', 'intershield');
+            $blockAdminOptions->msgAfterUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from sigs.interserver.net ', 'intershield');
         }
     }
 

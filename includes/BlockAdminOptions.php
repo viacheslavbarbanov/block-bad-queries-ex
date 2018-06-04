@@ -39,6 +39,7 @@ if (!class_exists('BlockAdminOptions')) {
             /***Add Scan Files Menu In Dashboard***/
             add_action('admin_menu', function () {
                 add_menu_page(__('Intershield', 'intershield'), __('Intershield', 'intershield'), 'manage_options', 'intershield', array($this, 'main_menu'), 'dashicons-shield');
+                add_submenu_page('intershield', __('Scan Files', 'intershield'), __('Scan Files', 'intershield'), 'manage_options', 'intershield', array($this, 'main_menu'));
                 add_submenu_page('intershield', __('Settings', 'intershield'), __('Settings', 'intershield'), 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
                 add_submenu_page('intershield', __('Configuration Check', 'intershield'), __('Configuration Check', 'intershield'), 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
 
