@@ -60,6 +60,16 @@ if (!class_exists('BlockAdminOptions')) {
             <div class="wrap">
                 <h1><?php echo get_admin_page_title(); ?></h1>
                 <div id="scan_page_parent">
+                    <div class="information_section">
+                        <h3>
+                            Use the below to begin a scan of your site. Using InterServer's cached malware db file checksums
+                            are taken and compared to known good and bad files. Files which have not been scanned are logged
+                            as 'Unknown Files'. Please check the
+                            <a href="?page=intershield-settings">settings</a>
+
+                        </h3>
+                    </div>
+
                     <div id="scan_section">
                         <form name="scan_info" action="#" method="post">
                             <input type="radio" name="scan_type" class="full_scan" id="full_scan" value="full_scan"
