@@ -18,12 +18,17 @@ ini_set('default_socket_timeout', 30000);
 
 /***Admin Options***/
 add_action('init', function () {
-    /***Scheduler update bad ips list***/
-    include BLOCK_DIR . 'includes/UpdateBadIpList.php';
-    $updateBadIpList = new UpdateBadIpList();
-
     include BLOCK_DIR . 'includes/BlockAdminOptions.php';
     $blockAdminOptions = new BlockAdminOptions();
+
+    /****WHEN ENABLED AUTOMATICALLY UPDATE IP LIST IN SETTINGS***/
+    if ($blockAdminOptions->intershield_settings['auto_update_bad_ip_switch'] === 'on') {
+        /***Scheduler update bad ips list***/
+        include BLOCK_DIR . 'includes/UpdateBadIpList.php';
+        $updateBadIpList = new UpdateBadIpList();
+    } else {
+        wp_clear_scheduled_hook('add_every_fifteen_min');
+    }
 
     /*****WHEN CLICKED UPDATE BAD IP LIST*****/
     if ($blockAdminOptions->startUpdateBadIpList) {
@@ -67,7 +72,6 @@ add_action('init', function () {
 
     /***Get Percent And Count Scanned Files From db***/
     add_action('wp_ajax_get_scan_percent', function () {
-
         wp_die(get_option('intershield_scanned_files_progress_percent'));
     });
 

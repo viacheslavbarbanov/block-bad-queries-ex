@@ -6,13 +6,17 @@ if (!class_exists('BlockBadIp')) {
         public function block_ip($block_bad_ip_switch)
         {
             /***When Firewall Is Off***/
-            if($block_bad_ip_switch === 'off'){
+            if ($block_bad_ip_switch === 'off') {
                 return false;
             }
 
-            $forbidden_link = $this->getSettingsDb()['forbidden_link'];
+            $settingsDb = $this->getSettingsDb();
+            $forbidden_link = $settingsDb['forbidden_link'];
 
-            if (!$forbidden_link) {
+            if ($settingsDb['show_403_forbidden'] === 'on') {
+                header('HTTP/1.0 403 Forbidden');
+                exit;
+            } elseif (!$forbidden_link) {
 //                header("Location: " . 'https://sigs.interserver.net/blocked?ref=' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '&port=' . $_SERVER['SERVER_PORT'], true, 301);
                 header("Location: " . 'https://sigs.interserver.net/blocked', true, 301);
                 exit;

@@ -211,6 +211,23 @@ if (!class_exists('BlockAdminOptions')) {
                                        value="<?php echo $this->intershield_settings['forbidden_link'] ?>">
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>
+                                <h3>
+                                    <label><?php _e('During bad IP block to show "403 forbidden":', 'intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'intershield') ?>
+                                <input type="radio" name="show_403_forbidden" value="on"
+                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'intershield') ?>
+                                <input type="radio" name="show_403_forbidden" value="off"
+                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                                 <h3>
@@ -255,6 +272,22 @@ if (!class_exists('BlockAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
+                                    <label> <?php _e('Automatically update bad IP list:', 'intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'intershield') ?>
+                                <input type="radio" name="auto_update_bad_ip_switch" value="on"
+                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'intershield') ?>
+                                <input type="radio" name="auto_update_bad_ip_switch" value="off"
+                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h3>
                                     <label> <?php _e('Show "Check Unknown Files" menu:', 'intershield') ?> </label>
                                 </h3>
                             </td>
@@ -267,6 +300,7 @@ if (!class_exists('BlockAdminOptions')) {
                                     <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
+
                         <tr>
                             <td>
                                 <input type="hidden" name="wp_nonce_update_settings"
@@ -495,9 +529,11 @@ if (!class_exists('BlockAdminOptions')) {
             if (!empty($_POST['wp_nonce_update_settings']) && wp_verify_nonce($_POST['wp_nonce_update_settings'], 'update-settings')) {
                 $intershield_settings_arr = array(
                     'forbidden_link' => $_POST['forbidden_link'],
+                    'show_403_forbidden' => $_POST['show_403_forbidden'],
                     'count_files_shown_during_start' => $_POST['count_files_shown_during_start'],
                     'load_more_files_range' => $_POST['load_more_files_range'],
                     'block_bad_ip_switch' => $_POST['block_bad_ip_switch'],
+                    'auto_update_bad_ip_switch' => $_POST['auto_update_bad_ip_switch'],
                     'show_check_unknown_files_menu_switch' => $_POST['show_check_unknown_files_menu_switch'],
                 );
 
@@ -637,9 +673,11 @@ if (!class_exists('BlockAdminOptions')) {
         {
             $default_intershield_settings = array(
                 'forbidden_link' => '',
+                'show_403_forbidden' => 'off',
                 'count_files_shown_during_start' => 5,
                 'load_more_files_range' => 5,
                 'block_bad_ip_switch' => 'on',
+                'auto_update_bad_ip_switch' => 'on',
                 'show_check_unknown_files_menu_switch' => 'off'
             );
             return get_option('intershield_settings') ? json_decode(get_option('intershield_settings'), true) : $default_intershield_settings;
