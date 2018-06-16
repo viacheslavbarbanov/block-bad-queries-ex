@@ -17,8 +17,8 @@ if (!class_exists('BlockBadIp')) {
                 header('HTTP/1.0 403 Forbidden');
                 exit;
             } elseif (!$forbidden_link) {
-//                header("Location: " . 'https://sigs.interserver.net/blocked?ref=' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '&port=' . $_SERVER['SERVER_PORT'], true, 301);
-                header("Location: " . 'https://sigs.interserver.net/blocked', true, 301);
+                //                header("Location: " . 'https://sigs.interserver.net/blocked', true, 301);
+                header("Location: " . 'https://sigs.interserver.net/blocked?ref=' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '&port=' . $_SERVER['SERVER_PORT'], true, 301);
                 exit;
             } else {
                 $current_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

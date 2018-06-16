@@ -127,8 +127,7 @@ if (!class_exists('CheckFilesCorrect')) {
 
         public function testHashFiles()
         {
-            $url = 'https://sigs.interserver.net/wpscan';
-            $fileGetContentRes = @file_get_contents($url);
+            $url = 'https://scanner.interserver.net/wpscan';
             $data = 'connectionError';
 
             if (function_exists('curl_version')) {
@@ -140,7 +139,7 @@ if (!class_exists('CheckFilesCorrect')) {
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
                 $data = curl_exec($ch);
                 curl_close($ch);
-            } else if ($fileGetContentRes) {
+            } else if ($fileGetContentRes = @file_get_contents($url)) {
                 $data = $fileGetContentRes;
             }
 

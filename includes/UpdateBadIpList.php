@@ -21,19 +21,24 @@ if (!class_exists('UpdateBadIpList')) {
         public function updateIpListTxt()
         {
             /***Get bad ips new list***/
-            $url = "http://sigs.interserver.net/ip.txt";
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $newIpList = curl_exec($ch);
+//            $url = "http://sigs.interserver.net/ip.txt";
+            $url = "https://scanner.interserver.net/ip.txt";
+            if (function_exists('curl_version')) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $newIpList = curl_exec($ch);
 
-            if (curl_errno($ch)) {
-                echo curl_error($ch);
-                echo "\n<br />";
-                $newIpList = '';
+                if (curl_errno($ch)) {
+                    wp_die(curl_error($ch));
+                } else {
+                    curl_close($ch);
+                }
+            } else if ($response = @file_get_contents($url)) {
+                $newIpList = $response;
             } else {
-                curl_close($ch);
+                wp_die(__('cURL and file_get_contents are disabled.', 'intershield'));
             }
 
             if (!is_string($newIpList) || !strlen($newIpList)) {

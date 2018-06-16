@@ -620,7 +620,8 @@ if (!class_exists('BlockAdminOptions')) {
         {
 //            // initialise the curl request
             $fileToUpload = new CURLFile(realpath($dir));
-            $request = curl_init('http://scanner.interserver.net/wpscan');
+//            $request = curl_init('http://scanner.interserver.net/wpscan');
+            $request = curl_init('https://scanner.interserver.net/wpscan');
             // send a file
             curl_setopt($request, CURLOPT_POST, true);
             curl_setopt($request, CURLOPT_SAFE_UPLOAD, true);
