@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 08:26+0000\n"
-"PO-Revision-Date: 2018-06-15 08:27+0000\n"
+"POT-Creation-Date: 2018-06-15 08:39+0000\n"
+"PO-Revision-Date: 2018-06-15 08:40+0000\n"
 "Last-Translator: admin <admin@example.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -136,8 +136,8 @@ msgid "Enter forbidden page url..."
 msgstr "Введите URL  запрещенный страницы..."
 
 #: includes/BlockAdminOptions.php:218
-msgid "During bad IP block to show 403 forbidden:"
-msgstr ""
+msgid "During bad IP block to show \"403 forbidden\":"
+msgstr "Во время блокировки плохих IP-адресов показать \"403 forbidden\":"
 
 #: includes/BlockAdminOptions.php:222 includes/BlockAdminOptions.php:263
 #: includes/BlockAdminOptions.php:279 includes/BlockAdminOptions.php:295

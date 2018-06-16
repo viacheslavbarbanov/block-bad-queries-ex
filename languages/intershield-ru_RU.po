@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 08:39+0000\n"
-"PO-Revision-Date: 2018-06-15 08:40+0000\n"
+"POT-Creation-Date: 2018-06-16 09:45+0000\n"
+"PO-Revision-Date: 2018-06-16 09:45+0000\n"
 "Last-Translator: admin <admin@example.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -237,16 +237,20 @@ msgstr "Отсканированные файлы:"
 msgid "Sent Files:"
 msgstr "Отправленные файлы:"
 
-#: includes/files-controller/CheckFilesCorrect.php:149
+#: includes/UpdateBadIpList.php:41
+msgid "cURL and file_get_contents are disabled."
+msgstr "cURL и file_get_contents отключены."
+
+#: includes/files-controller/CheckFilesCorrect.php:148
 msgid "Remote scanner connection is working"
 msgstr "Удаленное подключение сканера работает"
 
-#: includes/files-controller/CheckFilesCorrect.php:152
+#: includes/files-controller/CheckFilesCorrect.php:151
 msgid ""
 "Please enable your cURL or file_get_contents configuration on your server."
 msgstr "Включите конфигурацию cURL или file_get_contents на своем сервере."
 
-#: includes/files-controller/CheckFilesCorrect.php:155
+#: includes/files-controller/CheckFilesCorrect.php:154
 msgid "Remote scanner connection failing."
 msgstr "Неисправность удаленного сканера."
 
