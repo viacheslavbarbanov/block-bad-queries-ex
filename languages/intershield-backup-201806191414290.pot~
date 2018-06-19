@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 08:39+0000\n"
+"POT-Creation-Date: 2018-06-19 14:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -97,7 +97,7 @@ msgid "Malware test strings"
 msgstr ""
 
 #: includes/BlockAdminOptions.php:147 includes/BlockAdminOptions.php:182
-#: includes/BlockAdminOptions.php:378 includes/BlockAdminOptions.php:433
+#: includes/BlockAdminOptions.php:385 includes/BlockAdminOptions.php:440
 msgid "View Debugging Information"
 msgstr ""
 
@@ -175,74 +175,78 @@ msgstr ""
 msgid "You have not done any scan yet!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:362
+#: includes/BlockAdminOptions.php:369
 msgid "The list of the unknown files after last scan in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:385
+#: includes/BlockAdminOptions.php:392
 msgid "Send Unknown Files"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:391
+#: includes/BlockAdminOptions.php:398
 msgid "Stop Sending"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:401
+#: includes/BlockAdminOptions.php:408
 msgid "You have no unknown files!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:408
+#: includes/BlockAdminOptions.php:415
 msgid "The list of the files after last check in"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:419
-msgid "Bad Code:"
+#: includes/BlockAdminOptions.php:426
+msgid "scanned malware:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:423
-msgid "good code:"
+#: includes/BlockAdminOptions.php:430
+msgid "scanned clean:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:449
+#: includes/BlockAdminOptions.php:456
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
 
-#: includes/BlockAdminOptions.php:457
+#: includes/BlockAdminOptions.php:464
 msgid "Update"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:470
+#: includes/BlockAdminOptions.php:477
 msgid "Show bad IP list"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:481
+#: includes/BlockAdminOptions.php:488
 msgid "File is not opened!"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:508
+#: includes/BlockAdminOptions.php:515
 msgid "Total"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:509
+#: includes/BlockAdminOptions.php:516
 msgid "Scanned Files:"
 msgstr ""
 
-#: includes/BlockAdminOptions.php:510
+#: includes/BlockAdminOptions.php:517
 msgid "Sent Files:"
 msgstr ""
 
-#: includes/files-controller/CheckFilesCorrect.php:149
+#: includes/UpdateBadIpList.php:41
+msgid "cURL and file_get_contents are disabled."
+msgstr ""
+
+#: includes/files-controller/CheckFilesCorrect.php:148
 msgid "Remote scanner connection is working"
 msgstr ""
 
-#: includes/files-controller/CheckFilesCorrect.php:152
+#: includes/files-controller/CheckFilesCorrect.php:151
 msgid ""
 "Please enable your cURL or file_get_contents configuration on your server."
 msgstr ""
 
-#: includes/files-controller/CheckFilesCorrect.php:155
+#: includes/files-controller/CheckFilesCorrect.php:154
 msgid "Remote scanner connection failing."
 msgstr ""
 

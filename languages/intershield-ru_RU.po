@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wp Intershield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 09:45+0000\n"
-"PO-Revision-Date: 2018-06-16 09:45+0000\n"
+"POT-Creation-Date: 2018-06-19 14:14+0000\n"
+"PO-Revision-Date: 2018-06-19 14:16+0000\n"
 "Last-Translator: admin <admin@example.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -99,7 +99,7 @@ msgid "Malware test strings"
 msgstr "Тестовые строки вредоносных программ"
 
 #: includes/BlockAdminOptions.php:147 includes/BlockAdminOptions.php:182
-#: includes/BlockAdminOptions.php:378 includes/BlockAdminOptions.php:433
+#: includes/BlockAdminOptions.php:382 includes/BlockAdminOptions.php:437
 msgid "View Debugging Information"
 msgstr "Просмотр отладочной информации"
 
@@ -178,34 +178,46 @@ msgid "You have not done any scan yet!"
 msgstr "Вы еще не сделали никакого сканирования!"
 
 #: includes/BlockAdminOptions.php:362
+msgid ""
+"Unknown files have been detected. In order to scan then the check unknown "
+"files option must be enabled in configuration and then ran. This option is "
+"off by default because unknown files are sent to a remote scanner for "
+"scanning"
+msgstr ""
+"Неизвестные файлы обнаружены. Чтобы выполнить сканирование, необходимо "
+"включить опцию проверки неизвестных файлов в конфигурации и затем запустить. "
+"Эта опция отключена по умолчанию, поскольку неизвестные файлы отправляются "
+"на удаленный сканер для сканирования"
+
+#: includes/BlockAdminOptions.php:366
 msgid "The list of the unknown files after last scan in"
 msgstr "Список неизвестных файлов после последнего сканирования в"
 
-#: includes/BlockAdminOptions.php:385
+#: includes/BlockAdminOptions.php:389
 msgid "Send Unknown Files"
 msgstr "Отправить Неизвестные файлы"
 
-#: includes/BlockAdminOptions.php:391
+#: includes/BlockAdminOptions.php:395
 msgid "Stop Sending"
 msgstr "Остановить отправку"
 
-#: includes/BlockAdminOptions.php:401
+#: includes/BlockAdminOptions.php:405
 msgid "You have no unknown files!"
 msgstr "У вас нет неизвестных файлов!"
 
-#: includes/BlockAdminOptions.php:408
+#: includes/BlockAdminOptions.php:412
 msgid "The list of the files after last check in"
 msgstr "Список файлов после последней проверки"
 
-#: includes/BlockAdminOptions.php:419
-msgid "Bad Code:"
-msgstr "Плохой код:"
-
 #: includes/BlockAdminOptions.php:423
-msgid "good code:"
-msgstr "хороший код  "
+msgid "scanned malware:"
+msgstr "сканированное вредоносное ПО:"
 
-#: includes/BlockAdminOptions.php:449
+#: includes/BlockAdminOptions.php:427
+msgid "scanned clean:"
+msgstr "отсканированный чистый:"
+
+#: includes/BlockAdminOptions.php:453
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
@@ -213,27 +225,27 @@ msgstr ""
 "Плохой список ip автоматически обновляется ежедневно через wp-cron. "
 "Используйте приведенную ниже команду для принудительного обновления вручную."
 
-#: includes/BlockAdminOptions.php:457
+#: includes/BlockAdminOptions.php:461
 msgid "Update"
 msgstr "Обновить"
 
-#: includes/BlockAdminOptions.php:470
+#: includes/BlockAdminOptions.php:474
 msgid "Show bad IP list"
 msgstr "Показать плохой IP-список"
 
-#: includes/BlockAdminOptions.php:481
+#: includes/BlockAdminOptions.php:485
 msgid "File is not opened!"
 msgstr "Файл не открывается!"
 
-#: includes/BlockAdminOptions.php:508
+#: includes/BlockAdminOptions.php:512
 msgid "Total"
 msgstr "Всего"
 
-#: includes/BlockAdminOptions.php:509
+#: includes/BlockAdminOptions.php:513
 msgid "Scanned Files:"
 msgstr "Отсканированные файлы:"
 
-#: includes/BlockAdminOptions.php:510
+#: includes/BlockAdminOptions.php:514
 msgid "Sent Files:"
 msgstr "Отправленные файлы:"
 

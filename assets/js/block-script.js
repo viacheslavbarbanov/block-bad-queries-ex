@@ -116,11 +116,11 @@ jQuery(document).ready(function ($) {
     }
 
     function showMsgBeforeUnload(total, currentFileNumber) {
-        if(total > currentFileNumber){
-            $(window).bind('beforeunload', function(){
+        if (total > currentFileNumber) {
+            $(window).bind('beforeunload', function () {
                 return 'Please wait for scan to finish.';
             });
-        }else{
+        } else {
             $(window).unbind("beforeunload");
             location.reload(true);
         }

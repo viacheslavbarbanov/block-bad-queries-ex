@@ -3,7 +3,7 @@
 Plugin Name: Wp Intershield
 Plugin URI: #
 Description:
-Version: 0.1
+Version: 0.2
 Text Domain: intershield
 */
 

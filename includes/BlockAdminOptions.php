@@ -358,6 +358,10 @@ if (!class_exists('BlockAdminOptions')) {
 
                     if (is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
                         <div class="unknown_files_list">
+                            <h1 class="description">
+                                <?php _e('Unknown files have been detected. In order to scan then the check unknown files option must be enabled in configuration and then ran. This option is off by default because unknown files are sent to a remote scanner for scanning', 'intershield') ?>
+                            </h1>
+
                             <h2 class="description">
                                 <?php _e('The list of the unknown files after last scan in', 'intershield') ?>
                                 <span class="show_date">
@@ -416,14 +420,13 @@ if (!class_exists('BlockAdminOptions')) {
                                     $currentFileDir = array_keys($info)[0];
                                     if (in_array($this->badResponseCodeAfterCurl, $info)) { ?>
                                         <!--                                        /***Show Current Bad File Dir***/-->
-                                        <h3 class="errorMsg file_desc"> <?php _e('Bad Code:', 'intershield') ?> </h3>
+                                        <h3 class="errorMsg file_desc"> <?php _e('scanned malware:', 'intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } elseif (in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
                                         <!--                                        /***Show Current Good File Dir***/-->
-                                        <h3 class="successMsg file_desc"> <?php _e('good code:', 'intershield') ?> </h3>
+                                        <h3 class="successMsg file_desc"> <?php _e('scanned clean:', 'intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } ?>
-
                                 </div>
                             <?php } ?>
 
@@ -677,7 +680,7 @@ if (!class_exists('BlockAdminOptions')) {
                 'show_403_forbidden' => 'off',
                 'count_files_shown_during_start' => 5,
                 'load_more_files_range' => 5,
-                'block_bad_ip_switch' => 'on',
+                'block_bad_ip_switch' => 'off',
                 'auto_update_bad_ip_switch' => 'on',
                 'show_check_unknown_files_menu_switch' => 'off'
             );
