@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') or exit;
-if (!class_exists('CheckIpStatus')) {
-    class CheckIpStatus
+if (!class_exists('IntershieldCheckIpStatus')) {
+    class IntershieldCheckIpStatus
     {
         public $client_ip_address;
         public $is_bad_ip = false;
@@ -36,7 +36,7 @@ if (!class_exists('CheckIpStatus')) {
         private function check_status($client_ip_address)
         {
             /**Remove Comments**/
-            $bad_ips_str_without_comments = preg_replace("@\/\/.*[\n]+@", '', file_get_contents(__DIR__ . '/bad-ip-list.txt'));
+            $bad_ips_str_without_comments = preg_replace("@\/\/.*[\n]+@", '', @file_get_contents(__DIR__ . '/bad-ip-list.txt'));
             preg_match_all("@" . $client_ip_address . "[\n\r\s\t]@", $bad_ips_str_without_comments, $matches);
             if (!empty($matches[0])) {
                 $this->is_bad_ip = true;

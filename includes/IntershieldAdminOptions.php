@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') or exit;
-if (!class_exists('BlockAdminOptions')) {
-    class BlockAdminOptions
+if (!class_exists('IntershieldAdminOptions')) {
+    class IntershieldAdminOptions
     {
         public $intershield_settings;
         public $scanState;
@@ -10,8 +10,8 @@ if (!class_exists('BlockAdminOptions')) {
         public $unknownFilesDb;
         public $lastScannedInfo;
         public $msgAfterConfigCheck;
-        public $startUpdateBadIpList;
-        public $msgAfterUpdateBadIpList;
+        public $startIntershieldUpdateBadIpList;
+        public $msgAfterIntershieldUpdateBadIpList;
         public $filesInfoAfterCurl;
         public $curlProgressPercentDb;
         public $goodResponseCodeAfterCurl = '1 clamscan: OK';
@@ -48,8 +48,8 @@ if (!class_exists('BlockAdminOptions')) {
                 }
 
                 /***When Blocking Bad Ip's Enabled In Settings***/
-                if ($this->intershield_settings['block_bad_ip_switch'] === 'on') {
-                    add_submenu_page('intershield', __('Update Bad IP List', 'intershield'), __('Update Bad IP List', 'intershield'), 'manage_options', 'intershield-update-bad-ip-list', array($this, 'updateBadIpListMenu'));
+                if ($this->intershield_settings['intershield_update_bad_ip_list_menu'] === 'on') {
+                    add_submenu_page('intershield', __('Update Bad IP List', 'intershield'), __('Update Bad IP List', 'intershield'), 'manage_options', 'intershield-update-bad-ip-list', array($this, 'IntershieldUpdateBadIpListMenu'));
                 }
             });
         }
@@ -201,7 +201,7 @@ if (!class_exists('BlockAdminOptions')) {
                                 <h3>
                                     <label for="forbidden_link"> <?php _e('Forbidden Link:', 'intershield') ?> </label>
                                 </h3>
-                                <img src="<?php echo BLOCK_URL . 'assets/images/interrogative-badge.png' ?>"
+                                <img src="<?php echo INTERSHIELD_URL . 'assets/images/interrogative-badge.png' ?>"
                                      class="interrogative_badge"
                                      title=" <?php _e('Need fill url, for example ... https://website.com/forbidden/', 'intershield') ?>">
                             </td>
@@ -256,16 +256,16 @@ if (!class_exists('BlockAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label><?php _e('Blocking Bad IP:', 'intershield') ?> </label>
+                                    <label><?php _e('Show "Update Bad IP List" menu:', 'intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
                                 <?php _e('On', 'intershield') ?>
-                                <input type="radio" name="block_bad_ip_switch" value="on"
-                                    <?php echo $this->intershield_settings['block_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
+                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="on"
+                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'on' ? 'checked' : '' ?> >
                                 <?php _e('Off', 'intershield') ?>
-                                <input type="radio" name="block_bad_ip_switch" value="off"
-                                    <?php echo $this->intershield_settings['block_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
+                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="off"
+                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
 
@@ -321,7 +321,7 @@ if (!class_exists('BlockAdminOptions')) {
                 </div>
                 <div class="delete_forbidden_link">
                     <a href="?page=intershield-settings&del_forbidden_link&_wpnonce=<?php echo wp_create_nonce('del-link'); ?>"
-                       data-method="delete"><img src="<?php echo BLOCK_URL . 'assets/images/delete.png' ?>"> </a>
+                       data-method="delete"><img src="<?php echo INTERSHIELD_URL . 'assets/images/delete.png' ?>"> </a>
                 </div>
             </div>
             </div>
@@ -442,7 +442,7 @@ if (!class_exists('BlockAdminOptions')) {
             </div>
         <?php }
 
-        public function updateBadIpListMenu()
+        public function IntershieldUpdateBadIpListMenu()
         { ?>
             <div class="wrap">
                 <h1><?php echo get_admin_page_title(); ?></h1>
@@ -462,9 +462,9 @@ if (!class_exists('BlockAdminOptions')) {
                         </h3>
                     </div>
                     <!--                    /***When Clicked <<Update>> Button***/-->
-                    <?php if (!empty($this->msgAfterUpdateBadIpList)) { ?>
+                    <?php if (!empty($this->msgAfterIntershieldUpdateBadIpList)) { ?>
                         <div class="update_bad_ip_list_result">
-                            <h3 class="successMsg"><?php echo $this->msgAfterUpdateBadIpList ?></h3>
+                            <h3 class="successMsg"><?php echo $this->msgAfterIntershieldUpdateBadIpList ?></h3>
 
                             <?php
                             $path = dirname(__FILE__) . '/bad-ip-list.txt';
@@ -493,20 +493,19 @@ if (!class_exists('BlockAdminOptions')) {
         public function registerScripts()
         {
             /***CSS***/
-            wp_register_style('jquery_ui_style', BLOCK_URL . "assets/styles/jquery-ui.css");
-            wp_enqueue_style('jquery_ui_style');
+            wp_register_style('jquery_ui_progressbar_style', INTERSHIELD_URL . "assets/styles/jquery-ui.css");
+            wp_enqueue_style('jquery_ui_progressbar_style');
 
-            wp_register_style('block_style', BLOCK_URL . "assets/styles/block-style.css");
-            wp_enqueue_style('block_style');
+            wp_register_style('intershield_style', INTERSHIELD_URL . "assets/styles/intershield-style.css");
+            wp_enqueue_style('intershield_style');
 
             /***JS***/
-            wp_register_script('jquery_ui_script', BLOCK_URL . "assets/js/jquery-ui.js", array('jquery'));
-            wp_enqueue_script('jquery_ui_script');
+            wp_enqueue_script('jquery-ui-progressbar');
 
-            wp_register_script('block_script', BLOCK_URL . "assets/js/block-script.js", array('jquery'));
-            wp_enqueue_script('block_script');
+            wp_register_script('intershield_script', INTERSHIELD_URL . "assets/js/intershield-script.js", array('jquery'));
+            wp_enqueue_script('intershield_script');
 
-            wp_localize_script('block_script', 'data_block', array(
+            wp_localize_script('intershield_script', 'intershield_data', array(
                 'messages' => array(
                     'text_total' => __('Total', 'intershield'),
                     'text_ScannedFiles' => __('Scanned Files:', 'intershield'),
@@ -535,7 +534,7 @@ if (!class_exists('BlockAdminOptions')) {
                     'show_403_forbidden' => $_POST['show_403_forbidden'],
                     'count_files_shown_during_start' => $_POST['count_files_shown_during_start'],
                     'load_more_files_range' => $_POST['load_more_files_range'],
-                    'block_bad_ip_switch' => $_POST['block_bad_ip_switch'],
+                    'intershield_update_bad_ip_list_menu' => $_POST['intershield_update_bad_ip_list_menu'],
                     'auto_update_bad_ip_switch' => $_POST['auto_update_bad_ip_switch'],
                     'show_check_unknown_files_menu_switch' => $_POST['show_check_unknown_files_menu_switch'],
                 );
@@ -559,7 +558,7 @@ if (!class_exists('BlockAdminOptions')) {
 
             /***UPDATE BAD IP LIST***/
             if (isset($_GET['update_bad_ip_list']) && wp_verify_nonce($_GET['_wpnonce'], 'update-ip-list')) {
-                $this->startUpdateBadIpList = true;
+                $this->startIntershieldUpdateBadIpList = true;
             }
 
         }
@@ -619,29 +618,57 @@ if (!class_exists('BlockAdminOptions')) {
             return get_option('intershield_scanned_files_progress_percent');
         }
 
+//        public function sendUnknownFilesByCurl($dir)
+//        {
+////            // initialise the curl request
+//            $fileToUpload = new CURLFile(realpath($dir));
+//            $request = curl_init('https://scanner.interserver.net/wpscan');
+//            // send a file
+//            curl_setopt($request, CURLOPT_POST, true);
+//            curl_setopt($request, CURLOPT_SAFE_UPLOAD, true);
+//            curl_setopt(
+//                $request,
+//                CURLOPT_POSTFIELDS,
+//                array(
+//                    'submit' => 'apache',
+//                    'fileToUpload' => $fileToUpload,
+//                ));
+//            // output the response
+//            curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+//
+//            array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
+//            // close the session
+//            curl_close($request);
+//            return true;
+//        }
+
+//        todo not working
         public function sendUnknownFilesByCurl($dir)
         {
-//            // initialise the curl request
-            $fileToUpload = new CURLFile(realpath($dir));
-//            $request = curl_init('http://scanner.interserver.net/wpscan');
-            $request = curl_init('https://scanner.interserver.net/wpscan');
-            // send a file
-            curl_setopt($request, CURLOPT_POST, true);
-            curl_setopt($request, CURLOPT_SAFE_UPLOAD, true);
-            curl_setopt(
-                $request,
-                CURLOPT_POSTFIELDS,
-                array(
-                    'submit' => 'apache',
-                    'fileToUpload' => $fileToUpload,
-                ));
-            // output the response
-            curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-            array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
-            // close the session
-            curl_close($request);
-            return true;
+
+            $file = @fopen(realpath($dir), 'r');
+            $file_size = filesize(realpath($dir));
+            $file_data = fread($file, $file_size);
+
+            $args = array(
+                'method' => 'POST',
+
+//                'headers' => array(
+//                    'accept' => 'application/json', // The API returns JSON
+//                    'content-type' => 'application/binary', // Set content type to binary
+//                ),
+
+                'submit' => 'apache',
+                'fileToUpload' => realpath($dir),
+
+                'body' => $file_data
+            );
+
+            $result = wp_remote_request(  'https://scanner.interserver.net/wpscan', $args );
+
+            echo '<pre>'; var_dump($result); exit;
         }
+
 
         public function updateSettingsDb($intershield_settings_arr)
         {
@@ -680,7 +707,7 @@ if (!class_exists('BlockAdminOptions')) {
                 'show_403_forbidden' => 'off',
                 'count_files_shown_during_start' => 5,
                 'load_more_files_range' => 5,
-                'block_bad_ip_switch' => 'off',
+                'intershield_update_bad_ip_list_menu' => 'off',
                 'auto_update_bad_ip_switch' => 'on',
                 'show_check_unknown_files_menu_switch' => 'off'
             );

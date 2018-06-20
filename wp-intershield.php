@@ -10,9 +10,9 @@ Text Domain: wp-intershield
 */
 
 defined('ABSPATH') or exit;
-define("BLOCK_DIR", plugin_dir_path(__FILE__));
-define("BLOCK_URL", plugin_dir_url(__FILE__));
-define("BLOCK_REL_PATH", dirname(plugin_basename(__FILE__)));
+define("INTERSHIELD_DIR", plugin_dir_path(__FILE__));
+define("INTERSHIELD_URL", plugin_dir_url(__FILE__));
+define("INTERSHIELD_REL_PATH", dirname(plugin_basename(__FILE__)));
 
 ini_set('max_execution_time', 30000);
 ini_set('mysql.connect_timeout', 30000);
@@ -20,56 +20,58 @@ ini_set('default_socket_timeout', 30000);
 
 /***Admin Options***/
 add_action('init', function () {
-    include BLOCK_DIR . 'includes/BlockAdminOptions.php';
-    $blockAdminOptions = new BlockAdminOptions();
+    include INTERSHIELD_DIR . 'includes/IntershieldAdminOptions.php';
+    $IntershieldAdminOptions = new IntershieldAdminOptions();
 
     /****WHEN ENABLED AUTOMATICALLY UPDATE IP LIST IN SETTINGS***/
-    if ($blockAdminOptions->intershield_settings['auto_update_bad_ip_switch'] === 'on') {
+    if ($IntershieldAdminOptions->intershield_settings['auto_update_bad_ip_switch'] === 'on') {
         /***Scheduler update bad ips list***/
-        include BLOCK_DIR . 'includes/UpdateBadIpList.php';
-        $updateBadIpList = new UpdateBadIpList();
+        include INTERSHIELD_DIR . 'includes/IntershieldUpdateBadIpList.php';
+        $IntershieldUpdateBadIpList = new IntershieldUpdateBadIpList();
     } else {
         wp_clear_scheduled_hook('add_every_fifteen_min');
     }
 
     /*****WHEN CLICKED UPDATE BAD IP LIST*****/
-    if ($blockAdminOptions->startUpdateBadIpList) {
-        $updateIpListTxt = $updateBadIpList->updateIpListTxt();
+    if ($IntershieldAdminOptions->startIntershieldUpdateBadIpList) {
+        $updateIpListTxt = $IntershieldUpdateBadIpList->updateIpListTxt();
         if ($updateIpListTxt) {
-            $blockAdminOptions->msgAfterUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from sigs.interserver.net ', 'intershield');
+            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from sigs.interserver.net ', 'intershield');
+        }else{
+            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Didn\'t Update', 'intershield');
         }
     }
 
-    include BLOCK_DIR . 'includes/CheckIpStatus.php';
-    $CheckIpStatus = new CheckIpStatus();
+    include INTERSHIELD_DIR . 'includes/IntershieldCheckIpStatus.php';
+    $IntershieldCheckIpStatus = new IntershieldCheckIpStatus();
 
     /*****If Current Ip Is Bad*****/
-    if ($CheckIpStatus->is_bad_ip) {
+    if ($IntershieldCheckIpStatus->is_bad_ip) {
         /*****Block Current Ip*****/
-        include BLOCK_DIR . 'includes/BlockBadIp.php';
-        $blockBadIp = new BlockBadIp();
-        $blockBadIp->block_ip($blockAdminOptions->intershield_settings['block_bad_ip_switch']);
+        include INTERSHIELD_DIR . 'includes/IntershieldBlockBadIp.php';
+        $IntershieldBlockBadIp = new IntershieldBlockBadIp();
+        $IntershieldBlockBadIp->block_ip($IntershieldAdminOptions->intershield_settings['intershield_update_bad_ip_list_menu']);
     }
 
     /****Files Controller****/
-    include BLOCK_DIR . 'includes/files-controller/CheckFilesCorrect.php';
-    $checkFilesCorrect = new CheckFilesCorrect();
+    include INTERSHIELD_DIR . 'includes/files-controller/IntershieldCheckFilesCorrect.php';
+    $IntershieldCheckFilesCorrect = new IntershieldCheckFilesCorrect();
     /***When is clicked <<Start Scan>> button***/
-    if ($blockAdminOptions->scanState == 'start') {
+    if ($IntershieldAdminOptions->scanState == 'start') {
         /***Update intershield_malware_files_list in wp-option***/
-        $blockAdminOptions->updateMalwareFilesDb($checkFilesCorrect->malware_files_list);
+        $IntershieldAdminOptions->updateMalwareFilesDb($IntershieldCheckFilesCorrect->malware_files_list);
 
         /***Update intershield_unknown_files_list in wp-option***/
-        $blockAdminOptions->updateUnknownFilesList($checkFilesCorrect->unknownFilesList);
+        $IntershieldAdminOptions->updateUnknownFilesList($IntershieldCheckFilesCorrect->unknownFilesList);
 
         /***Update intershield_good_files_list in wp-option***/
-        $blockAdminOptions->updateGoodFilesList($checkFilesCorrect->goodFilesList);
+        $IntershieldAdminOptions->updateGoodFilesList($IntershieldCheckFilesCorrect->goodFilesList);
 
         header("Location: " . home_url() . '/wp-admin/admin.php?page=intershield&end-scan=true');
-    } elseif ($blockAdminOptions->scanState == 'configCheck') {
+    } elseif ($IntershieldAdminOptions->scanState == 'configCheck') {
         /***Configuration Check Menu***/
-        /***Get configCheckResult Of CheckFilesCorrect() And Insert To msgAfterConfigCheck In BlockAdminOptions()***/
-        $blockAdminOptions->msgAfterConfigCheck = $checkFilesCorrect->configCheckResult;
+        /***Get configCheckResult Of IntershieldCheckFilesCorrect() And Insert To msgAfterConfigCheck In IntershieldAdminOptions()***/
+        $IntershieldAdminOptions->msgAfterConfigCheck = $IntershieldCheckFilesCorrect->configCheckResult;
     }
 
     /***Get Percent And Count Scanned Files From db***/
@@ -85,7 +87,7 @@ add_action('init', function () {
 
 /***For Multi Language***/
 add_action('plugins_loaded', function () {
-    load_plugin_textdomain('intershield', false, BLOCK_REL_PATH . '/languages');
+    load_plugin_textdomain('intershield', false, INTERSHIELD_REL_PATH . '/languages');
 });
 
 /***Clear Scheduler hook***/
@@ -94,9 +96,9 @@ register_deactivation_hook(__FILE__, function () {
 });
 
 /***After Uninstall Plugin***/
-register_uninstall_hook(__FILE__, 'block_uninstall');
+register_uninstall_hook(__FILE__, 'intershield_uninstall');
 
-function block_uninstall()
+function intershield_uninstall()
 {
     delete_option('intershield_malware_files_list');
     delete_option('intershield_good_files_list');

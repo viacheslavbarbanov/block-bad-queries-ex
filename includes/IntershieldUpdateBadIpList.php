@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') or exit;
-if (!class_exists('UpdateBadIpList')) {
-    class UpdateBadIpList
+if (!class_exists('IntershieldUpdateBadIpList')) {
+    class IntershieldUpdateBadIpList
     {
         public function __construct()
         {
@@ -23,27 +23,12 @@ if (!class_exists('UpdateBadIpList')) {
             /***Get bad ips new list***/
 //            $url = "http://sigs.interserver.net/ip.txt";
             $url = "https://scanner.interserver.net/ip.txt";
-            if (function_exists('curl_version')) {
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $newIpList = curl_exec($ch);
 
-                if (curl_errno($ch)) {
-                    wp_die(curl_error($ch));
-                } else {
-                    curl_close($ch);
-                }
-            } else if ($response = @file_get_contents($url)) {
-                $newIpList = $response;
-            } else {
-                wp_die(__('cURL and file_get_contents are disabled.', 'intershield'));
-            }
-
-            if (!is_string($newIpList) || !strlen($newIpList)) {
-                echo "Failed to get contents.";
-                $newIpList = '';
+            $response = wp_remote_get( $url, array('timeout'=> 120) );
+            if (is_array( $response ) ) {
+                $newIpList = $response['body']; // use the content
+            }else{
+               return false;
             }
 
             /***Set Bad IP's New List***/

@@ -1,8 +1,8 @@
 <?php
 defined('ABSPATH') or exit;
-if (!class_exists('CheckFilesCorrect')) {
+if (!class_exists('IntershieldCheckFilesCorrect')) {
 
-    class CheckFilesCorrect
+    class IntershieldCheckFilesCorrect
     {
         public $home_dir;
         public $filesList;
@@ -14,7 +14,7 @@ if (!class_exists('CheckFilesCorrect')) {
         public function __construct()
         {
             /*****Get home directory****/
-            preg_match("/(.*)wp-content/", BLOCK_DIR, $matches);
+            preg_match("/(.*)wp-content/", INTERSHIELD_DIR, $matches);
             $this->home_dir = $matches[1];
 
             if (!empty($_POST['scan_type'])) {
@@ -108,7 +108,6 @@ if (!class_exists('CheckFilesCorrect')) {
                 $hashToCheck = substr($hash, 0, -1) . '.' . $hash[strlen($hash) - 1];
                 $hostname = $hashToCheck . '.rblscanner.interserver.net';
                 $returnedCode = gethostbyname($hostname);
-
                 if (!in_array($returnedCode, $goodCodesList) && !in_array($returnedCode, $malwareCodesList)) {
                     /***When Return A Same Code What A Sent***/
                     /***Exclude <<wp-config.php, bad-ip-list.txt>> Files***/
@@ -128,27 +127,16 @@ if (!class_exists('CheckFilesCorrect')) {
         public function testHashFiles()
         {
             $url = 'https://scanner.interserver.net/wpscan';
-            $data = 'connectionError';
+            $data = '';
 
-            if (function_exists('curl_version')) {
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-                $data = curl_exec($ch);
-                curl_close($ch);
-            } else if ($fileGetContentRes = @file_get_contents($url)) {
-                $data = $fileGetContentRes;
+            $response = wp_remote_get( $url, array('timeout'=> 120) );
+            if ( is_array( $response ) ) {
+                $data = $response['body']; // use the content
             }
 
             switch ($data) {
                 case 'input..input..':
                     $this->configCheckResult = __('Remote scanner connection is working', 'intershield');
-                    break;
-                case 'connectionError':
-                    $this->configCheckResult = __('Please enable your cURL or file_get_contents configuration on your server.', 'intershield');
                     break;
                 default:
                     $this->configCheckResult = __('Remote scanner connection failing.', 'intershield');

@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
     });
 
     (function showInfoWithLoadMore() {
-        var countFilesShownDuringStart = data_block.intershield_settings['count_files_shown_during_start'];
+        var countFilesShownDuringStart = intershield_data.intershield_settings['count_files_shown_during_start'];
 
         /***Part Of <<Good files list>>***/
         $(".good_files_list .current_file_info").slice(0, countFilesShownDuringStart).show();
@@ -61,7 +61,7 @@ jQuery(document).ready(function ($) {
 
     $(".loadMore").on('click', function (e) {
         e.preventDefault();
-        var loadMoreFilesRange = data_block.intershield_settings['load_more_files_range'];
+        var loadMoreFilesRange = intershield_data.intershield_settings['load_more_files_range'];
         var clickedLoadMoreParent = $(this).parent();
 
         $(clickedLoadMoreParent).find(".current_file_info:hidden").slice(0, loadMoreFilesRange).slideDown();
@@ -73,7 +73,7 @@ jQuery(document).ready(function ($) {
     function sendAjaxRequest(requestAction) {
         setInterval(function () {
             $.ajax({
-                url: data_block.ajaxUrl,
+                url: intershield_data.ajaxUrl,
                 method: 'post',
                 data: {action: requestAction}
             }).done(function (response) {
@@ -86,13 +86,13 @@ jQuery(document).ready(function ($) {
 
                     $('.scanned_files_info').html('' +
                         '<h3>'
-                        + data_block.messages.text_total + '(' + info.total + ') '
-                        + data_block.messages.text_ScannedFiles + ' ' + info.scannedFiles +
+                        + intershield_data.messages.text_total + '(' + info.total + ') '
+                        + intershield_data.messages.text_ScannedFiles + ' ' + info.scannedFiles +
                         '</h3>');
                 } else if (requestAction === 'get_curl_percent') {
                     currentFileNumber = info.sentFiles;
 
-                    $('.curl_sent_files_info').html('<h3>' + data_block.messages.text_total + '(' + info.total + ') ' + data_block.messages.text_sentFiles + ' ' + info.sentFiles + '</h3>');
+                    $('.curl_sent_files_info').html('<h3>' + intershield_data.messages.text_total + '(' + info.total + ') ' + intershield_data.messages.text_sentFiles + ' ' + info.sentFiles + '</h3>');
                 }
 
                 /***If during plugin work user goes to another page***/
