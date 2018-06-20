@@ -1,10 +1,12 @@
 <?php
 /*
-Plugin Name: Wp Intershield
-Plugin URI: #
-Description:
+Plugin Name: InterShield
+Plugin URI: https://scanner.interserver.net
+Description: Malware scanner and firewall
+Author: InterServer
+Author URI: https://interserver.net
 Version: 0.2
-Text Domain: intershield
+Text Domain: wp-intershield
 */
 
 defined('ABSPATH') or exit;
