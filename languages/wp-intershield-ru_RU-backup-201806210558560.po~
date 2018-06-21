@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Wp Intershield\n"
+"Project-Id-Version: InterShield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:14+0000\n"
-"PO-Revision-Date: 2018-06-19 14:16+0000\n"
+"POT-Creation-Date: 2018-06-21 05:33+0000\n"
+"PO-Revision-Date: 2018-06-21 05:58+0000\n"
 "Last-Translator: admin <admin@example.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -14,13 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: wp-intershield.php:37
+#: wp-intershield.php:39
 msgid ""
 "Bad IP List Successfully Updated. Downloading bad IP list update from sigs."
 "interserver.net "
 msgstr ""
 "Плохой список IP успешно обновлен. Загрузка плохого IP списка обновляет с "
 "sigs.interserver.net"
+
+#: wp-intershield.php:41
+msgid "Bad IP List Didn't Update"
+msgstr "Плохой IP-список не обновлялся"
 
 #: includes/IntershieldAdminOptions.php:41
 msgid "Intershield"
@@ -98,8 +102,10 @@ msgstr "SEO-сопоставление вредоносных программ"
 msgid "Malware test strings"
 msgstr "Тестовые строки вредоносных программ"
 
-#: includes/IntershieldAdminOptions.php:147 includes/IntershieldAdminOptions.php:182
-#: includes/IntershieldAdminOptions.php:382 includes/IntershieldAdminOptions.php:437
+#: includes/IntershieldAdminOptions.php:147
+#: includes/IntershieldAdminOptions.php:182
+#: includes/IntershieldAdminOptions.php:382
+#: includes/IntershieldAdminOptions.php:436
 msgid "View Debugging Information"
 msgstr "Просмотр отладочной информации"
 
@@ -139,13 +145,17 @@ msgstr "Введите URL  запрещенный страницы..."
 msgid "During bad IP block to show \"403 forbidden\":"
 msgstr "Во время блокировки плохих IP-адресов показать \"403 forbidden\":"
 
-#: includes/IntershieldAdminOptions.php:222 includes/IntershieldAdminOptions.php:263
-#: includes/IntershieldAdminOptions.php:279 includes/IntershieldAdminOptions.php:295
+#: includes/IntershieldAdminOptions.php:222
+#: includes/IntershieldAdminOptions.php:263
+#: includes/IntershieldAdminOptions.php:279
+#: includes/IntershieldAdminOptions.php:295
 msgid "On"
 msgstr "Включить"
 
-#: includes/IntershieldAdminOptions.php:225 includes/IntershieldAdminOptions.php:266
-#: includes/IntershieldAdminOptions.php:282 includes/IntershieldAdminOptions.php:298
+#: includes/IntershieldAdminOptions.php:225
+#: includes/IntershieldAdminOptions.php:266
+#: includes/IntershieldAdminOptions.php:282
+#: includes/IntershieldAdminOptions.php:298
 msgid "Off"
 msgstr "Выключить"
 
@@ -158,8 +168,8 @@ msgid "Loading files quantity on \"View Debugging Information\" button click:"
 msgstr "Количества загружаемых файлов по щелчку кнопки \"Загрузить больше\":"
 
 #: includes/IntershieldAdminOptions.php:259
-msgid "Blocking Bad IP:"
-msgstr "Блокирование плохого IP:"
+msgid "Show \"Update Bad IP List\" menu:"
+msgstr ""
 
 #: includes/IntershieldAdminOptions.php:275
 msgid "Automatically update bad IP list:"
@@ -217,7 +227,7 @@ msgstr "сканированное вредоносное ПО:"
 msgid "scanned clean:"
 msgstr "отсканированный чистый:"
 
-#: includes/IntershieldAdminOptions.php:453
+#: includes/IntershieldAdminOptions.php:452
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
@@ -225,51 +235,54 @@ msgstr ""
 "Плохой список ip автоматически обновляется ежедневно через wp-cron. "
 "Используйте приведенную ниже команду для принудительного обновления вручную."
 
-#: includes/IntershieldAdminOptions.php:461
+#: includes/IntershieldAdminOptions.php:460
 msgid "Update"
 msgstr "Обновить"
 
-#: includes/IntershieldAdminOptions.php:474
+#: includes/IntershieldAdminOptions.php:473
 msgid "Show bad IP list"
 msgstr "Показать плохой IP-список"
 
-#: includes/IntershieldAdminOptions.php:485
+#: includes/IntershieldAdminOptions.php:484
 msgid "File is not opened!"
 msgstr "Файл не открывается!"
 
-#: includes/IntershieldAdminOptions.php:512
+#: includes/IntershieldAdminOptions.php:510
 msgid "Total"
 msgstr "Всего"
 
-#: includes/IntershieldAdminOptions.php:513
+#: includes/IntershieldAdminOptions.php:511
 msgid "Scanned Files:"
 msgstr "Отсканированные файлы:"
 
-#: includes/IntershieldAdminOptions.php:514
+#: includes/IntershieldAdminOptions.php:512
 msgid "Sent Files:"
 msgstr "Отправленные файлы:"
 
-#: includes/IntershieldUpdateBadIpList.php:41
-msgid "cURL and file_get_contents are disabled."
-msgstr "cURL и file_get_contents отключены."
-
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:148
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:139
 msgid "Remote scanner connection is working"
 msgstr "Удаленное подключение сканера работает"
 
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:151
-msgid ""
-"Please enable your cURL or file_get_contents configuration on your server."
-msgstr "Включите конфигурацию cURL или file_get_contents на своем сервере."
-
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:154
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:142
 msgid "Remote scanner connection failing."
 msgstr "Неисправность удаленного сканера."
 
 #. Name of the plugin
-msgid "Wp Intershield"
+msgid "InterShield"
 msgstr ""
 
+#. Description of the plugin
+msgid "Malware scanner and firewall"
+msgstr "Сканер вредоносных программ и брандмауэр"
+
 #. URI of the plugin
-msgid "#"
+msgid "https://scanner.interserver.net"
+msgstr ""
+
+#. Author of the plugin
+msgid "InterServer"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://interserver.net"
 msgstr ""

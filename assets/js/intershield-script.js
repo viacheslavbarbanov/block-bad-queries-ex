@@ -28,7 +28,7 @@ jQuery(document).ready(function ($) {
         $('.stop_button').show('slow');
         $('.unknown_files_list').hide('slow');
         $('.files_list_after_curl').hide('slow');
-        sendAjaxRequest('get_curl_percent')
+        sendAjaxRequest('get_sent_files_percent')
     });
 
     (function showInfoWithLoadMore() {
@@ -89,7 +89,7 @@ jQuery(document).ready(function ($) {
                         + intershield_data.messages.text_total + '(' + info.total + ') '
                         + intershield_data.messages.text_ScannedFiles + ' ' + info.scannedFiles +
                         '</h3>');
-                } else if (requestAction === 'get_curl_percent') {
+                } else if (requestAction === 'get_sent_files_percent') {
                     currentFileNumber = info.sentFiles;
 
                     $('.curl_sent_files_info').html('<h3>' + intershield_data.messages.text_total + '(' + info.total + ') ' + intershield_data.messages.text_sentFiles + ' ' + info.sentFiles + '</h3>');

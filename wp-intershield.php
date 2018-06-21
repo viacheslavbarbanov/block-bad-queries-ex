@@ -36,9 +36,9 @@ add_action('init', function () {
     if ($IntershieldAdminOptions->startIntershieldUpdateBadIpList) {
         $updateIpListTxt = $IntershieldUpdateBadIpList->updateIpListTxt();
         if ($updateIpListTxt) {
-            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from sigs.interserver.net ', 'intershield');
+            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from sigs.interserver.net ', 'wp-intershield');
         }else{
-            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Didn\'t Update', 'intershield');
+            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Didn\'t Update', 'wp-intershield');
         }
     }
 
@@ -80,8 +80,8 @@ add_action('init', function () {
     });
 
     /***Get Percent And Count Sent Files By CURL From db***/
-    add_action('wp_ajax_get_curl_percent', function () {
-        wp_die(get_option('intershield_curl_progress_percent'));
+    add_action('wp_ajax_get_sent_files_percent', function () {
+        wp_die(get_option('intershield_sent_files_progress_percent'));
     });
 });
 
@@ -103,7 +103,7 @@ function intershield_uninstall()
     delete_option('intershield_malware_files_list');
     delete_option('intershield_good_files_list');
     delete_option('intershield_unknown_files_list');
-    delete_option('intershield_curl_progress_percent');
+    delete_option('intershield_sent_files_progress_percent');
     delete_option('intershield_files_info_after_curl');
     delete_option('intershield_settings');
     delete_option('intershield_scanned_files_progress_percent');

@@ -136,10 +136,10 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
 
             switch ($data) {
                 case 'input..input..':
-                    $this->configCheckResult = __('Remote scanner connection is working', 'intershield');
+                    $this->configCheckResult = __('Remote scanner connection is working', 'wp-intershield');
                     break;
                 default:
-                    $this->configCheckResult = __('Remote scanner connection failing.', 'intershield');
+                    $this->configCheckResult = __('Remote scanner connection failing.', 'wp-intershield');
             }
         }
     }

@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Wp Intershield\n"
+"Project-Id-Version: InterShield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:14+0000\n"
+"POT-Creation-Date: 2018-06-21 05:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,10 +14,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: wp-intershield.php:37
+#: wp-intershield.php:39
 msgid ""
 "Bad IP List Successfully Updated. Downloading bad IP list update from sigs."
 "interserver.net "
+msgstr ""
+
+#: wp-intershield.php:41
+msgid "Bad IP List Didn't Update"
 msgstr ""
 
 #: includes/IntershieldAdminOptions.php:41
@@ -96,8 +100,10 @@ msgstr ""
 msgid "Malware test strings"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:147 includes/IntershieldAdminOptions.php:182
-#: includes/IntershieldAdminOptions.php:382 includes/IntershieldAdminOptions.php:437
+#: includes/IntershieldAdminOptions.php:147
+#: includes/IntershieldAdminOptions.php:182
+#: includes/IntershieldAdminOptions.php:382
+#: includes/IntershieldAdminOptions.php:436
 msgid "View Debugging Information"
 msgstr ""
 
@@ -137,13 +143,17 @@ msgstr ""
 msgid "During bad IP block to show \"403 forbidden\":"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:222 includes/IntershieldAdminOptions.php:263
-#: includes/IntershieldAdminOptions.php:279 includes/IntershieldAdminOptions.php:295
+#: includes/IntershieldAdminOptions.php:222
+#: includes/IntershieldAdminOptions.php:263
+#: includes/IntershieldAdminOptions.php:279
+#: includes/IntershieldAdminOptions.php:295
 msgid "On"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:225 includes/IntershieldAdminOptions.php:266
-#: includes/IntershieldAdminOptions.php:282 includes/IntershieldAdminOptions.php:298
+#: includes/IntershieldAdminOptions.php:225
+#: includes/IntershieldAdminOptions.php:266
+#: includes/IntershieldAdminOptions.php:282
+#: includes/IntershieldAdminOptions.php:298
 msgid "Off"
 msgstr ""
 
@@ -156,7 +166,7 @@ msgid "Loading files quantity on \"View Debugging Information\" button click:"
 msgstr ""
 
 #: includes/IntershieldAdminOptions.php:259
-msgid "Blocking Bad IP:"
+msgid "Show \"Update Bad IP List\" menu:"
 msgstr ""
 
 #: includes/IntershieldAdminOptions.php:275
@@ -211,57 +221,60 @@ msgstr ""
 msgid "scanned clean:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:453
+#: includes/IntershieldAdminOptions.php:452
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:461
+#: includes/IntershieldAdminOptions.php:460
 msgid "Update"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:474
+#: includes/IntershieldAdminOptions.php:473
 msgid "Show bad IP list"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:485
+#: includes/IntershieldAdminOptions.php:484
 msgid "File is not opened!"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:512
+#: includes/IntershieldAdminOptions.php:510
 msgid "Total"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:513
+#: includes/IntershieldAdminOptions.php:511
 msgid "Scanned Files:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:514
+#: includes/IntershieldAdminOptions.php:512
 msgid "Sent Files:"
 msgstr ""
 
-#: includes/IntershieldUpdateBadIpList.php:41
-msgid "cURL and file_get_contents are disabled."
-msgstr ""
-
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:148
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:139
 msgid "Remote scanner connection is working"
 msgstr ""
 
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:151
-msgid ""
-"Please enable your cURL or file_get_contents configuration on your server."
-msgstr ""
-
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:154
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:142
 msgid "Remote scanner connection failing."
 msgstr ""
 
 #. Name of the plugin
-msgid "Wp Intershield"
+msgid "InterShield"
+msgstr ""
+
+#. Description of the plugin
+msgid "Malware scanner and firewall"
 msgstr ""
 
 #. URI of the plugin
-msgid "#"
+msgid "https://scanner.interserver.net"
+msgstr ""
+
+#. Author of the plugin
+msgid "InterServer"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://interserver.net"
 msgstr ""

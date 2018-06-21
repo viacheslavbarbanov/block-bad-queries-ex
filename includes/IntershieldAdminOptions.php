@@ -38,18 +38,18 @@ if (!class_exists('IntershieldAdminOptions')) {
         {
             /***Add Scan Files Menu In Dashboard***/
             add_action('admin_menu', function () {
-                add_menu_page(__('Intershield', 'intershield'), __('Intershield', 'intershield'), 'manage_options', 'intershield', array($this, 'main_menu'), 'dashicons-shield');
-                add_submenu_page('intershield', __('Scan Files', 'intershield'), __('Scan Files', 'intershield'), 'manage_options', 'intershield', array($this, 'main_menu'));
-                add_submenu_page('intershield', __('Settings', 'intershield'), __('Settings', 'intershield'), 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
-                add_submenu_page('intershield', __('Configuration Check', 'intershield'), __('Configuration Check', 'intershield'), 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
+                add_menu_page(__('Intershield', 'wp-intershield'), __('Intershield', 'wp-intershield'), 'manage_options', 'intershield', array($this, 'main_menu'), 'dashicons-shield');
+                add_submenu_page('intershield', __('Scan Files', 'wp-intershield'), __('Scan Files', 'wp-intershield'), 'manage_options', 'intershield', array($this, 'main_menu'));
+                add_submenu_page('intershield', __('Settings', 'wp-intershield'), __('Settings', 'wp-intershield'), 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
+                add_submenu_page('intershield', __('Configuration Check', 'wp-intershield'), __('Configuration Check', 'wp-intershield'), 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
 
                 if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') {
-                    add_submenu_page('intershield', __('Check Unknown Files', 'intershield'), __('Check Unknown Files', 'intershield'), 'manage_options', 'intershield-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
+                    add_submenu_page('intershield', __('Check Unknown Files', 'wp-intershield'), __('Check Unknown Files', 'wp-intershield'), 'manage_options', 'intershield-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
                 }
 
                 /***When Blocking Bad Ip's Enabled In Settings***/
                 if ($this->intershield_settings['intershield_update_bad_ip_list_menu'] === 'on') {
-                    add_submenu_page('intershield', __('Update Bad IP List', 'intershield'), __('Update Bad IP List', 'intershield'), 'manage_options', 'intershield-update-bad-ip-list', array($this, 'IntershieldUpdateBadIpListMenu'));
+                    add_submenu_page('intershield', __('Update Bad IP List', 'wp-intershield'), __('Update Bad IP List', 'wp-intershield'), 'manage_options', 'intershield-update-bad-ip-list', array($this, 'IntershieldUpdateBadIpListMenu'));
                 }
             });
         }
@@ -74,18 +74,18 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <form name="scan_info" action="#" method="post">
                             <input type="radio" name="scan_type" class="full_scan" id="full_scan" value="full_scan"
                                    checked>
-                            <label for="full_scan"> <?php _e('Full Site Scan:', 'intershield') ?> </label><br>
+                            <label for="full_scan"> <?php _e('Full Site Scan:', 'wp-intershield') ?> </label><br>
                             <input type="radio" name="scan_type" class="part_scan" id="part_scan" value="part_scan">
-                            <label for="part_scan"> <?php _e('Partial Folder Scan:', 'intershield') ?> </label><br>
+                            <label for="part_scan"> <?php _e('Partial Folder Scan:', 'wp-intershield') ?> </label><br>
                             <input type="text" name="folder_name_for_scan" id="folder_name_for_scan" class="hidden"
                                    placeholder="Enter folder name..."><br>
                             <input type="hidden" name="wp_nonce_start_scan"
                                    value="<?php echo wp_create_nonce('start-scan'); ?>">
 
                             <input type="submit" name="start_scan" id="start_scan"
-                                   value=" <?php _e('Start Scan', 'intershield') ?> ">
+                                   value=" <?php _e('Start Scan', 'wp-intershield') ?> ">
                             <a href="?page=intershield&end-scan=true" id="stop_scan" class="stop_button">
-                                <?php _e('Stop Scan', 'intershield') ?>
+                                <?php _e('Stop Scan', 'wp-intershield') ?>
                             </a>
                         </form>
                     </div>
@@ -97,13 +97,13 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <?php if (!empty($this->lastScannedInfo['scannedFiles'])) { ?>
                             <div class="last_scanned_files_info">
                                 <h1 class="title">
-                                    <?php _e('Malware Files Information After Last Scan in', 'intershield') ?>
+                                    <?php _e('Malware Files Information After Last Scan in', 'wp-intershield') ?>
                                     <span class="show_date">
                                        <?php echo trim($this->lastScannedInfo['date'], '""'); ?>
                                     </span>
                                 </h1>
                                 <h2 class="last_scanned_count">
-                                    <?php echo __('Scanned', 'intershield') . ' ' . $this->lastScannedInfo['scannedFiles'] . ' ' . __('files', 'intershield'); ?>
+                                    <?php echo __('Scanned', 'wp-intershield') . ' ' . $this->lastScannedInfo['scannedFiles'] . ' ' . __('files', 'wp-intershield'); ?>
                                 </h2>
                             </div>
                         <?php } ?>
@@ -116,22 +116,22 @@ if (!class_exists('IntershieldAdminOptions')) {
                                         foreach ($currentFileInfo as $responseCode => $fileDir) {
                                             switch ($responseCode) {
                                                 case '127.0.0.100':
-                                                    $malwareMsg = __('Malware sha256 match from previous scan', 'intershield');
+                                                    $malwareMsg = __('Malware sha256 match from previous scan', 'wp-intershield');
                                                     break;
                                                 case '127.0.0.10':
-                                                    $malwareMsg = __('Malware sha256 match from known malware', 'intershield');
+                                                    $malwareMsg = __('Malware sha256 match from known malware', 'wp-intershield');
                                                     break;
                                                 case '127.0.0.20':
-                                                    $malwareMsg = __('Malware hexmatch from known malware', 'intershield');
+                                                    $malwareMsg = __('Malware hexmatch from known malware', 'wp-intershield');
                                                     break;
                                                 case '127.0.0.40':
-                                                    $malwareMsg = __('Malware logical virus match', 'intershield');
+                                                    $malwareMsg = __('Malware logical virus match', 'wp-intershield');
                                                     break;
                                                 case '127.0.0.50':
-                                                    $malwareMsg = __('Malware SEO match', 'intershield');
+                                                    $malwareMsg = __('Malware SEO match', 'wp-intershield');
                                                     break;
                                                 case '127.0.0.2':
-                                                    $malwareMsg = __('Malware test strings', 'intershield');
+                                                    $malwareMsg = __('Malware test strings', 'wp-intershield');
                                                     break;
                                             } ?>
                                             <div class="current_file_info">
@@ -144,14 +144,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     /***show  <<View Debugging Information>> Button When <<Malware Files List>> Is More Then <<Count Files Shown During Start>>***/
                                     if (count($this->malwareFilesDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                         <button type="button" id="loadMoreMalwareFiles" class="loadMore">
-                                            <?php _e('View Debugging Information', 'intershield') ?>
+                                            <?php _e('View Debugging Information', 'wp-intershield') ?>
                                         </button>
                                     <?php }
                                 } else {
-                                    echo "<h2 class='successMsg'>" . __('No malware files were detected after the previous scan', 'intershield') . "</h2>";
+                                    echo "<h2 class='successMsg'>" . __('No malware files were detected after the previous scan', 'wp-intershield') . "</h2>";
                                 } ?>
                             <?php } else {
-                                echo "<h2 class='successMsg'>" . __('No previous scan was detected', 'intershield') . "</h2>";
+                                echo "<h2 class='successMsg'>" . __('No previous scan was detected', 'wp-intershield') . "</h2>";
                             } ?>
                         </div>
 
@@ -159,7 +159,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             $goodFilesListArr = json_decode($this->goodFilesDb, true); ?>
                             <div>
                                 <button type="button" id="show_good_files">
-                                    <?php _e('Show clean files', 'intershield') ?>
+                                    <?php _e('Show clean files', 'wp-intershield') ?>
                                 </button>
                             </div>
 
@@ -169,7 +169,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     foreach ($value as $hashCode => $dir) { ?>
                                         <div class="current_file_info">
                                             <strong>
-                                                <?php echo $hashCode == '127.0.10.100' ? __('Good sha256 match from previous scan', 'intershield') : __('Good sha256 match known wordpress files', 'intershield'); ?>
+                                                <?php echo $hashCode == '127.0.10.100' ? __('Good sha256 match from previous scan', 'wp-intershield') : __('Good sha256 match known wordpress files', 'wp-intershield'); ?>
                                             </strong>
                                             <p><?php echo $dir; ?></p>
                                         </div>
@@ -179,7 +179,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                                 <!--/***show <<View Debugging Information>> Button When <<Good Files List>> Is More Then <<Count Files Shown During Start>>***/-->
                                 <?php if (count($goodFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                     <button type="button" id="loadMoreGoodFiles"
-                                            class="loadMore"><?php _e('View Debugging Information', 'intershield') ?> </button>
+                                            class="loadMore"><?php _e('View Debugging Information', 'wp-intershield') ?> </button>
                                 <?php } ?>
                             </div>
                         <?php } ?>
@@ -199,15 +199,15 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td class="interrogative_badge_parent">
                                 <h3>
-                                    <label for="forbidden_link"> <?php _e('Forbidden Link:', 'intershield') ?> </label>
+                                    <label for="forbidden_link"> <?php _e('Forbidden Link:', 'wp-intershield') ?> </label>
                                 </h3>
                                 <img src="<?php echo INTERSHIELD_URL . 'assets/images/interrogative-badge.png' ?>"
                                      class="interrogative_badge"
-                                     title=" <?php _e('Need fill url, for example ... https://website.com/forbidden/', 'intershield') ?>">
+                                     title=" <?php _e('Need fill url, for example ... https://website.com/forbidden/', 'wp-intershield') ?>">
                             </td>
                             <td>
                                 <input type="text" name="forbidden_link" id="forbidden_link"
-                                       placeholder="<?php _e('Enter forbidden page url...', 'intershield') ?> "
+                                       placeholder="<?php _e('Enter forbidden page url...', 'wp-intershield') ?> "
                                        value="<?php echo $this->intershield_settings['forbidden_link'] ?>">
                             </td>
                         </tr>
@@ -215,14 +215,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label><?php _e('During bad IP block to show "403 forbidden":', 'intershield') ?> </label>
+                                    <label><?php _e('During bad IP block to show "403 forbidden":', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
-                                <?php _e('On', 'intershield') ?>
+                                <?php _e('On', 'wp-intershield') ?>
                                 <input type="radio" name="show_403_forbidden" value="on"
                                     <?php echo $this->intershield_settings['show_403_forbidden'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'intershield') ?>
+                                <?php _e('Off', 'wp-intershield') ?>
                                 <input type="radio" name="show_403_forbidden" value="off"
                                     <?php echo $this->intershield_settings['show_403_forbidden'] == 'off' ? 'checked' : '' ?> >
                             </td>
@@ -231,7 +231,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label for="count_files_shown_during_start"> <?php _e('Files quantity on start:', 'intershield') ?> </label>
+                                    <label for="count_files_shown_during_start"> <?php _e('Files quantity on start:', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
@@ -244,7 +244,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             <td>
                                 <h3>
                                     <label for="load_more_files_range">
-                                        <?php _e('Loading files quantity on "View Debugging Information" button click:', 'intershield') ?>
+                                        <?php _e('Loading files quantity on "View Debugging Information" button click:', 'wp-intershield') ?>
                                     </label>
                                 </h3>
                             </td>
@@ -256,14 +256,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label><?php _e('Show "Update Bad IP List" menu:', 'intershield') ?> </label>
+                                    <label><?php _e('Show "Update Bad IP List" menu:', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
-                                <?php _e('On', 'intershield') ?>
+                                <?php _e('On', 'wp-intershield') ?>
                                 <input type="radio" name="intershield_update_bad_ip_list_menu" value="on"
                                     <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'intershield') ?>
+                                <?php _e('Off', 'wp-intershield') ?>
                                 <input type="radio" name="intershield_update_bad_ip_list_menu" value="off"
                                     <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'off' ? 'checked' : '' ?> >
                             </td>
@@ -272,14 +272,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label> <?php _e('Automatically update bad IP list:', 'intershield') ?> </label>
+                                    <label> <?php _e('Automatically update bad IP list:', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
-                                <?php _e('On', 'intershield') ?>
+                                <?php _e('On', 'wp-intershield') ?>
                                 <input type="radio" name="auto_update_bad_ip_switch" value="on"
                                     <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'intershield') ?>
+                                <?php _e('Off', 'wp-intershield') ?>
                                 <input type="radio" name="auto_update_bad_ip_switch" value="off"
                                     <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
@@ -288,14 +288,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <tr>
                             <td>
                                 <h3>
-                                    <label> <?php _e('Show "Check Unknown Files" menu:', 'intershield') ?> </label>
+                                    <label> <?php _e('Show "Check Unknown Files" menu:', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
-                                <?php _e('On', 'intershield') ?>
+                                <?php _e('On', 'wp-intershield') ?>
                                 <input type="radio" name="show_check_unknown_files_menu_switch" value="on"
                                     <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'intershield') ?>
+                                <?php _e('Off', 'wp-intershield') ?>
                                 <input type="radio" name="show_check_unknown_files_menu_switch" value="off"
                                     <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
@@ -306,7 +306,8 @@ if (!class_exists('IntershieldAdminOptions')) {
                                 <input type="hidden" name="wp_nonce_update_settings"
                                        value="<?php echo wp_create_nonce('update-settings'); ?>">
                             </td>
-                            <td class="textright"><input type="submit" value="<?php _e('Save', 'intershield') ?>"></td>
+                            <td class="textright"><input type="submit" value="<?php _e('Save', 'wp-intershield') ?>">
+                            </td>
                         </tr>
                     </table>
                 </form>
@@ -351,7 +352,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                     $filesInfoAfterCurlDb = json_decode($this->filesInfoAfterCurlDb, true);
                     if (is_null($unknownFilesListArr)) { ?>
                         <?php wp_die("
-                            <h2 class='successMsg'>" . __('You have not done any scan yet!', 'intershield') . "</h2>
+                            <h2 class='successMsg'>" . __('You have not done any scan yet!', 'wp-intershield') . "</h2>
                             <a href='?page=intershield' class='button'>Go to scan</a>
                             ") ?>
                     <?php }
@@ -359,11 +360,11 @@ if (!class_exists('IntershieldAdminOptions')) {
                     if (is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
                         <div class="unknown_files_list">
                             <h1 class="description">
-                                <?php _e('Unknown files have been detected. In order to scan then the check unknown files option must be enabled in configuration and then ran. This option is off by default because unknown files are sent to a remote scanner for scanning', 'intershield') ?>
+                                <?php _e('Unknown files have been detected. In order to scan then the check unknown files option must be enabled in configuration and then ran. This option is off by default because unknown files are sent to a remote scanner for scanning', 'wp-intershield') ?>
                             </h1>
 
                             <h2 class="description">
-                                <?php _e('The list of the unknown files after last scan in', 'intershield') ?>
+                                <?php _e('The list of the unknown files after last scan in', 'wp-intershield') ?>
                                 <span class="show_date">
                                     <?php echo trim($this->lastScannedInfo['date'], '""'); ?>
                                 </span>
@@ -379,20 +380,20 @@ if (!class_exists('IntershieldAdminOptions')) {
                             <!--/***show <<View Debugging Information>> Button When <<Unknown Files List>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($unknownFilesListArr) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreUnknownFiles" class="loadMore">
-                                    <?php _e('View Debugging Information', 'intershield') ?>
+                                    <?php _e('View Debugging Information', 'wp-intershield') ?>
                                 </button>
                             <?php } ?>
                         </div>
 
                         <form name="send_unknown_files" action="#" method="post">
                             <input type="submit" name="send_unknown_files" id="send_unknown_files"
-                                   value=" <?php _e('Send Unknown Files', 'intershield') ?> ">
+                                   value=" <?php _e('Send Unknown Files', 'wp-intershield') ?> ">
                             <input type="hidden" name="wp_nonce_unknown_files_nonce"
                                    value="<?php echo wp_create_nonce('unknown-files-nonce'); ?>">
 
                             <a href="?page=intershield&stop-sending-unknown-files=true" id="stop_sending_unknown_files"
                                class="stop_button">
-                                <?php _e('Stop Sending', 'intershield') ?>
+                                <?php _e('Stop Sending', 'wp-intershield') ?>
                             </a>
                         </form>
 
@@ -402,14 +403,14 @@ if (!class_exists('IntershieldAdminOptions')) {
                         </div>
                         <?php
                     } else { ?>
-                        <h2 class="successMsg"><?php _e('You have no unknown files!', 'intershield') ?></h2>
+                        <h2 class="successMsg"><?php _e('You have no unknown files!', 'wp-intershield') ?></h2>
                     <?php }
 
                     /***Show Section <<The list of the files after last check>>***/
                     if (!empty($filesInfoAfterCurlDb)) { ?>
                         <div class="files_list_after_curl">
                             <h2 class="description">
-                                <?php _e('The list of the files after last check in', 'intershield') ?>
+                                <?php _e('The list of the files after last check in', 'wp-intershield') ?>
                                 <span class="show_date">
                                        <?php echo trim($this->curlProgressPercentDb['date'], '""'); ?>
                                 </span>
@@ -420,11 +421,11 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     $currentFileDir = array_keys($info)[0];
                                     if (in_array($this->badResponseCodeAfterCurl, $info)) { ?>
                                         <!--                                        /***Show Current Bad File Dir***/-->
-                                        <h3 class="errorMsg file_desc"> <?php _e('scanned malware:', 'intershield') ?> </h3>
+                                        <h3 class="errorMsg file_desc"> <?php _e('scanned malware:', 'wp-intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } elseif (in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
                                         <!--                                        /***Show Current Good File Dir***/-->
-                                        <h3 class="successMsg file_desc"> <?php _e('scanned clean:', 'intershield') ?> </h3>
+                                        <h3 class="successMsg file_desc"> <?php _e('scanned clean:', 'wp-intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } ?>
                                 </div>
@@ -433,7 +434,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             <!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($filesInfoAfterCurlDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreFilesListAfterCurl" class="loadMore">
-                                    <?php _e('View Debugging Information', 'intershield') ?>
+                                    <?php _e('View Debugging Information', 'wp-intershield') ?>
                                 </button>
                             <?php } ?>
                         </div>
@@ -449,7 +450,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                 <div id="update_bad_ip_list_section">
                     <div class="update_bad_ip_list_info">
                         <h3>
-                            <?php _e('The bad ip list will automatically update daily through wp-cron. Use the below to manually force an update.', 'intershield') ?>
+                            <?php _e('The bad ip list will automatically update daily through wp-cron. Use the below to manually force an update.', 'wp-intershield') ?>
                         </h3>
                     </div>
 
@@ -457,7 +458,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                         <h3>
                             <a class="button"
                                href="?page=intershield-update-bad-ip-list&update_bad_ip_list=true&_wpnonce=<?php echo wp_create_nonce('update-ip-list'); ?>">
-                                <?php _e('Update', 'intershield') ?>
+                                <?php _e('Update', 'wp-intershield') ?>
                             </a>
                         </h3>
                     </div>
@@ -470,7 +471,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             $path = dirname(__FILE__) . '/bad-ip-list.txt';
                             if (file_exists($path) && $badIpListTxt = fopen($path, "r")) { ?>
                                 <button type="button" id="show_bad_ip_list">
-                                    <?php _e('Show bad IP list', 'intershield') ?>
+                                    <?php _e('Show bad IP list', 'wp-intershield') ?>
                                 </button>
                                 <div class="bad_ip_list">
                                     <?php while (!feof($badIpListTxt)) {
@@ -481,7 +482,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     ?>
                                 </div>
                             <?php } else {
-                                wp_die('<h3>' . __('File is not opened!', 'intershield') . '</h3>');
+                                wp_die('<h3>' . __('File is not opened!', 'wp-intershield') . '</h3>');
                             }
                             ?>
                         </div>
@@ -507,9 +508,9 @@ if (!class_exists('IntershieldAdminOptions')) {
 
             wp_localize_script('intershield_script', 'intershield_data', array(
                 'messages' => array(
-                    'text_total' => __('Total', 'intershield'),
-                    'text_ScannedFiles' => __('Scanned Files:', 'intershield'),
-                    'text_sentFiles' => __('Sent Files:', 'intershield'),
+                    'text_total' => __('Total', 'wp-intershield'),
+                    'text_ScannedFiles' => __('Scanned Files:', 'wp-intershield'),
+                    'text_sentFiles' => __('Sent Files:', 'wp-intershield'),
                 ),
                 'intershield_settings' => $this->intershield_settings,
                 'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -645,18 +646,21 @@ if (!class_exists('IntershieldAdminOptions')) {
 //        todo not working
         public function sendUnknownFilesByCurl($dir)
         {
-
             $file = @fopen(realpath($dir), 'r');
             $file_size = filesize(realpath($dir));
             $file_data = fread($file, $file_size);
 
+//            echo '<pre>'; var_dump($file_data); exit;
+
             $args = array(
                 'method' => 'POST',
 
-//                'headers' => array(
-//                    'accept' => 'application/json', // The API returns JSON
-//                    'content-type' => 'application/binary', // Set content type to binary
-//                ),
+                'headers' => array(
+                    'accept' => 'application/json', // The API returns JSON
+                    'content-type' => 'application/binary', // Set content type to binary
+                ),
+
+
 
                 'submit' => 'apache',
                 'fileToUpload' => realpath($dir),
@@ -664,9 +668,11 @@ if (!class_exists('IntershieldAdminOptions')) {
                 'body' => $file_data
             );
 
-            $result = wp_remote_request(  'https://scanner.interserver.net/wpscan', $args );
+            $result = wp_remote_request('https://scanner.interserver.net/wpscan', $args);
 
-            echo '<pre>'; var_dump($result); exit;
+            echo '<pre>';
+            var_dump($result);
+            exit;
         }
 
 
@@ -697,7 +703,7 @@ if (!class_exists('IntershieldAdminOptions')) {
 
         public function updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl)
         {
-            update_option('intershield_curl_progress_percent', json_encode(array('sentFiles' => $increment, 'percent' => $percent, 'total' => $totalFilesCountForCurl, 'date' => date('"d-m-Y H:i:s"'))));
+            update_option('intershield_sent_files_progress_percent', json_encode(array('sentFiles' => $increment, 'percent' => $percent, 'total' => $totalFilesCountForCurl, 'date' => date('"d-m-Y H:i:s"'))));
         }
 
         public function getSettingsDb()
@@ -736,7 +742,7 @@ if (!class_exists('IntershieldAdminOptions')) {
 
         public function getCurlProgressPercentDb()
         {
-            return get_option('intershield_curl_progress_percent');
+            return get_option('intershield_sent_files_progress_percent');
         }
     }
 }
