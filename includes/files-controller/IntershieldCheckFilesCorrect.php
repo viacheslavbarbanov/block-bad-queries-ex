@@ -129,8 +129,8 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
             $url = 'https://scanner.interserver.net/wpscan';
             $data = '';
 
-            $response = wp_remote_get( $url, array('timeout'=> 120) );
-            if ( is_array( $response ) ) {
+            $response = wp_remote_get($url, array('timeout' => 120));
+            if (is_array($response)) {
                 $data = $response['body']; // use the content
             }
 

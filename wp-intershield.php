@@ -46,11 +46,13 @@ add_action('init', function () {
     $IntershieldCheckIpStatus = new IntershieldCheckIpStatus();
 
     /*****If Current Ip Is Bad*****/
+
+
     if ($IntershieldCheckIpStatus->is_bad_ip) {
         /*****Block Current Ip*****/
         include INTERSHIELD_DIR . 'includes/IntershieldBlockBadIp.php';
         $IntershieldBlockBadIp = new IntershieldBlockBadIp();
-        $IntershieldBlockBadIp->block_ip($IntershieldAdminOptions->intershield_settings['intershield_update_bad_ip_list_menu']);
+        $IntershieldBlockBadIp->block_ip($IntershieldAdminOptions->intershield_settings['enable_firewall_blocking']);
     }
 
     /****Files Controller****/

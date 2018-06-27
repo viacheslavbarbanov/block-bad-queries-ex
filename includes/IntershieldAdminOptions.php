@@ -197,6 +197,22 @@ if (!class_exists('IntershieldAdminOptions')) {
                 <form action="?page=intershield-settings&update-settings" method="post">
                     <table>
                         <tr>
+                            <td>
+                                <h3>
+                                    <label> <?php _e('Enable Firewall blocking:', 'wp-intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'wp-intershield') ?>
+                                <input type="radio" name="enable_firewall_blocking" value="on"
+                                    <?php echo $this->intershield_settings['enable_firewall_blocking'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'wp-intershield') ?>
+                                <input type="radio" name="enable_firewall_blocking" value="off"
+                                    <?php echo $this->intershield_settings['enable_firewall_blocking'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
+                        <tr>
                             <td class="interrogative_badge_parent">
                                 <h3>
                                     <label for="forbidden_link"> <?php _e('Forbidden Link:', 'wp-intershield') ?> </label>
@@ -531,6 +547,7 @@ if (!class_exists('IntershieldAdminOptions')) {
             /***Save <<intershield_settings>> In DB***/
             if (!empty($_POST['wp_nonce_update_settings']) && wp_verify_nonce($_POST['wp_nonce_update_settings'], 'update-settings')) {
                 $intershield_settings_arr = array(
+                    'enable_firewall_blocking' => $_POST['enable_firewall_blocking'],
                     'forbidden_link' => $_POST['forbidden_link'],
                     'show_403_forbidden' => $_POST['show_403_forbidden'],
                     'count_files_shown_during_start' => $_POST['count_files_shown_during_start'],
@@ -569,28 +586,8 @@ if (!class_exists('IntershieldAdminOptions')) {
             $unknownFilesListArr = $this->unknownFilesDb;
 
             if (!empty($unknownFilesListArr)) {
-                $totalFilesCountForCurl = count($unknownFilesListArr);
-                $increment = 0;
-                foreach ($unknownFilesListArr as $hashCode => $value) {
-                    foreach ($unknownFilesListArr[$hashCode] as $dir) {
-                        /***Send All Unknown Files For Repeated Check***/
-                        if (file_exists($dir)) {
-                            $increment++;
-                            /***Get Percent For Send Unknown Files By Curl***/
-                            $percent = round(($increment / $totalFilesCountForCurl) * 100, 0);
-                            /***Send Current File For Check By Curl***/
-                            if ($this->sendUnknownFilesByCurl($dir)) {
-                                /***Save Percent For Every 5%***/
-                                if ($percent % 5 === 0) {
-                                    $this->updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl);
-                                }
-                            }
-                        } else {
-                            /***For Correct Reckon  Total Files Count Which Sent By CURL***/
-                            $totalFilesCountForCurl--;
-                        }
-                    }
-                }
+                /***Send Unknown Files By Curl For Check ***/
+                $this->sendUnknownFilesByCurl();
 
                 /***After Curl Remove All Good Files Off intershield_unknown_files_list In wp-option***/
                 $this->removeGoodFilesOffUnknownFilesList();
@@ -619,62 +616,54 @@ if (!class_exists('IntershieldAdminOptions')) {
             return get_option('intershield_scanned_files_progress_percent');
         }
 
-//        public function sendUnknownFilesByCurl($dir)
-//        {
-////            // initialise the curl request
-//            $fileToUpload = new CURLFile(realpath($dir));
-//            $request = curl_init('https://scanner.interserver.net/wpscan');
-//            // send a file
-//            curl_setopt($request, CURLOPT_POST, true);
-//            curl_setopt($request, CURLOPT_SAFE_UPLOAD, true);
-//            curl_setopt(
-//                $request,
-//                CURLOPT_POSTFIELDS,
-//                array(
-//                    'submit' => 'apache',
-//                    'fileToUpload' => $fileToUpload,
-//                ));
-//            // output the response
-//            curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-//
-//            array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
-//            // close the session
-//            curl_close($request);
-//            return true;
-//        }
 
-//        todo not working
-        public function sendUnknownFilesByCurl($dir)
+        public function sendUnknownFilesByCurl()
         {
-            $file = @fopen(realpath($dir), 'r');
-            $file_size = filesize(realpath($dir));
-            $file_data = fread($file, $file_size);
+            add_action('http_api_curl', function ($handle, $requestArguments, $requestUrl) {
+                $totalFilesCountForCurl = count($this->unknownFilesDb);
+                $increment = 0;
+                foreach ($this->unknownFilesDb as $fileInfo) {
+                    $dir = array_values($fileInfo)[0];
+                    if (file_exists($dir)) {
+                        /***Send Current File For Check By Curl***/
+                        $fileToUpload = new CURLFile($dir);
+                        $request = curl_init($requestUrl);
 
-//            echo '<pre>'; var_dump($file_data); exit;
+                        // send a file
+                        curl_setopt($request, CURLOPT_POST, true);
+                        curl_setopt($request, CURLOPT_SAFE_UPLOAD, true);
+                        curl_setopt(
+                            $request,
+                            CURLOPT_POSTFIELDS,
+                            array(
+                                'submit' => 'apache',
+                                'fileToUpload' => $fileToUpload,
+                            ));
+                        // output the response
+                        curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
 
-            $args = array(
-                'method' => 'POST',
+                        array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
+                        // close the session
+                        curl_close($request);
+                    } else {
+                        /***For Correct Reckon  Total Files Count Which Sent By CURL***/
+                        $totalFilesCountForCurl--;
+                    }
 
-                'headers' => array(
-                    'accept' => 'application/json', // The API returns JSON
-                    'content-type' => 'application/binary', // Set content type to binary
-                ),
+                    /***Get Percent For Send Unknown Files By Curl***/
+                    $increment++;
+                    $percent = round(($increment / $totalFilesCountForCurl) * 100, 0);
 
+                    if ($percent % 5 === 0) {
+                        $this->updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl);
+                    }
+                }
 
+            }, 10, 3);
 
-                'submit' => 'apache',
-                'fileToUpload' => realpath($dir),
-
-                'body' => $file_data
-            );
-
-            $result = wp_remote_request('https://scanner.interserver.net/wpscan', $args);
-
-            echo '<pre>';
-            var_dump($result);
-            exit;
+            $WP_Http_Curl = new WP_Http_Curl();
+            $WP_Http_Curl->request('https://scanner.interserver.net/wpscan');
         }
-
 
         public function updateSettingsDb($intershield_settings_arr)
         {
@@ -709,8 +698,9 @@ if (!class_exists('IntershieldAdminOptions')) {
         public function getSettingsDb()
         {
             $default_intershield_settings = array(
+                'enable_firewall_blocking' => 'off',
                 'forbidden_link' => '',
-                'show_403_forbidden' => 'off',
+                'show_403_forbidden' => 'on',
                 'count_files_shown_during_start' => 5,
                 'load_more_files_range' => 5,
                 'intershield_update_bad_ip_list_menu' => 'off',

@@ -3,10 +3,10 @@ defined('ABSPATH') or exit;
 if (!class_exists('IntershieldBlockBadIp')) {
     class IntershieldBlockBadIp
     {
-        public function block_ip($intershield_update_bad_ip_list_menu)
+        public function block_ip($enable_firewall_blocking)
         {
             /***When Firewall Is Off***/
-            if ($intershield_update_bad_ip_list_menu === 'off') {
+            if ($enable_firewall_blocking === 'off') {
                 return false;
             }
 

@@ -169,7 +169,7 @@ msgstr "Количества загружаемых файлов по щелчк
 
 #: includes/IntershieldAdminOptions.php:259
 msgid "Show \"Update Bad IP List\" menu:"
-msgstr ""
+msgstr "Показать меню «Обновить список неверных IP-адресов»:"
 
 #: includes/IntershieldAdminOptions.php:275
 msgid "Automatically update bad IP list:"
