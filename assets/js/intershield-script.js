@@ -162,7 +162,7 @@ jQuery(document).ready(function ($) {
     var enable_firewall_blocking = $('[name="enable_firewall_blocking"]');
 
     $.each($(enable_firewall_blocking), function (key, currentInput) {
-        if($(currentInput).is(':checked')){
+        if ($(currentInput).is(':checked')) {
             $(currentInput).val() === 'on' ? hideShow_toggle_section('show') : hideShow_toggle_section('hide');
         }
     });
