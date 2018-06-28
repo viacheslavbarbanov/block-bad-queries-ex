@@ -157,4 +157,25 @@ jQuery(document).ready(function ($) {
         $('#show_bad_ip_list').hide('slow');
         $('.bad_ip_list').show('slow');
     });
+
+    /****FIREWALL TABLE IN SETTINGS MENU****/
+    var enable_firewall_blocking = $('[name="enable_firewall_blocking"]');
+
+    $.each($(enable_firewall_blocking), function (key, currentInput) {
+        if($(currentInput).is(':checked')){
+            $(currentInput).val() === 'on' ? hideShow_toggle_section('show') : hideShow_toggle_section('hide');
+        }
+    });
+
+    $(enable_firewall_blocking).on('click', function () {
+        $(this).val() === 'on' ? hideShow_toggle_section('show') : hideShow_toggle_section('hide')
+    });
+
+    function hideShow_toggle_section(query) {
+        if (query === 'show') {
+            $('.toggle_section').show('slow')
+        } else if (query === 'hide') {
+            $('.toggle_section').hide('slow')
+        }
+    }
 });

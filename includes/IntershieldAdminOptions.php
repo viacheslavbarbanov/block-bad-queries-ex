@@ -212,7 +212,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr class="toggle_section">
                             <td>
                                 <h3>
                                     <label> <?php _e('Automatically update bad IP list:', 'wp-intershield') ?> </label>
@@ -228,7 +228,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr class="toggle_section">
                             <td>
                                 <h3>
                                     <label><?php _e('During bad IP block to show "403 forbidden":', 'wp-intershield') ?> </label>
@@ -244,7 +244,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr class="toggle_section">
                             <td class="interrogative_badge_parent">
                                 <h3>
                                     <label for="forbidden_link"> <?php _e('Forbidden Link:', 'wp-intershield') ?> </label>
@@ -260,10 +260,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                             </td>
                         </tr>
 
-                    </table>
-
-                    <table>
-                        <tr>
+                        <tr class="toggle_section">
                             <td>
                                 <h3>
                                     <label><?php _e('Show "Update Bad IP List" menu:', 'wp-intershield') ?> </label>
@@ -278,7 +275,9 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
+                    </table>
 
+                    <table>
                         <tr>
                             <td>
                                 <h3>
@@ -320,17 +319,6 @@ if (!class_exists('IntershieldAdminOptions')) {
                                        value="<?php echo $this->intershield_settings['load_more_files_range'] ?>">
                             </td>
                         </tr>
-
-
-<!--                        <tr>-->
-<!--                            <td>-->
-<!--                                -->
-<!--                            </td>-->
-<!--                            <td class="">-->
-<!---->
-<!---->
-<!--                            </td>-->
-<!--                        </tr>-->
                     </table>
 
                     <div class="save_settings_section">

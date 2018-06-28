@@ -77,6 +77,10 @@
     width: 50%;
 }
 
+.firewall_table .toggle_section{
+    display: none;
+}
+
 .interrogative_badge_parent {
     display: flex;
     align-items: center;
