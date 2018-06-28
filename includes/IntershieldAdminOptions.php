@@ -195,7 +195,7 @@ if (!class_exists('IntershieldAdminOptions')) {
             <h1><?php echo get_admin_page_title(); ?></h1>
             <div id="settings_section">
                 <form action="?page=intershield-settings&update-settings" method="post">
-                    <table>
+                    <table class="firewall_table">
                         <tr>
                             <td>
                                 <h3>
@@ -209,6 +209,38 @@ if (!class_exists('IntershieldAdminOptions')) {
                                 <?php _e('Off', 'wp-intershield') ?>
                                 <input type="radio" name="enable_firewall_blocking" value="off"
                                     <?php echo $this->intershield_settings['enable_firewall_blocking'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h3>
+                                    <label> <?php _e('Automatically update bad IP list:', 'wp-intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'wp-intershield') ?>
+                                <input type="radio" name="auto_update_bad_ip_switch" value="on"
+                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'wp-intershield') ?>
+                                <input type="radio" name="auto_update_bad_ip_switch" value="off"
+                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h3>
+                                    <label><?php _e('During bad IP block to show "403 forbidden":', 'wp-intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'wp-intershield') ?>
+                                <input type="radio" name="show_403_forbidden" value="on"
+                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'wp-intershield') ?>
+                                <input type="radio" name="show_403_forbidden" value="off"
+                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
 
@@ -228,19 +260,38 @@ if (!class_exists('IntershieldAdminOptions')) {
                             </td>
                         </tr>
 
+                    </table>
+
+                    <table>
                         <tr>
                             <td>
                                 <h3>
-                                    <label><?php _e('During bad IP block to show "403 forbidden":', 'wp-intershield') ?> </label>
+                                    <label><?php _e('Show "Update Bad IP List" menu:', 'wp-intershield') ?> </label>
                                 </h3>
                             </td>
                             <td>
                                 <?php _e('On', 'wp-intershield') ?>
-                                <input type="radio" name="show_403_forbidden" value="on"
-                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'on' ? 'checked' : '' ?> >
+                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="on"
+                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'on' ? 'checked' : '' ?> >
                                 <?php _e('Off', 'wp-intershield') ?>
-                                <input type="radio" name="show_403_forbidden" value="off"
-                                    <?php echo $this->intershield_settings['show_403_forbidden'] == 'off' ? 'checked' : '' ?> >
+                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="off"
+                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'off' ? 'checked' : '' ?> >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h3>
+                                    <label> <?php _e('Show "Check Unknown Files" menu:', 'wp-intershield') ?> </label>
+                                </h3>
+                            </td>
+                            <td>
+                                <?php _e('On', 'wp-intershield') ?>
+                                <input type="radio" name="show_check_unknown_files_menu_switch" value="on"
+                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'on' ? 'checked' : '' ?> >
+                                <?php _e('Off', 'wp-intershield') ?>
+                                <input type="radio" name="show_check_unknown_files_menu_switch" value="off"
+                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
                             </td>
                         </tr>
 
@@ -269,63 +320,27 @@ if (!class_exists('IntershieldAdminOptions')) {
                                        value="<?php echo $this->intershield_settings['load_more_files_range'] ?>">
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <h3>
-                                    <label><?php _e('Show "Update Bad IP List" menu:', 'wp-intershield') ?> </label>
-                                </h3>
-                            </td>
-                            <td>
-                                <?php _e('On', 'wp-intershield') ?>
-                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="on"
-                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'wp-intershield') ?>
-                                <input type="radio" name="intershield_update_bad_ip_list_menu" value="off"
-                                    <?php echo $this->intershield_settings['intershield_update_bad_ip_list_menu'] == 'off' ? 'checked' : '' ?> >
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>
-                                <h3>
-                                    <label> <?php _e('Automatically update bad IP list:', 'wp-intershield') ?> </label>
-                                </h3>
-                            </td>
-                            <td>
-                                <?php _e('On', 'wp-intershield') ?>
-                                <input type="radio" name="auto_update_bad_ip_switch" value="on"
-                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'wp-intershield') ?>
-                                <input type="radio" name="auto_update_bad_ip_switch" value="off"
-                                    <?php echo $this->intershield_settings['auto_update_bad_ip_switch'] == 'off' ? 'checked' : '' ?> >
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>
-                                <h3>
-                                    <label> <?php _e('Show "Check Unknown Files" menu:', 'wp-intershield') ?> </label>
-                                </h3>
-                            </td>
-                            <td>
-                                <?php _e('On', 'wp-intershield') ?>
-                                <input type="radio" name="show_check_unknown_files_menu_switch" value="on"
-                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'on' ? 'checked' : '' ?> >
-                                <?php _e('Off', 'wp-intershield') ?>
-                                <input type="radio" name="show_check_unknown_files_menu_switch" value="off"
-                                    <?php echo $this->intershield_settings['show_check_unknown_files_menu_switch'] == 'off' ? 'checked' : '' ?> >
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="hidden" name="wp_nonce_update_settings"
-                                       value="<?php echo wp_create_nonce('update-settings'); ?>">
-                            </td>
-                            <td class="textright"><input type="submit" value="<?php _e('Save', 'wp-intershield') ?>">
-                            </td>
-                        </tr>
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                -->
+<!--                            </td>-->
+<!--                            <td class="">-->
+<!---->
+<!---->
+<!--                            </td>-->
+<!--                        </tr>-->
                     </table>
+
+                    <div class="save_settings_section">
+                        <input type="hidden" name="wp_nonce_update_settings"
+                               value="<?php echo wp_create_nonce('update-settings'); ?>">
+
+                        <input type="submit" value="<?php _e('Save', 'wp-intershield') ?>">
+
+                    </div>
+
                 </form>
             </div>
 
