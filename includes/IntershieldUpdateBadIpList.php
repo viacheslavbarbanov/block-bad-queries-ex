@@ -3,10 +3,13 @@ defined('ABSPATH') or exit;
 if (!class_exists('IntershieldUpdateBadIpList')) {
     class IntershieldUpdateBadIpList
     {
-        public function __construct()
+        private $IntershieldAdminOptionsObj = false;
+
+        public function __construct($IntershieldAdminOptions)
         {
+            $this->IntershieldAdminOptionsObj = $IntershieldAdminOptions;
             // Hook into that action that'll fire every 15 minutes
-            add_action('add_every_fifteen_min', array($this, 'updateIpListTxt'));
+            add_action('add_every_fifteen_min', array($this, 'updateIpListDB'));
 
             // Add a new interval for cron
             add_filter('cron_schedules', array($this, 'add_cron_interval'));
@@ -17,30 +20,21 @@ if (!class_exists('IntershieldUpdateBadIpList')) {
             }
         }
 
-
-        public function updateIpListTxt()
+        public function updateIpListDB()
         {
             /***Get bad ips new list***/
-//            $url = "http://sigs.interserver.net/ip.txt";
             $url = "https://scanner.interserver.net/ip.txt";
-
             $response = wp_remote_get( $url, array('timeout'=> 120) );
+
             if (is_array( $response ) ) {
                 $newIpList = $response['body']; // use the content
             }else{
                return false;
             }
 
-            /***Set Bad IP's New List***/
-            $path = dirname(__FILE__) . '/bad-ip-list.txt';
-            $fp = fopen($path, 'wa+');
-
-            if (!$fp) {
-                echo 'file is not opend';
+            if($this->IntershieldAdminOptionsObj){
+                $this->IntershieldAdminOptionsObj->updateBadIpListDb($newIpList);
             }
-
-            fwrite($fp, $newIpList);
-            fclose($fp);
             return true;
         }
 

@@ -110,8 +110,8 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
                 $returnedCode = gethostbyname($hostname);
                 if (!in_array($returnedCode, $goodCodesList) && !in_array($returnedCode, $malwareCodesList)) {
                     /***When Return A Same Code What A Sent***/
-                    /***Exclude <<wp-config.php, bad-ip-list.txt>> Files***/
-                    if (!strpos($file, 'wp-config.php') && !strpos($file, 'wp-intershield/includes/bad-ip-list.txt')) {
+                    /***Exclude <<wp-config.php>> File***/
+                    if (!strpos($file, 'wp-config.php')) {
                         array_push($this->unknownFilesList, array($returnedCode => $file));
                     }
                 } else if (in_array($returnedCode, $malwareCodesList)) {

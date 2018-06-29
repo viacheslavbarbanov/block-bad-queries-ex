@@ -20,7 +20,7 @@ msgid ""
 "interserver.net "
 msgstr ""
 "Плохой список IP успешно обновлен. Загрузка плохого IP списка обновляет с "
-"sigs.interserver.net"
+"scanner.interserver.net"
 
 #: wp-intershield.php:41
 msgid "Bad IP List Didn't Update"

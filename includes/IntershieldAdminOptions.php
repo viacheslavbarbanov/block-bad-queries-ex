@@ -324,9 +324,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                     <div class="save_settings_section">
                         <input type="hidden" name="wp_nonce_update_settings"
                                value="<?php echo wp_create_nonce('update-settings'); ?>">
-
                         <input type="submit" value="<?php _e('Save', 'wp-intershield') ?>">
-
                     </div>
 
                 </form>
@@ -485,25 +483,21 @@ if (!class_exists('IntershieldAdminOptions')) {
                     <?php if (!empty($this->msgAfterIntershieldUpdateBadIpList)) { ?>
                         <div class="update_bad_ip_list_result">
                             <h3 class="successMsg"><?php echo $this->msgAfterIntershieldUpdateBadIpList ?></h3>
-
                             <?php
-                            $path = dirname(__FILE__) . '/bad-ip-list.txt';
-                            if (file_exists($path) && $badIpListTxt = fopen($path, "r")) { ?>
+                            $badIpListTxt = json_decode($this->getBadIpListDb());
+
+                            if ($badIpListTxt) { ?>
                                 <button type="button" id="show_bad_ip_list">
                                     <?php _e('Show bad IP list', 'wp-intershield') ?>
                                 </button>
                                 <div class="bad_ip_list">
-                                    <?php while (!feof($badIpListTxt)) {
-                                        $line = fgets($badIpListTxt);
-                                        echo $line . '<br>';
-                                    }
-                                    fclose($badIpListTxt);
+                                    <?php
+                                    echo '<pre>';
+                                    echo $badIpListTxt;
                                     ?>
                                 </div>
-                            <?php } else {
-                                wp_die('<h3>' . __('File is not opened!', 'wp-intershield') . '</h3>');
-                            }
-                            ?>
+                            <?php } ?>
+
                         </div>
                     <?php } ?>
                 </div>
@@ -581,7 +575,6 @@ if (!class_exists('IntershieldAdminOptions')) {
             if (isset($_GET['update_bad_ip_list']) && wp_verify_nonce($_GET['_wpnonce'], 'update-ip-list')) {
                 $this->startIntershieldUpdateBadIpList = true;
             }
-
         }
 
         public function unknownFilesController()
@@ -661,7 +654,6 @@ if (!class_exists('IntershieldAdminOptions')) {
                         $this->updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl);
                     }
                 }
-
             }, 10, 3);
 
             $WP_Http_Curl = new WP_Http_Curl();
@@ -696,6 +688,11 @@ if (!class_exists('IntershieldAdminOptions')) {
         public function updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl)
         {
             update_option('intershield_sent_files_progress_percent', json_encode(array('sentFiles' => $increment, 'percent' => $percent, 'total' => $totalFilesCountForCurl, 'date' => date('"d-m-Y H:i:s"'))));
+        }
+
+        public function updateBadIpListDb($badIpList)
+        {
+            update_option('intershield_bad_ip_list', json_encode($badIpList));
         }
 
         public function getSettingsDb()
@@ -736,6 +733,11 @@ if (!class_exists('IntershieldAdminOptions')) {
         public function getCurlProgressPercentDb()
         {
             return get_option('intershield_sent_files_progress_percent');
+        }
+
+        public function getBadIpListDb()
+        {
+            return get_option('intershield_bad_ip_list');
         }
     }
 }

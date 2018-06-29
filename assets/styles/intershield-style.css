@@ -61,23 +61,23 @@
     margin-top: 5vh;
 }
 
-.save_settings_section{
+.save_settings_section {
     width: 60%;
     text-align: right;
 }
 
-#settings_section table{
+#settings_section table {
     width: 60%;
     margin-bottom: 15px;
     padding: 15px;
     border: 2px solid #ccc;
 }
 
-#settings_section table td{
+#settings_section table td {
     width: 50%;
 }
 
-.firewall_table .toggle_section{
+.firewall_table .toggle_section {
     display: none;
 }
 
@@ -151,11 +151,11 @@
     margin: 5% auto;
 }
 
-#update_bad_ip_list_section > div{
+#update_bad_ip_list_section > div {
     margin-bottom: 10vh;
 }
 
-.bad_ip_list{
+.bad_ip_list {
     display: none;
 }
 
