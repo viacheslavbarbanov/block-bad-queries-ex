@@ -18,8 +18,6 @@ ini_set('max_execution_time', 30000);
 ini_set('mysql.connect_timeout', 30000);
 ini_set('default_socket_timeout', 30000);
 
-
-
 /***Admin Options***/
 add_action('init', function () {
     include INTERSHIELD_DIR . 'includes/IntershieldAdminOptions.php';
