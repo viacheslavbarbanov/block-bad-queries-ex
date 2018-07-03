@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 #scan_section a, #configuration_check_section a, #check_unknown_files_section a, #update_bad_ip_list_section a {
     text-decoration: none;
 }
@@ -39,8 +43,13 @@
     margin: 2% 0;
 }
 
-.malware_files_list p {
-    margin-top: 0;
+.current_malware_file_section {
+    display: flex;
+    align-items: center;
+}
+
+.current_malware_file_section > div {
+    margin: 10px;
 }
 
 #loadGoodFiles {
@@ -55,6 +64,75 @@
     color: green;
     margin-top: 0;
 }
+
+/*****POPUP IN MAIN MENU****/
+.popupParent {
+    display: none;
+    width: 100%;
+    height: 500px;
+    z-index: 9999;
+}
+
+/* The actual popup */
+.popupParent .popuptext {
+    visibility: hidden;
+    width: 80%;
+    background-color: #555;
+    color: #fff;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+/* Popup arrow */
+.popupParent .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popupParent .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.popupToggle {
+    border-radius: 50%;
+
+}
+
+.popupToggle img {
+    width: 25px;
+    height: 20px;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
 
 /***SETTINGS MENU***/
 #settings_section {
@@ -144,6 +222,7 @@
 
 .current_file_info {
     display: none;
+    cursor: pointer;
 }
 
 /***UPDATE BAD IP LIST MENU***/

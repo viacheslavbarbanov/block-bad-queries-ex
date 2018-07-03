@@ -178,4 +178,18 @@ jQuery(document).ready(function ($) {
             $('.toggle_section').hide('slow')
         }
     }
+
+    /*****POPUP IN MAIN MENU****/
+
+    $(document.getElementsByClassName("popupToggle")).on('click', function () {
+        var popuptext = $(this).parents('.current_file_info').find('.popuptext');
+
+        if ($(popuptext).hasClass('show')) {
+            $(popuptext).parent().css({"display": "none"});
+            $(popuptext).removeClass('show');
+        } else {
+            $(popuptext).parent().css({"display": "flex", "justify-content": "center"});
+            $(popuptext).addClass('show');
+        }
+    })
 });

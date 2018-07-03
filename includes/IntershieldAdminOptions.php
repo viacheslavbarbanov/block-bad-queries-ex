@@ -67,8 +67,13 @@ if (!class_exists('IntershieldAdminOptions')) {
                             are taken and compared to known good and bad files. Files which have not been scanned are
                             logged
                             as 'Unknown Files'. Please check the
-                            <a href="?page=intershield-settings">settings</a>
+                            <a href="?page=intershield-settings"> <?php _e('Settings', 'wp-intershield') ?> </a>
                         </h3>
+
+                        <h3>
+                            <a href="?page=intershield-check-unknown-files"> <?php _e('Scan Unknown Files', 'wp-intershield') ?></a>
+                        </h3>
+
                     </div>
                     <div id="scan_section">
                         <form name="scan_info" action="#" method="post">
@@ -134,9 +139,29 @@ if (!class_exists('IntershieldAdminOptions')) {
                                                     $malwareMsg = __('Malware test strings', 'wp-intershield');
                                                     break;
                                             } ?>
+
                                             <div class="current_file_info">
-                                                <strong><?php echo $malwareMsg; ?></strong>
-                                                <p class="errorMsg"> <?php echo $fileDir; ?></p>
+                                                <div>
+                                                    <strong><?php echo $malwareMsg; ?></strong>
+                                                    <div class="current_malware_file_section popupToggle">
+                                                        <div class="errorMsg">
+                                                            <?php echo $fileDir; ?>
+                                                        </div>
+                                                        <div>
+                                                            <span class="dashicons dashicons-visibility "></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- /****SHOW CURRENT MALWARE FILE CONTENT****/-->
+                                                <div class="popupParent">
+                                                    <div class="popuptext">
+                                                        <?php
+                                                        $fileContent = (@file_get_contents($fileDir));
+                                                        echo '<xmp>' . $fileContent . '</xmp>';
+                                                        ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                         <?php }
                                     }
@@ -182,6 +207,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                                             class="loadMore"><?php _e('View Debugging Information', 'wp-intershield') ?> </button>
                                 <?php } ?>
                             </div>
+
                         <?php } ?>
                     </div>
                 </div>
