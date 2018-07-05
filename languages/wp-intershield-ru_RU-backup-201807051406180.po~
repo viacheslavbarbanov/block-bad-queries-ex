@@ -1,14 +1,14 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: InterShield\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-05 14:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2018-07-05 14:06+0000\n"
+"Last-Translator: admin <admin@example.com>\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,35 +19,37 @@ msgid ""
 "Bad IP List Successfully Updated. Downloading bad IP list update from "
 "scanner.interserver.net "
 msgstr ""
+"Плохой список IP успешно обновлен. Загрузка плохого обновления списка IP-"
+"адресов из scanner.interserver.net"
 
 #: intershield.php:41
 msgid "Bad IP List Didn't Update"
-msgstr ""
+msgstr "Плохой IP-список не обновлялся"
 
 #: includes/IntershieldAdminOptions.php:41
 msgid "Intershield"
-msgstr ""
+msgstr "Между щитов"
 
 #: includes/IntershieldAdminOptions.php:42
 msgid "Scan Files"
-msgstr ""
+msgstr "Сканирование файлов"
 
 #: includes/IntershieldAdminOptions.php:43
 #: includes/IntershieldAdminOptions.php:70
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: includes/IntershieldAdminOptions.php:44
 msgid "Configuration Check"
-msgstr ""
+msgstr "Проверка конфигурации"
 
 #: includes/IntershieldAdminOptions.php:47
 msgid "Check Unknown Files"
-msgstr ""
+msgstr "Проверка неизвестных файлов"
 
 #: includes/IntershieldAdminOptions.php:52
 msgid "Update Bad IP List"
-msgstr ""
+msgstr "Обновить неверный список IP-адресов"
 
 #: includes/IntershieldAdminOptions.php:79
 msgid "Unknown files detected, please use"
@@ -55,90 +57,90 @@ msgstr ""
 
 #: includes/IntershieldAdminOptions.php:80
 msgid "Scan Unknown Files"
-msgstr ""
+msgstr "Сканировать неизвестные файлы"
 
 #: includes/IntershieldAdminOptions.php:89
 msgid "Full Site Scan:"
-msgstr ""
+msgstr "Сканирование полного сайта:"
 
 #: includes/IntershieldAdminOptions.php:91
 msgid "Partial Folder Scan:"
-msgstr ""
+msgstr "Сканирование частичной папки:"
 
 #: includes/IntershieldAdminOptions.php:98
 msgid "Start Scan"
-msgstr ""
+msgstr "Начать сканирование"
 
 #: includes/IntershieldAdminOptions.php:100
 msgid "Stop Scan"
-msgstr ""
+msgstr "Остановка сканирования"
 
 #: includes/IntershieldAdminOptions.php:112
 msgid "Malware Files Information After Last Scan in"
-msgstr ""
+msgstr "Информация о вредоносных файлах после последнего сканирования в"
 
 #: includes/IntershieldAdminOptions.php:118
 msgid "Scanned"
-msgstr ""
+msgstr "Отсканированные"
 
 #: includes/IntershieldAdminOptions.php:118
 msgid "files"
-msgstr ""
+msgstr "файлы"
 
 #: includes/IntershieldAdminOptions.php:131
 msgid "Malware sha256 match from previous scan"
-msgstr ""
+msgstr "Вредоносная программа sha256 соответствует предыдущей проверке"
 
 #: includes/IntershieldAdminOptions.php:134
 msgid "Malware sha256 match from known malware"
-msgstr ""
+msgstr "Malware sha256 соответствует известным вредоносным программам"
 
 #: includes/IntershieldAdminOptions.php:137
 msgid "Malware hexmatch from known malware"
-msgstr ""
+msgstr "Вредоносная программа hexmatch из известных вредоносных программ"
 
 #: includes/IntershieldAdminOptions.php:140
 msgid "Malware logical virus match"
-msgstr ""
+msgstr "Вредоносный логический вирус"
 
 #: includes/IntershieldAdminOptions.php:143
 msgid "Malware SEO match"
-msgstr ""
+msgstr "SEO-сопоставление вредоносных программ"
 
 #: includes/IntershieldAdminOptions.php:146
 msgid "Malware test strings"
-msgstr ""
+msgstr "Тестовые строки вредоносных программ"
 
 #: includes/IntershieldAdminOptions.php:179
 #: includes/IntershieldAdminOptions.php:214
 #: includes/IntershieldAdminOptions.php:433
 #: includes/IntershieldAdminOptions.php:487
 msgid "View Debugging Information"
-msgstr ""
+msgstr "Просмотр отладочной информации"
 
 #: includes/IntershieldAdminOptions.php:183
 msgid "No malware files were detected after the previous scan"
-msgstr ""
+msgstr "После предыдущего сканирования не было обнаружено вредоносных файлов"
 
 #: includes/IntershieldAdminOptions.php:186
 msgid "No previous scan was detected"
-msgstr ""
+msgstr "Не было обнаружено предыдущего сканирования"
 
 #: includes/IntershieldAdminOptions.php:194
 msgid "Show clean files"
-msgstr ""
+msgstr "Показать чистые файлы"
 
 #: includes/IntershieldAdminOptions.php:204
 msgid "Good sha256 match from previous scan"
-msgstr ""
+msgstr "Хорошее соответствие sha256 от предыдущего сканирования"
 
 #: includes/IntershieldAdminOptions.php:204
 msgid "Good sha256 match known wordpress files"
-msgstr ""
+msgstr "Хорошие ответы sha256 на известные файлы WordPress"
 
 #: includes/IntershieldAdminOptions.php:235
 msgid "Enable Firewall blocking:"
-msgstr ""
+msgstr "Включить блокировку брандмауэра:"
 
 #: includes/IntershieldAdminOptions.php:239
 #: includes/IntershieldAdminOptions.php:255
@@ -146,7 +148,7 @@ msgstr ""
 #: includes/IntershieldAdminOptions.php:303
 #: includes/IntershieldAdminOptions.php:321
 msgid "On"
-msgstr ""
+msgstr "Включить"
 
 #: includes/IntershieldAdminOptions.php:242
 #: includes/IntershieldAdminOptions.php:258
@@ -154,51 +156,51 @@ msgstr ""
 #: includes/IntershieldAdminOptions.php:306
 #: includes/IntershieldAdminOptions.php:324
 msgid "Off"
-msgstr ""
+msgstr "Выключить"
 
 #: includes/IntershieldAdminOptions.php:251
 msgid "Automatically update bad IP list:"
-msgstr ""
+msgstr "Автоматически обновлять неверный список IP-адресов:"
 
 #: includes/IntershieldAdminOptions.php:267
 msgid "During bad IP block to show \"403 forbidden\":"
-msgstr ""
+msgstr "Во время блокировки плохих IP-адресов показать \"403 forbidden\":"
 
 #: includes/IntershieldAdminOptions.php:283
 msgid "Forbidden Link:"
-msgstr ""
+msgstr "Запретная ссылка:"
 
 #: includes/IntershieldAdminOptions.php:287
 msgid "Need fill url, for example ... https://website.com/forbidden/"
-msgstr ""
+msgstr "Нужно заполнить URL-адрес, например ... https://website.com/forbidden/"
 
 #: includes/IntershieldAdminOptions.php:291
 msgid "Enter forbidden page url..."
-msgstr ""
+msgstr "Введите URL  запрещенный страницы..."
 
 #: includes/IntershieldAdminOptions.php:299
 msgid "Show \"Update Bad IP List\" menu:"
-msgstr ""
+msgstr "Показать меню «Обновить список неверных IP-адресов»:"
 
 #: includes/IntershieldAdminOptions.php:317
 msgid "Show \"Check Unknown Files\" menu:"
-msgstr ""
+msgstr "Показать меню «Проверка неизвестных файлов»:"
 
 #: includes/IntershieldAdminOptions.php:333
 msgid "Files quantity on start:"
-msgstr ""
+msgstr "Количество файлов при запуске:"
 
 #: includes/IntershieldAdminOptions.php:346
 msgid "Loading files quantity on \"View Debugging Information\" button click:"
-msgstr ""
+msgstr "Количества загружаемых файлов по щелчку кнопки \"Загрузить больше\":"
 
 #: includes/IntershieldAdminOptions.php:360
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: includes/IntershieldAdminOptions.php:405
 msgid "You have not done any scan yet!"
-msgstr ""
+msgstr "Вы еще не сделали никакого сканирования!"
 
 #: includes/IntershieldAdminOptions.php:413
 msgid ""
@@ -207,68 +209,74 @@ msgid ""
 "off by default because unknown files are sent to a remote scanner for "
 "scanning"
 msgstr ""
+"Неизвестные файлы обнаружены. Чтобы выполнить сканирование, необходимо "
+"включить опцию проверки неизвестных файлов в конфигурации и затем запустить. "
+"Эта опция отключена по умолчанию, поскольку неизвестные файлы отправляются "
+"на удаленный сканер для сканирования"
 
 #: includes/IntershieldAdminOptions.php:417
 msgid "The list of the unknown files after last scan in"
-msgstr ""
+msgstr "Список неизвестных файлов после последнего сканирования в"
 
 #: includes/IntershieldAdminOptions.php:440
 msgid "Send Unknown Files"
-msgstr ""
+msgstr "Отправить Неизвестные файлы"
 
 #: includes/IntershieldAdminOptions.php:446
 msgid "Stop Sending"
-msgstr ""
+msgstr "Остановить отправку"
 
 #: includes/IntershieldAdminOptions.php:456
 msgid "You have no unknown files!"
-msgstr ""
+msgstr "У вас нет неизвестных файлов!"
 
 #: includes/IntershieldAdminOptions.php:463
 msgid "The list of the files after last check in"
-msgstr ""
+msgstr "Список файлов после последней проверки"
 
 #: includes/IntershieldAdminOptions.php:474
 msgid "scanned malware:"
-msgstr ""
+msgstr "сканированное вредоносное ПО:"
 
 #: includes/IntershieldAdminOptions.php:478
 msgid "scanned clean:"
-msgstr ""
+msgstr "отсканированный чистый:"
 
 #: includes/IntershieldAdminOptions.php:503
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
+"Плохой список ip автоматически обновляется ежедневно через wp-cron. "
+"Используйте приведенную ниже команду для принудительного обновления вручную."
 
 #: includes/IntershieldAdminOptions.php:511
 msgid "Update"
-msgstr ""
+msgstr "Обновить"
 
 #: includes/IntershieldAdminOptions.php:524
 msgid "Show bad IP list"
-msgstr ""
+msgstr "Показать плохой IP-список"
 
 #: includes/IntershieldAdminOptions.php:557
 msgid "Total"
-msgstr ""
+msgstr "Всего"
 
 #: includes/IntershieldAdminOptions.php:558
 msgid "Scanned Files:"
-msgstr ""
+msgstr "Отсканированные файлы:"
 
 #: includes/IntershieldAdminOptions.php:559
 msgid "Sent Files:"
-msgstr ""
+msgstr "Отправленные файлы:"
 
 #: includes/files-controller/IntershieldCheckFilesCorrect.php:139
 msgid "Remote scanner connection is working"
-msgstr ""
+msgstr "Удаленное подключение сканера работает"
 
 #: includes/files-controller/IntershieldCheckFilesCorrect.php:142
 msgid "Remote scanner connection failing."
-msgstr ""
+msgstr "Неисправность удаленного сканера."
 
 #. Name of the plugin
 msgid "InterShield"
@@ -276,7 +284,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Malware scanner and firewall"
-msgstr ""
+msgstr "Сканер вредоносных программ и брандмауэр"
 
 #. URI of the plugin
 msgid "https://scanner.interserver.net"
