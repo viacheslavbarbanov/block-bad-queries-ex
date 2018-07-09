@@ -43,7 +43,9 @@ if (!class_exists('IntershieldAdminOptions')) {
                 add_submenu_page('intershield', __('Settings', 'wp-intershield'), __('Settings', 'wp-intershield'), 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
                 add_submenu_page('intershield', __('Configuration Check', 'wp-intershield'), __('Configuration Check', 'wp-intershield'), 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
 
-                if ($this->intershield_settings['enable_firewall_blocking'] === 'on' && $this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') {
+//                echo '<pre>'; var_dump($this->intershield_settings['show_check_unknown_files_menu_switch']); exit;
+
+                if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') {
                     add_submenu_page('intershield', __('Check Unknown Files', 'wp-intershield'), __('Check Unknown Files', 'wp-intershield'), 'manage_options', 'intershield-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
                 }
 
@@ -69,12 +71,11 @@ if (!class_exists('IntershieldAdminOptions')) {
                             as 'Unknown Files'. Please check the
                             <a href="?page=intershield-settings"> <?php _e('Settings', 'wp-intershield') ?> </a>
                         </h3>
-
+                        
                         <?php
                         $unknownFilesListArr = $this->unknownFilesDb;
                         // /****WHEN ENABLE FIREWALL BLOCKING IS "on" AND EXISTS UNKNOWN FILES***/
-
-                        if ($this->intershield_settings['enable_firewall_blocking'] === 'on' && is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
+                        if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on' && is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
                             <h3>
                                 <?php _e('Unknown files detected, please use', 'wp-intershield') ?> <a
                                         href="?page=intershield-check-unknown-files"> <?php _e('Scan Unknown Files', 'wp-intershield') ?></a>
@@ -543,13 +544,13 @@ if (!class_exists('IntershieldAdminOptions')) {
             wp_register_style('jquery_ui_progressbar_style', INTERSHIELD_URL . "assets/styles/jquery-ui.css");
             wp_enqueue_style('jquery_ui_progressbar_style');
 
-            wp_register_style('intershield_style', INTERSHIELD_URL . "assets/styles/intershield-style.css");
+            wp_register_style('intershield_style', INTERSHIELD_URL . "assets/styles/intershield-style.css", array(), 0.4);
             wp_enqueue_style('intershield_style');
 
             /***JS***/
             wp_enqueue_script('jquery-ui-progressbar');
 
-            wp_register_script('intershield_script', INTERSHIELD_URL . "assets/js/intershield-script.js", array('jquery'));
+            wp_register_script('intershield_script', INTERSHIELD_URL . "assets/js/intershield-script.js", array('jquery'), 0.4);
             wp_enqueue_script('intershield_script');
 
             wp_localize_script('intershield_script', 'intershield_data', array(
