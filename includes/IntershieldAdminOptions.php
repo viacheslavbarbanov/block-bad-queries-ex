@@ -71,17 +71,29 @@ if (!class_exists('IntershieldAdminOptions')) {
                             as 'Unknown Files'. Please check the
                             <a href="?page=intershield-settings"> <?php _e('Settings', 'wp-intershield') ?> </a>
                         </h3>
-                        
+
                         <?php
                         $unknownFilesListArr = $this->unknownFilesDb;
-                        // /****WHEN ENABLE FIREWALL BLOCKING IS "on" AND EXISTS UNKNOWN FILES***/
-                        if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on' && is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) { ?>
-                            <h3>
-                                <?php _e('Unknown files detected, please use', 'wp-intershield') ?> <a
-                                        href="?page=intershield-check-unknown-files"> <?php _e('Scan Unknown Files', 'wp-intershield') ?></a>
-                            </h3>
-                        <?php }
-                        ?>
+
+                        if (is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) {
+                            // /****WHEN ENABLE FIREWALL BLOCKING IS "on" AND EXISTS UNKNOWN FILES***/
+                            if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') { ?>
+
+                                <h3>
+                                    <?php _e('Unknown files detected, please use', 'wp-intershield') ?>
+                                    <a href="?page=intershield-check-unknown-files"> <?php _e('Scan Unknown Files', 'wp-intershield') ?></a>
+                                </h3>
+
+                                <?php
+                            } else { ?>
+                                <h3>
+                                    <?php _e('You have unknown files', 'wp-intershield') ?>
+                                </h3>
+
+                            <?php }
+
+                        } ?>
+
                     </div>
                     <div id="scan_section">
                         <form name="scan_info" action="#" method="post">
@@ -589,7 +601,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                 );
 
                 $this->updateSettingsDb($intershield_settings_arr);
-                header("Location: " . home_url() . '/wp-admin/admin.php?page=intershield-settings', true, 301);
+                header("Location: " . home_url() . '/wp-admin/admin.php', true, 301);
             }
 
             /***Delete forbidden_link In DB***/
