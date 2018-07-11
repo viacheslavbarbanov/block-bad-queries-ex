@@ -42,9 +42,6 @@ if (!class_exists('IntershieldAdminOptions')) {
                 add_submenu_page('intershield', __('Scan Files', 'wp-intershield'), __('Scan Files', 'wp-intershield'), 'manage_options', 'intershield', array($this, 'main_menu'));
                 add_submenu_page('intershield', __('Settings', 'wp-intershield'), __('Settings', 'wp-intershield'), 'manage_options', 'intershield-settings', array($this, 'intershieldSettingsMenu'));
                 add_submenu_page('intershield', __('Configuration Check', 'wp-intershield'), __('Configuration Check', 'wp-intershield'), 'manage_options', 'intershield-configuration-check', array($this, 'configurationCheckMenu'));
-
-//                echo '<pre>'; var_dump($this->intershield_settings['show_check_unknown_files_menu_switch']); exit;
-
                 if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') {
                     add_submenu_page('intershield', __('Check Unknown Files', 'wp-intershield'), __('Check Unknown Files', 'wp-intershield'), 'manage_options', 'intershield-check-unknown-files', array($this, 'checkUnknownFilesMenu'));
                 }
@@ -78,22 +75,17 @@ if (!class_exists('IntershieldAdminOptions')) {
                         if (is_array($unknownFilesListArr) && !empty($unknownFilesListArr)) {
                             // /****WHEN ENABLE FIREWALL BLOCKING IS "on" AND EXISTS UNKNOWN FILES***/
                             if ($this->intershield_settings['show_check_unknown_files_menu_switch'] === 'on') { ?>
-
                                 <h3>
                                     <?php _e('Unknown files detected, please use', 'wp-intershield') ?>
                                     <a href="?page=intershield-check-unknown-files"> <?php _e('Scan Unknown Files', 'wp-intershield') ?></a>
                                 </h3>
-
                                 <?php
                             } else { ?>
                                 <h3>
                                     <?php _e('You have unknown files', 'wp-intershield') ?>
                                 </h3>
-
                             <?php }
-
                         } ?>
-
                     </div>
                     <div id="scan_section">
                         <form name="scan_info" action="#" method="post">
