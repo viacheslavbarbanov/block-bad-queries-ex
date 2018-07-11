@@ -1,8 +1,10 @@
 <?php
+include_once(INTERSHIELD_DIR. 'includes/IntershieldProcessHelper.php');
+
 defined('ABSPATH') or exit;
 if (!class_exists('IntershieldCheckFilesCorrect')) {
 
-    class IntershieldCheckFilesCorrect
+    class IntershieldCheckFilesCorrect extends intershieldProcessHelper
     {
         public $home_dir;
         public $filesList;
@@ -18,25 +20,8 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
             $this->home_dir = $matches[1];
 
             if (!empty($_POST['scan_type'])) {
-                if ($_POST['scan_type'] == 'full_scan') {
-                    /***Check Access For <<wp-includes>> Directory***/
-                    $withoutWpIncludes = $this->checkHtaccess();
-                    /**Find All PHP And JS Files**/
-                    $this->filesList = $this->glob_recursive($this->home_dir, '*.{php,js,rb,py,pl,cgi,txt}', GLOB_BRACE, $withoutWpIncludes);
-                } else if ($_POST['scan_type'] == 'part_scan' && !empty($_POST['folder_name_for_scan'])) {
-                    /***Find Current Folder Directory***/
-                    $folder_path_for_scan_arr = $this->glob_recursive($this->home_dir, $_POST['folder_name_for_scan'] . '/', GLOB_BRACE);
-                    if (!empty($folder_path_for_scan_arr)) {
-                        /***Find All PHP And JS Files In Current Directory***/
-                        $this->filesList = $this->glob_recursive($folder_path_for_scan_arr[0], '*.{php,js}', GLOB_BRACE);
-                    } else {
-                        /***When *Current Folder Not Found**/
-                        header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder not found"));
-                    }
-                } else {
-                    /***When folder_name_for_scan Is Empty**/
-                    header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder name can not be empty"));
-                }
+                $this->process();
+
                 /***To Cache All Files In filesList***/
                 $this->hashFiles($this->filesList);
             } elseif (!empty($_GET['page']) && $_GET['page'] == 'intershield-configuration-check') {
@@ -54,6 +39,7 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
                 $matches = preg_grep("@[\\\/]wp\-includes[\\\/]@i", $directoriesArr);
                 $directoriesArr = array_diff($directoriesArr, $matches);
             }
+
             foreach ($directoriesArr as $dir) {
                 $dirFiles = $this->glob_recursive($dir, $pattern, $flags);
                 $dirFiles = str_replace('\\', '/', $dirFiles);
@@ -62,6 +48,30 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
                 }
             }
             return $files;
+        }
+
+
+        function load_data() {
+            if ($_POST['scan_type'] == 'full_scan') {
+                /***Check Access For <<wp-includes>> Directory***/
+                $withoutWpIncludes = $this->checkHtaccess();
+                /**Find All PHP And JS Files**/
+                $this->filesList = $this->glob_recursive($this->home_dir, '*.{php,js,rb,py,pl,cgi,txt}', GLOB_BRACE, $withoutWpIncludes);
+
+            } else if ($_POST['scan_type'] == 'part_scan' && !empty($_POST['folder_name_for_scan'])) {
+                /***Find Current Folder Directory***/
+                $folder_path_for_scan_arr = $this->glob_recursive($this->home_dir, $_POST['folder_name_for_scan'] . '/', GLOB_BRACE);
+                if (!empty($folder_path_for_scan_arr)) {
+                    /***Find All PHP And JS Files In Current Directory***/
+                    $this->filesList = $this->glob_recursive($folder_path_for_scan_arr[0], '*.{php,js}', GLOB_BRACE);
+                } else {
+                    /***When *Current Folder Not Found**/
+                    header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder not found"));
+                }
+            } else {
+                /***When folder_name_for_scan Is Empty**/
+                header("Location: " . home_url() . "/wp-admin/admin.php?page=intershield&errorMsg=" . urlencode("Folder name can not be empty"));
+            }
         }
 
         /***Check Access For <<wp-includes>> Directory***/
