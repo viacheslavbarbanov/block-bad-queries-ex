@@ -470,23 +470,23 @@ if (!class_exists('IntershieldAdminOptions')) {
                                        <?php echo trim($this->curlProgressPercentDb['date'], '""'); ?>
                                 </span>
                             </h2>
+
                             <?php foreach ($filesInfoAfterCurlDb as $info) { ?>
                                 <div class="current_file_info">
                                     <?php
                                     $currentFileDir = array_keys($info)[0];
-                                    if (in_array($this->badResponseCodeAfterCurl, $info)) { ?>
-                                        <!--                                        /***Show Current Bad File Dir***/-->
+                                    if (!in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
+                                        <!-- /***Show Current Bad File Dir***/-->
                                         <h3 class="errorMsg file_desc"> <?php _e('scanned malware:', 'wp-intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
-                                    <?php } elseif (in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
-                                        <!--                                        /***Show Current Good File Dir***/-->
+                                    <?php } else { ?>
+                                        <!-- /***Show Current Good File Dir***/-->
                                         <h3 class="successMsg file_desc"> <?php _e('scanned clean:', 'wp-intershield') ?> </h3>
                                         <p> <?php echo $currentFileDir ?> </p>
                                     <?php } ?>
                                 </div>
                             <?php } ?>
-
-                            <!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
+<!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($filesInfoAfterCurlDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreFilesListAfterCurl" class="loadMore">
                                     <?php _e('View Debugging Information', 'wp-intershield') ?>
