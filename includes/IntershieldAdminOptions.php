@@ -619,20 +619,19 @@ if (!class_exists('IntershieldAdminOptions')) {
         public function unknownFilesController()
         {
             $unknownFilesListArr = $this->unknownFilesDb;
-
             if (!empty($unknownFilesListArr)) {
                 /***Send Unknown Files By Curl For Check ***/
-                $this->sendUnknownFilesByCurl();
+                if($this->sendUnknownFilesByCurl()){
+                    /***After Curl Remove All Files Off intershield_unknown_files_list In wp-option***/
+                    $this->updateUnknownFilesList(array());
+                    $this->unknownFilesDb = array();
 
-                /***After Curl Remove All Good Files Off intershield_unknown_files_list In wp-option***/
-                $this->updateUnknownFilesList(array());
-                $this->unknownFilesDb = array();
+                    /***Update intershield_files_info_after_curl In wp-option***/
+                    $this->updateFilesInfoAfterCurl($this->responseAfterCurlArr);
 
-                /***Update intershield_files_info_after_curl In wp-option***/
-                $this->updateFilesInfoAfterCurl($this->responseAfterCurlArr);
-
-                header("Refresh:0");
-                exit;
+                    header("Refresh:0");
+                    exit;
+                }
             }
         }
 
@@ -689,6 +688,8 @@ if (!class_exists('IntershieldAdminOptions')) {
 
             $WP_Http_Curl = new WP_Http_Curl();
             $WP_Http_Curl->request('https://scanner.interserver.net/wpscan');
+
+            return true;
         }
 
         public function updateSettingsDb($intershield_settings_arr)
@@ -714,6 +715,8 @@ if (!class_exists('IntershieldAdminOptions')) {
         public function updateFilesInfoAfterCurl($responseAfterCurl)
         {
             update_option('intershield_files_info_after_curl', json_encode($responseAfterCurl));
+
+            return true;
         }
 
         public function updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl)
