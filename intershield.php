@@ -5,7 +5,7 @@ Plugin URI: https://scanner.interserver.net
 Description: Malware scanner and firewall
 Author: InterServer
 Author URI: https://interserver.net
-Version: 0.4
+Version: 0.
 Text Domain: wp-intershield
 */
 
@@ -36,7 +36,8 @@ add_action('init', function () {
     if ($IntershieldAdminOptions->startIntershieldUpdateBadIpList) {
         $updateIpListDB = $IntershieldUpdateBadIpList->updateIpListDB();
         if ($updateIpListDB) {
-            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Successfully Updated. Downloading bad IP list update from scanner.interserver.net ', 'wp-intershield');
+            $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList =
+                __('Bad IP List Successfully Updated. Downloading bad IP list update from scanner.interserver.net ', 'wp-intershield');
         } else {
             $IntershieldAdminOptions->msgAfterIntershieldUpdateBadIpList = __('Bad IP List Didn\'t Update', 'wp-intershield');
         }
@@ -59,6 +60,7 @@ add_action('init', function () {
     /***When is clicked <<Start Scan>> button***/
     if ($IntershieldAdminOptions->scanState == 'start') {
         /***Update intershield_malware_files_list in wp-option***/
+
         $IntershieldAdminOptions->updateMalwareFilesDb($IntershieldCheckFilesCorrect->malware_files_list);
 
         /***Update intershield_unknown_files_list in wp-option***/

@@ -1,5 +1,5 @@
 <?php
-include_once(INTERSHIELD_DIR. 'includes/IntershieldProcessHelper.php');
+include_once(INTERSHIELD_DIR . 'includes/IntershieldProcessHelper.php');
 
 defined('ABSPATH') or exit;
 if (!class_exists('IntershieldCheckFilesCorrect')) {
@@ -51,7 +51,8 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
         }
 
 
-        function load_data() {
+        function load_data()
+        {
             if ($_POST['scan_type'] == 'full_scan') {
                 /***Check Access For <<wp-includes>> Directory***/
                 $withoutWpIncludes = $this->checkHtaccess();

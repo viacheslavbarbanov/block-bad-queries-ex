@@ -470,7 +470,6 @@ if (!class_exists('IntershieldAdminOptions')) {
                                        <?php echo trim($this->curlProgressPercentDb['date'], '""'); ?>
                                 </span>
                             </h2>
-
                             <?php foreach ($filesInfoAfterCurlDb as $info) { ?>
                                 <div class="current_file_info">
                                     <?php
@@ -486,7 +485,8 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     <?php } ?>
                                 </div>
                             <?php } ?>
-<!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
+
+                            <!--/***show <<View Debugging Information>> Button When <<Files Info After Curl>> Is More Then <<Count Files Shown During Start>>***/-->
                             <?php if (count($filesInfoAfterCurlDb) > $this->intershield_settings['count_files_shown_during_start']) { ?>
                                 <button type="button" id="loadMoreFilesListAfterCurl" class="loadMore">
                                     <?php _e('View Debugging Information', 'wp-intershield') ?>
@@ -593,7 +593,8 @@ if (!class_exists('IntershieldAdminOptions')) {
                 );
 
                 $this->updateSettingsDb($intershield_settings_arr);
-                header("Location: " . home_url() . '/wp-admin/admin.php', true, 301);
+                header("Refresh:0");
+                exit;
             }
 
             /***Delete forbidden_link In DB***/
@@ -624,32 +625,21 @@ if (!class_exists('IntershieldAdminOptions')) {
                 $this->sendUnknownFilesByCurl();
 
                 /***After Curl Remove All Good Files Off intershield_unknown_files_list In wp-option***/
-                $this->removeGoodFilesOffUnknownFilesList();
+                $this->updateUnknownFilesList(array());
+                $this->unknownFilesDb = array();
 
                 /***Update intershield_files_info_after_curl In wp-option***/
                 $this->updateFilesInfoAfterCurl($this->responseAfterCurlArr);
-                header("Refresh:0");
-            }
-        }
 
-        public function removeGoodFilesOffUnknownFilesList()
-        {
-            $newUknownFilesListArr = array();
-            foreach ($this->responseAfterCurlArr as $key => $currentFileArr) {
-                foreach ($currentFileArr as $fileDir => $responseCode) {
-                    if ($responseCode !== '1 clamscan: OK') {
-                        array_push($newUknownFilesListArr, $fileDir);
-                    }
-                }
+                header("Refresh:0");
+                exit;
             }
-            $this->updateUnknownFilesList($newUknownFilesListArr);
         }
 
         public function scannedFilesProgressPercent()
         {
             return get_option('intershield_scanned_files_progress_percent');
         }
-
 
         public function sendUnknownFilesByCurl()
         {
@@ -673,6 +663,8 @@ if (!class_exists('IntershieldAdminOptions')) {
                                 'submit' => 'apache',
                                 'fileToUpload' => $fileToUpload,
                             ));
+
+
                         // output the response
                         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
 
@@ -691,6 +683,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                     if ($percent % 5 === 0) {
                         $this->updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl);
                     }
+
                 }
             }, 10, 3);
 
