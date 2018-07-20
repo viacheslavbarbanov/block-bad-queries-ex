@@ -620,8 +620,9 @@ if (!class_exists('IntershieldAdminOptions')) {
         {
             $unknownFilesListArr = $this->unknownFilesDb;
             if (!empty($unknownFilesListArr)) {
+
                 /***Send Unknown Files By Curl For Check ***/
-                if($this->sendUnknownFilesByCurl()){
+                if ($this->sendUnknownFilesByCurl()) {
                     /***After Curl Remove All Files Off intershield_unknown_files_list In wp-option***/
                     $this->updateUnknownFilesList(array());
                     $this->unknownFilesDb = array();
@@ -661,8 +662,8 @@ if (!class_exists('IntershieldAdminOptions')) {
                             array(
                                 'submit' => 'apache',
                                 'fileToUpload' => $fileToUpload,
-                            ));
-
+                            )
+                        );
 
                         // output the response
                         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
@@ -682,12 +683,10 @@ if (!class_exists('IntershieldAdminOptions')) {
                     if ($percent % 5 === 0) {
                         $this->updateCurlProgressPercent($increment, $percent, $totalFilesCountForCurl);
                     }
-
                 }
             }, 10, 3);
 
-            $WP_Http_Curl = new WP_Http_Curl();
-            $WP_Http_Curl->request('https://scanner.interserver.net/wpscan');
+            do_action( 'http_api_curl', '', '', 'https://scanner.interserver.net/wpscan' );
 
             return true;
         }

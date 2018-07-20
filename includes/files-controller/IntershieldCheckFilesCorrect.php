@@ -51,7 +51,7 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
         }
 
 
-        function load_data()
+        public function load_data()
         {
             if ($_POST['scan_type'] == 'full_scan') {
                 /***Check Access For <<wp-includes>> Directory***/
