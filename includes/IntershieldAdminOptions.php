@@ -476,12 +476,33 @@ if (!class_exists('IntershieldAdminOptions')) {
                                     $currentFileDir = array_keys($info)[0];
                                     if (!in_array($this->goodResponseCodeAfterCurl, $info)) { ?>
                                         <!-- /***Show Current Bad File Dir***/-->
-                                        <h3 class="errorMsg file_desc"> <?php _e('scanned malware:', 'wp-intershield') ?> </h3>
-                                        <p> <?php echo $currentFileDir ?> </p>
+                                        <div>
+                                            <h3 class="file_desc"> <?php _e('scanned malware:', 'wp-intershield') ?> </h3>
+                                            <div class="current_malware_file_section popupToggle">
+                                                <div class="errorMsg">
+                                                    <p> <?php echo $currentFileDir ?> </p>
+                                                </div>
+                                                <div>
+                                                    <span class="dashicons dashicons-visibility "></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="popupParent">
+                                            <div class="popuptext">
+                                                <?php
+                                                $fileContent = (@file_get_contents($currentFileDir));
+                                                echo '<xmp>' . $fileContent . '</xmp>';
+                                                ?>
+                                            </div>
+                                        </div>
+
                                     <?php } else { ?>
                                         <!-- /***Show Current Good File Dir***/-->
                                         <h3 class="successMsg file_desc"> <?php _e('scanned clean:', 'wp-intershield') ?> </h3>
-                                        <p> <?php echo $currentFileDir ?> </p>
+                                        <div>
+                                            <p> <?php echo $currentFileDir ?> </p>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             <?php } ?>
@@ -668,16 +689,18 @@ if (!class_exists('IntershieldAdminOptions')) {
                         // output the response
                         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
 
-                        array_push($this->responseAfterCurlArr, array($dir => curl_exec($request)));
+                        array_push($this->responseAfterCurlArr, array($dir => trim(curl_exec($request))));
                         // close the session
                         curl_close($request);
+
+                        /***Get Percent For Send Unknown Files By Curl***/
+                        $increment++;
+
                     } else {
                         /***For Correct Reckon  Total Files Count Which Sent By CURL***/
                         $totalFilesCountForCurl--;
                     }
 
-                    /***Get Percent For Send Unknown Files By Curl***/
-                    $increment++;
                     $percent = round(($increment / $totalFilesCountForCurl) * 100, 0);
 
                     if ($percent % 5 === 0) {
@@ -686,7 +709,7 @@ if (!class_exists('IntershieldAdminOptions')) {
                 }
             }, 10, 3);
 
-            do_action( 'http_api_curl', '', '', 'https://scanner.interserver.net/wpscan' );
+            do_action('http_api_curl', '', '', 'https://scanner.interserver.net/wpscan');
 
             return true;
         }
