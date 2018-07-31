@@ -133,6 +133,32 @@ if (!class_exists('IntershieldCheckFilesCorrect')) {
                     array_push($this->goodFilesList, array($returnedCode => $file));
                 }
             }
+
+
+            /***Send Email Malware Files Info***/
+            if (!empty($this->malware_files_list)) {
+                $this->intershieldSendEailMalwareFilesInfo();
+            }
+        }
+
+        public function intershieldSendEailMalwareFilesInfo()
+        {
+            $malwareFilesInfoHtml = '';
+            foreach ($this->malware_files_list as $currentFileInfo) {
+                foreach ($currentFileInfo as $responseCode => $fileDir) {
+                    $fileContent = (@file_get_contents($fileDir));
+                    $malwareFilesInfoHtml .= '<pre>' . '<h1>' . $fileDir . '</h1>' . '</br>' . '<xmp>' . $fileContent . '</xmp>' . '</pre>';
+                }
+            }
+
+            add_filter('wp_mail_content_type', array($this, 'support_html'));
+
+            wp_mail(get_option('admin_email'), __('InterShield Malware Files List', 'wp-intershield'), $malwareFilesInfoHtml);
+        }
+
+        public function support_html()
+        {
+            return "text/html";
         }
 
         public function testHashFiles()

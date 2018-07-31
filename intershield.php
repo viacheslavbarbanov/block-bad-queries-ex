@@ -5,7 +5,7 @@ Plugin URI: https://scanner.interserver.net
 Description: Malware scanner and firewall
 Author: InterServer
 Author URI: https://interserver.net
-Version: 0.5
+Version: 0.7
 Text Domain: wp-intershield
 */
 

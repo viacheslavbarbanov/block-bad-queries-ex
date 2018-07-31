@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: InterShield\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-05 14:04+0000\n"
+"POT-Creation-Date: 2018-07-31 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,13 +14,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: intershield.php:39
+#: intershield.php:40
 msgid ""
 "Bad IP List Successfully Updated. Downloading bad IP list update from "
 "scanner.interserver.net "
 msgstr ""
 
-#: intershield.php:41
+#: intershield.php:42
 msgid "Bad IP List Didn't Update"
 msgstr ""
 
@@ -33,7 +33,7 @@ msgid "Scan Files"
 msgstr ""
 
 #: includes/IntershieldAdminOptions.php:43
-#: includes/IntershieldAdminOptions.php:70
+#: includes/IntershieldAdminOptions.php:69
 msgid "Settings"
 msgstr ""
 
@@ -41,11 +41,11 @@ msgstr ""
 msgid "Configuration Check"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:47
+#: includes/IntershieldAdminOptions.php:46
 msgid "Check Unknown Files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:52
+#: includes/IntershieldAdminOptions.php:51
 msgid "Update Bad IP List"
 msgstr ""
 
@@ -57,150 +57,154 @@ msgstr ""
 msgid "Scan Unknown Files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:89
+#: includes/IntershieldAdminOptions.php:85
+msgid "You have unknown files"
+msgstr ""
+
+#: includes/IntershieldAdminOptions.php:94
 msgid "Full Site Scan:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:91
+#: includes/IntershieldAdminOptions.php:96
 msgid "Partial Folder Scan:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:98
+#: includes/IntershieldAdminOptions.php:103
 msgid "Start Scan"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:100
+#: includes/IntershieldAdminOptions.php:105
 msgid "Stop Scan"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:112
+#: includes/IntershieldAdminOptions.php:117
 msgid "Malware Files Information After Last Scan in"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:118
+#: includes/IntershieldAdminOptions.php:123
 msgid "Scanned"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:118
+#: includes/IntershieldAdminOptions.php:123
 msgid "files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:131
+#: includes/IntershieldAdminOptions.php:138
 msgid "Malware sha256 match from previous scan"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:134
+#: includes/IntershieldAdminOptions.php:141
 msgid "Malware sha256 match from known malware"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:137
+#: includes/IntershieldAdminOptions.php:144
 msgid "Malware hexmatch from known malware"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:140
+#: includes/IntershieldAdminOptions.php:147
 msgid "Malware logical virus match"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:143
+#: includes/IntershieldAdminOptions.php:150
 msgid "Malware SEO match"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:146
+#: includes/IntershieldAdminOptions.php:153
 msgid "Malware test strings"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:179
-#: includes/IntershieldAdminOptions.php:214
-#: includes/IntershieldAdminOptions.php:433
-#: includes/IntershieldAdminOptions.php:487
+#: includes/IntershieldAdminOptions.php:188
+#: includes/IntershieldAdminOptions.php:223
+#: includes/IntershieldAdminOptions.php:443
+#: includes/IntershieldAdminOptions.php:518
 msgid "View Debugging Information"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:183
+#: includes/IntershieldAdminOptions.php:192
 msgid "No malware files were detected after the previous scan"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:186
+#: includes/IntershieldAdminOptions.php:195
 msgid "No previous scan was detected"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:194
+#: includes/IntershieldAdminOptions.php:203
 msgid "Show clean files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:204
+#: includes/IntershieldAdminOptions.php:213
 msgid "Good sha256 match from previous scan"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:204
+#: includes/IntershieldAdminOptions.php:213
 msgid "Good sha256 match known wordpress files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:235
+#: includes/IntershieldAdminOptions.php:245
 msgid "Enable Firewall blocking:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:239
-#: includes/IntershieldAdminOptions.php:255
-#: includes/IntershieldAdminOptions.php:271
-#: includes/IntershieldAdminOptions.php:303
-#: includes/IntershieldAdminOptions.php:321
+#: includes/IntershieldAdminOptions.php:249
+#: includes/IntershieldAdminOptions.php:265
+#: includes/IntershieldAdminOptions.php:281
+#: includes/IntershieldAdminOptions.php:313
+#: includes/IntershieldAdminOptions.php:331
 msgid "On"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:242
-#: includes/IntershieldAdminOptions.php:258
-#: includes/IntershieldAdminOptions.php:274
-#: includes/IntershieldAdminOptions.php:306
-#: includes/IntershieldAdminOptions.php:324
+#: includes/IntershieldAdminOptions.php:252
+#: includes/IntershieldAdminOptions.php:268
+#: includes/IntershieldAdminOptions.php:284
+#: includes/IntershieldAdminOptions.php:316
+#: includes/IntershieldAdminOptions.php:334
 msgid "Off"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:251
+#: includes/IntershieldAdminOptions.php:261
 msgid "Automatically update bad IP list:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:267
+#: includes/IntershieldAdminOptions.php:277
 msgid "During bad IP block to show \"403 forbidden\":"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:283
+#: includes/IntershieldAdminOptions.php:293
 msgid "Forbidden Link:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:287
+#: includes/IntershieldAdminOptions.php:297
 msgid "Need fill url, for example ... https://website.com/forbidden/"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:291
+#: includes/IntershieldAdminOptions.php:301
 msgid "Enter forbidden page url..."
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:299
+#: includes/IntershieldAdminOptions.php:309
 msgid "Show \"Update Bad IP List\" menu:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:317
+#: includes/IntershieldAdminOptions.php:327
 msgid "Show \"Check Unknown Files\" menu:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:333
+#: includes/IntershieldAdminOptions.php:343
 msgid "Files quantity on start:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:346
+#: includes/IntershieldAdminOptions.php:356
 msgid "Loading files quantity on \"View Debugging Information\" button click:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:360
+#: includes/IntershieldAdminOptions.php:370
 msgid "Save"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:405
+#: includes/IntershieldAdminOptions.php:415
 msgid "You have not done any scan yet!"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:413
+#: includes/IntershieldAdminOptions.php:423
 msgid ""
 "Unknown files have been detected. In order to scan then the check unknown "
 "files option must be enabled in configuration and then ran. This option is "
@@ -208,65 +212,69 @@ msgid ""
 "scanning"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:417
+#: includes/IntershieldAdminOptions.php:427
 msgid "The list of the unknown files after last scan in"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:440
+#: includes/IntershieldAdminOptions.php:450
 msgid "Send Unknown Files"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:446
+#: includes/IntershieldAdminOptions.php:456
 msgid "Stop Sending"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:456
+#: includes/IntershieldAdminOptions.php:466
 msgid "You have no unknown files!"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:463
+#: includes/IntershieldAdminOptions.php:473
 msgid "The list of the files after last check in"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:474
+#: includes/IntershieldAdminOptions.php:485
 msgid "scanned malware:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:478
+#: includes/IntershieldAdminOptions.php:507
 msgid "scanned clean:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:503
+#: includes/IntershieldAdminOptions.php:534
 msgid ""
 "The bad ip list will automatically update daily through wp-cron. Use the "
 "below to manually force an update."
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:511
+#: includes/IntershieldAdminOptions.php:542
 msgid "Update"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:524
+#: includes/IntershieldAdminOptions.php:555
 msgid "Show bad IP list"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:557
+#: includes/IntershieldAdminOptions.php:588
 msgid "Total"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:558
+#: includes/IntershieldAdminOptions.php:589
 msgid "Scanned Files:"
 msgstr ""
 
-#: includes/IntershieldAdminOptions.php:559
+#: includes/IntershieldAdminOptions.php:590
 msgid "Sent Files:"
 msgstr ""
 
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:139
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:192
+msgid "InterShield Malware Files List"
+msgstr ""
+
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:214
 msgid "Remote scanner connection is working"
 msgstr ""
 
-#: includes/files-controller/IntershieldCheckFilesCorrect.php:142
+#: includes/files-controller/IntershieldCheckFilesCorrect.php:217
 msgid "Remote scanner connection failing."
 msgstr ""
 
